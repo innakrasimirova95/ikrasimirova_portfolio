@@ -20,8 +20,9 @@ import {
   SiKeycloak,
   SiShadcnui,
   SiSqlalchemy,
-  SiGit
+  SiGit,
 } from "react-icons/si";
+import { VscAzure } from "react-icons/vsc";
 
 const techStack = [
   { name: "Python", icon: FaPython, baseColor: "#6b7280", hoverColor: "#3776AB" },
@@ -40,6 +41,7 @@ const techStack = [
   { name: "SQLite", icon: SiSqlite, baseColor: "#6b7280", hoverColor: "#003B57" },
   { name: "Keycloak", icon: SiKeycloak, baseColor: "#6b7280", hoverColor: "#3C4E8C" },
   { name: "Docker", icon: FaDocker, baseColor: "#6b7280", hoverColor: "#2496ED" },
+  { name: "Azure", icon: VscAzure, baseColor: "#6b7280", hoverColor: "#0078D4" },
   { name: "Git", icon: SiGit, baseColor: "#6b7280", hoverColor: "#F05032" }, // Añadido Git
 
 ];

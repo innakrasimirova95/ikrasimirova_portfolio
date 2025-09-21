@@ -1,3 +1,5 @@
+import { Experience } from "@/components/Experience";
+
 // app/page.tsx (o pages/index.tsx)
 import { Header } from "@/components/Header";
 import { EducationTimeline } from "@/components/EducationTimeline";
@@ -64,7 +66,7 @@ export default function Home() {
 
       <main className="container mx-auto px-6 py-12 space-y-32">
         <section id="proyectos">
-          <h2 className="text-3xl font-bold mb-4 text-primary">&lt;Proyectos/&gt;</h2>
+          <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent">&lt;Proyectos/&gt;</h2>
           <p className="text-muted-foreground mb-6">
             Aquí puedes mostrar algunos de tus proyectos destacados como desarrolladora Full Stack.
           </p>
@@ -75,18 +77,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="experiencia">
-          <h2 className="text-3xl font-bold mb-4 text-primary">&lt;Experiencia/&gt;</h2>
-          <p className="text-muted-foreground mb-6">
-            Detalla tu experiencia laboral como desarrolladora, roles anteriores y logros.
-          </p>
-          <ul className="space-y-4">
-            <li className="border-l-4 pl-4 border-primary">
-              <strong>Empresa X</strong> – Full Stack Developer (2022 - Presente)
-              <p className="text-sm text-muted-foreground">Descripción breve de responsabilidades.</p>
-            </li>
-          </ul>
-        </section>
+        <Experience />
 
         <section id="educacion">
           <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent">&lt;Educación/&gt;</h2>
