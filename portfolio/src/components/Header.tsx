@@ -16,14 +16,14 @@ const navItems = [
   { href: "#tecnologias", label: "<Tecnologías/>" },
 ];
 
-export function Header() {
+export function Header({ showName, activeSection }: { showName: boolean; activeSection: string }) {
   return (
     <header className="sticky top-0 z-50 w-full bg-background  shadow-sm">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
-        <Link href="/" className="text-2xl font-semibold tracking-tight text-primary hover:opacity-90 transition">
+        <Link href="/" className="text-xl font-semibold tracking-tight text-primary hover:opacity-90 transition">
           <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            icono
+            {showName ? "Inna Krasimirova" : ""}
           </span>
         </Link>
 
@@ -33,7 +33,10 @@ export function Header() {
             <Link
               key={item.href}
               href={item.href}
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              className={cn(
+                "text-sm font-medium transition-colors",
+                activeSection === item.href.substring(1) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+              )}
             >
               {item.label}
             </Link>
@@ -56,7 +59,10 @@ export function Header() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block text-base font-medium text-muted-foreground hover:text-foreground transition-colors"
+                    className={cn(
+                      "block text-base font-medium transition-colors",
+                      activeSection === item.href.substring(1) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                    )}
                   >
                     {item.label}
                   </Link>

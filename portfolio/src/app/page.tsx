@@ -1,4 +1,7 @@
+"use client";
+
 import { Experience } from "@/components/Experience";
+import { useState, useEffect, useRef } from "react";
 
 // app/page.tsx (o pages/index.tsx)
 import { Header } from "@/components/Header";
@@ -10,14 +13,79 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 
 export default function Home() {
+  const [showNameInHeader, setShowNameInHeader] = useState(false);
+  const nameRef = useRef<HTMLHeadingElement>(null);
+
+  const [activeSection, setActiveSection] = useState('');
+  const proyectosRef = useRef<HTMLElement>(null);
+  const experienciaRef = useRef<HTMLElement>(null);
+  const educacionRef = useRef<HTMLElement>(null);
+  const tecnologiasRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setShowNameInHeader(!entry.isIntersecting);
+      },
+      { threshold: 0.1 } // Trigger when 10% of the element is visible
+    );
+
+    if (nameRef.current) {
+      observer.observe(nameRef.current);
+    }
+
+    return () => {
+      if (nameRef.current) {
+        observer.unobserve(nameRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const sectionRefs = [
+      { ref: proyectosRef, id: 'proyectos' },
+      { ref: experienciaRef, id: 'experiencia' },
+      { ref: educacionRef, id: 'educacion' },
+      { ref: tecnologiasRef, id: 'tecnologias' },
+    ];
+
+    const observerOptions = {
+      root: null, // viewport
+      rootMargin: '0px',
+      threshold: 0.5, // 50% of the section must be visible
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, observerOptions);
+
+    sectionRefs.forEach(({ ref }) => {
+      if (ref.current) {
+        sectionObserver.observe(ref.current);
+      }
+    });
+
+    return () => {
+      sectionRefs.forEach(({ ref }) => {
+        if (ref.current) {
+          sectionObserver.unobserve(ref.current);
+        }
+      });
+    };
+  }, []);
+
   return (
     <>
-      <Header />
+      <Header showName={showNameInHeader} activeSection={activeSection} />
 
 
   {/* Hero Section */}
     <section className="min-h-[60vh] flex flex-col justify-center items-center text-center px-4 space-y-6">
-      <h1 className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+      <h1 ref={nameRef} className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
         Inna Krasimirova
       </h1>
       <p className="text-lg md:text-2xl text-muted-foreground">
@@ -65,7 +133,7 @@ export default function Home() {
     </section>
 
       <main className="container mx-auto px-6 py-12 space-y-32">
-        <section id="proyectos">
+        <section id="proyectos" ref={proyectosRef}>
           <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent">&lt;Proyectos/&gt;</h2>
           <p className="text-muted-foreground mb-6">
             Aquí puedes mostrar algunos de tus proyectos destacados como desarrolladora Full Stack.
@@ -77,14 +145,14 @@ export default function Home() {
           </div>
         </section>
 
-        <Experience />
+        <Experience ref={experienciaRef} />
 
-        <section id="educacion">
+        <section id="educacion" ref={educacionRef}>
           <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent">&lt;Educación/&gt;</h2>
           <EducationTimeline></EducationTimeline>
         </section>
 
-        <section id="tecnologias">
+        <section id="tecnologias" ref={tecnologiasRef}>
           <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent">&lt;Tecnologías/&gt;</h2>
           <TechIcons/>
         </section>

@@ -21,9 +21,9 @@ const experienceData = [
   },
 ];
 
-export const Experience = () => {
+export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
   return (
-    <section id="experiencia">
+    <section id="experiencia" ref={ref}>
       <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent">&lt;Experiencia/&gt;</h2>
       <div className="space-y-4">
         {experienceData.map((exp, index) => (
@@ -40,4 +40,4 @@ export const Experience = () => {
       </div>
     </section>
   );
-};
+});
