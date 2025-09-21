@@ -88,16 +88,16 @@ export default function Home() {
       <h1 ref={nameRef} className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
         Inna Krasimirova
       </h1>
-      <p className="text-lg md:text-2xl text-muted-foreground">
-        <TypingEffect
-          text="Ingeniera de Software | Desarrolladora Full Stack"
-          typingSpeed={240}
-          deletingSpeed={120}
-          pauseTime={1500}
-          fontSize="clamp(1rem, 1vw, 2.5rem)"
-        />
+    <div className="text-lg md:text-2xl text-muted-foreground">
+      <TypingEffect
+        text="Ingeniera de Software | Desarrolladora Full Stack"
+        typingSpeed={240}
+        deletingSpeed={120}
+        pauseTime={1500}
+        fontSize="clamp(1rem, 1vw, 2.5rem)"
+      />
 
-      </p>
+    </div>
 
       {/* Icon Links */}
       <div className="flex items-center gap-8 mt-6 text-muted-foreground">
