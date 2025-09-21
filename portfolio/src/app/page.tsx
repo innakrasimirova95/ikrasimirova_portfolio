@@ -102,7 +102,7 @@ export default function Home() {
       {/* Icon Links */}
       <div className="flex items-center gap-8 mt-6 text-muted-foreground">
         <a
-          href="https://www.linkedin.com/in/tuusuario"
+          href="hhttps://www.linkedin.com/in/innakrasimirova/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="LinkedIn"
@@ -112,7 +112,7 @@ export default function Home() {
         </a>
 
         <a
-          href="https://github.com/tuusuario"
+          href="https://github.com/innakrasimirova95"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="GitHub"

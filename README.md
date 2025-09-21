@@ -35,7 +35,7 @@ Sigue estos pasos para configurar y ejecutar el proyecto localmente:
 
 1.  **Clona el repositorio:**
     ```bash
-    git clone https://github.com/tu-usuario/ikrasimirova_portfolio.git
+    git clone https://github.com/innakrasimirova95/ikrasimirova_portfolio
     cd ikrasimirova_portfolio
     ```
 
