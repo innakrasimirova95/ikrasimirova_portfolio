@@ -1,13 +1,12 @@
-// components/Header.tsx
 "use client";
 
+import React from "react";
 import Link from "next/link";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/toggle-theme";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navItems = [
   { href: "#proyectos", label: "<Proyectos/>" },
@@ -18,24 +17,26 @@ const navItems = [
 
 export function Header({ showName, activeSection }: { showName: boolean; activeSection: string }) {
   return (
-    <header className="sticky top-0 z-50 w-full bg-background  shadow-sm">
+    <header className="sticky top-0 z-50 w-full bg-background shadow-md backdrop-blur-sm">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
         <Link href="/" className="text-xl font-semibold tracking-tight text-primary hover:opacity-90 transition">
-          <span className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
             {showName ? "Inna Krasimirova" : ""}
           </span>
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-8">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium transition-colors",
-                activeSection === item.href.substring(1) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                "text-sm font-medium transition-colors relative px-2 py-1",
+                activeSection === item.href.substring(1)
+                  ? "text-foreground before:absolute before:-bottom-1 before:left-0 before:w-full before:h-[2px] before:bg-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:before:absolute hover:before:-bottom-1 hover:before:left-0 hover:before:w-full hover:before:h-[2px] hover:before:bg-foreground before:opacity-0 hover:before:opacity-100"
               )}
             >
               {item.label}
@@ -53,15 +54,21 @@ export function Header({ showName, activeSection }: { showName: boolean; activeS
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-64 sm:w-72">
-              <nav className="mt-10 space-y-4">
+            <SheetContent
+              side="right"
+              className="w-64 sm:w-72 p-6 bg-background/95 backdrop-blur-md shadow-xl rounded-l-xl transition-transform duration-300 ease-in-out"
+            >
+              <SheetTitle className="sr-only">Mobile Navigation</SheetTitle>
+              <nav className="mt-12 flex flex-col gap-4 text-center">
                 {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     className={cn(
-                      "block text-base font-medium transition-colors",
-                      activeSection === item.href.substring(1) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                      "block text-lg font-medium py-3 rounded-lg transition-all duration-200 hover:bg-muted-foreground/10",
+                      activeSection === item.href.substring(1)
+                        ? "text-foreground font-semibold"
+                        : "text-muted-foreground"
                     )}
                   >
                     {item.label}
@@ -75,5 +82,3 @@ export function Header({ showName, activeSection }: { showName: boolean; activeS
     </header>
   );
 }
-
-
