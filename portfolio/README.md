@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Inna Krasimirova - Portfolio
 
-## Getting Started
+## Descripción
 
-First, run the development server:
+Este es el portfolio personal de Inna Krasimirova, una Ingeniera de Software y Desarrolladora Full Stack. Este proyecto está diseñado para mostrar mis habilidades, experiencia y proyectos a través de una interfaz moderna y responsiva.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Características
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Sección "Sobre Mí"**: Una introducción personal y profesional.
+- **Proyectos Destacados**: Una galería de proyectos con descripciones y enlaces.
+- **Experiencia Laboral**: Un timeline detallado de mi trayectoria profesional.
+- **Educación**: Información sobre mi formación académica.
+- **Tecnologías**: Un listado de las herramientas y tecnologías con las que trabajo.
+- **Alternador de Tema**: Cambia entre el modo claro y oscuro para una experiencia de usuario personalizada.
+- **Diseño Responsivo**: Adaptado para verse y funcionar perfectamente en dispositivos de todos los tamaños.
+- **Navegación Fluida**: Desplazamiento suave entre secciones y un menú de navegación intuitivo.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tecnologías Utilizadas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Este proyecto ha sido construido utilizando las siguientes tecnologías:
 
-## Learn More
+- **Next.js**: Framework de React para aplicaciones web con renderizado del lado del servidor y generación de sitios estáticos.
+- **React**: Biblioteca de JavaScript para construir interfaces de usuario.
+- **TypeScript**: Superset de JavaScript que añade tipado estático.
+- **Tailwind CSS**: Framework CSS utility-first para un diseño rápido y personalizado.
+- **Shadcn UI**: Componentes de UI construidos con Tailwind CSS y Radix UI.
+- **next-themes**: Para la gestión de temas claro/oscuro.
+- **Lucide React**: Colección de iconos personalizables.
+- **React Icons**: Librería de iconos populares.
+- **Geist Fonts**: Fuentes modernas y elegantes.
 
-To learn more about Next.js, take a look at the following resources:
+## Configuración e Instalación
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Sigue estos pasos para configurar y ejecutar el proyecto localmente:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1.  **Clona el repositorio:**
+    ```bash
+    git clone https://github.com/innakrasimirova95/ikrasimirova_portfolio
+    cd portfolio
+    ```
 
-## Deploy on Vercel
+2.  **Instala las dependencias:**
+    ```bash
+    npm install
+    # o yarn install
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3.  **Ejecuta el servidor de desarrollo:**
+    ```bash
+    npm run dev
+    # o yarn dev
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
+
+## Uso
+
+Navega por las diferentes secciones del portfolio utilizando el menú de navegación. Puedes cambiar el tema entre claro y oscuro usando el botón de alternancia de tema en la esquina superior derecha. En dispositivos móviles, el menú de navegación se transforma en un menú desplegable.
+
+## Contacto
+
+- **LinkedIn**: [Tu perfil de LinkedIn](https://www.linkedin.com/in/innakrasimirova/)
+- **GitHub**: [Tu perfil de GitHub](https://github.com/innakrasimirova95)
+
+---
+
+© 2025 Inna Krasimirova. Todos los derechos reservados.

@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { HiOutlineCalendar, HiOutlineExternalLink } from "react-icons/hi";
 
 const projectsData = [
@@ -21,7 +22,6 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
         &lt;Proyectos/&gt;
       </h2>
 
-
       {/* Grid de proyectos */}
       <div className="grid gap-8 sm:grid-cols-2">
         {projectsData.map((project, index) => (
@@ -34,12 +34,16 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
           >
             {/* Imagen */}
             <div className="relative w-full h-56 overflow-hidden">
-              <img
+              <Image
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority={index === 0} 
               />
-              {/* Overlay distinto para claro/oscuro */}
+
+              {/* Overlay claro/oscuro */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent dark:from-background/90 dark:via-transparent dark:to-transparent" />
             </div>
 

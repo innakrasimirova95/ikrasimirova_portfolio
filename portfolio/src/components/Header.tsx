@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/toggle-theme";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 
 const navItems = [
   { href: "#proyectos", label: "<Proyectos/>" },
