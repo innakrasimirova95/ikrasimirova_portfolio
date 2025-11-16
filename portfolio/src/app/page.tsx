@@ -128,7 +128,7 @@ export default function Home() {
           </a>
 
           <a
-            href="/cv_inna_krasimirova.pdf"
+            href="/CV Inna Krasimirova.pdf"
             download
             aria-label="Descargar CV"
             className="hover:text-green-600 transition"
