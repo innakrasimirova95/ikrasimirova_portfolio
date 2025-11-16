@@ -36,22 +36,22 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
         {experienceData.map((exp, index) => (
           <div
             key={index}
-            className="group relative transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg p-6 rounded-xl bg-card border border-border/50"
+            className="group relative transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg p-6 mb-8"
           >
-            <div className="absolute left-0 top-0 bottom-0 w-1 bg-white/40 group-hover:bg-gradient-to-b from-blue-500 via-purple-600 to-pink-500 transition-all duration-300" />
+            <div className="absolute left-0 top-0 bottom-0 w-1 bg-white group-hover:bg-gradient-to-b from-blue-500 via-purple-600 to-pink-500 transition-all duration-300" />
 
             <div className="pl-6">
-              <h3 className="text-xl font-semibold text-foreground">{exp.role}</h3>
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">{exp.role}</h3>
 
-              <p className="text-md font-medium text-muted-foreground flex items-center gap-2">
+              <p className="flex items-center gap-2 text-primary font-medium italic mb-1">
                 <FaBuilding className="w-4 h-4" /> {exp.company}
               </p>
 
-              <p className="text-sm text-muted-foreground mb-2 flex items-center gap-2">
+              <p className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
                 <FaCalendarAlt className="w-4 h-4" /> {exp.period}
               </p>
 
-              <p className="text-base text-muted-foreground group-hover:text-foreground transition-colors">
+              <p className="text-base text-gray-600 dark:text-gray-400">
                 {exp.description}
               </p>
             </div>
