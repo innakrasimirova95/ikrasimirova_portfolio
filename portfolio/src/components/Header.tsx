@@ -16,12 +16,32 @@ const navItems = [
 ];
 
 export function Header({ showName, activeSection }: { showName: boolean; activeSection: string }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const targetId = e.currentTarget.href.split('#')[1];
+    const targetElement = document.getElementById(targetId);
+
+    if (targetElement) {
+      const headerOffset = document.querySelector('header')?.offsetHeight || 0;
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <header className="sticky top-0 z-50 w-full bg-background shadow-md backdrop-blur-sm">
       <div className="container mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
-        <Link href="/" className="text-xl font-semibold tracking-tight text-primary hover:opacity-90 transition">
-          <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+        <Link href="/" className="text-lg font-semibold tracking-tight text-primary hover:opacity-90 transition mr-4">
+          <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent whitespace-nowrap">
             {showName ? "Inna Krasimirova" : ""}
           </span>
         </Link>
@@ -32,6 +52,7 @@ export function Header({ showName, activeSection }: { showName: boolean; activeS
             <Link
               key={item.href}
               href={item.href}
+              onClick={handleNavClick}
               className={cn(
                 "text-sm font-medium transition-colors relative px-2 py-1",
                 activeSection === item.href.substring(1)
@@ -48,7 +69,7 @@ export function Header({ showName, activeSection }: { showName: boolean; activeS
         {/* Mobile Menu */}
         <div className="md:hidden flex items-center gap-2">
           <ModeToggle />
-          <Sheet>
+          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
                 <Menu className="h-5 w-5" />
@@ -64,6 +85,7 @@ export function Header({ showName, activeSection }: { showName: boolean; activeS
                   <Link
                     key={item.href}
                     href={item.href}
+                    onClick={handleNavClick}
                     className={cn(
                       "block text-lg font-medium py-3 rounded-lg transition-all duration-200 hover:bg-muted-foreground/10",
                       activeSection === item.href.substring(1)

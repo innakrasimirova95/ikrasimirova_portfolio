@@ -24,7 +24,7 @@ const experienceData = [
 export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
   return (
     <section id="experiencia" ref={ref}>
-      <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent">&lt;Experiencia/&gt;</h2>
+      <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">&lt;Experiencia/&gt;</h2>
       <div className="space-y-4">
         {experienceData.map((exp, index) => (
           <div key={index} className="group relative transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg p-6">

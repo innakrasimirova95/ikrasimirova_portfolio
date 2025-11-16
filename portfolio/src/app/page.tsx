@@ -134,7 +134,7 @@ export default function Home() {
 
       <main className="container mx-auto px-6 py-12 space-y-32">
         <section id="proyectos" ref={proyectosRef}>
-          <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent">&lt;Proyectos/&gt;</h2>
+          <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">&lt;Proyectos/&gt;</h2>
           <p className="text-muted-foreground mb-6">
             Aquí puedes mostrar algunos de tus proyectos destacados como desarrolladora Full Stack.
           </p>
@@ -148,12 +148,12 @@ export default function Home() {
         <Experience ref={experienciaRef} />
 
         <section id="educacion" ref={educacionRef}>
-          <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent">&lt;Educación/&gt;</h2>
+          <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">&lt;Educación/&gt;</h2>
           <EducationTimeline></EducationTimeline>
         </section>
 
         <section id="tecnologias" ref={tecnologiasRef}>
-          <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent">&lt;Tecnologías/&gt;</h2>
+          <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">&lt;Tecnologías/&gt;</h2>
           <TechIcons/>
         </section>
       </main>

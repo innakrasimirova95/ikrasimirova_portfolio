@@ -6,21 +6,25 @@ export function EducationTimeline() {
       title: "MÁSTER EN DIRECCIÓN Y GESTIÓN DE PROYECTOS SOFTWARE",
       institution: "Universidad Politécnica de Madrid - ETSII",
       date: "Octubre 2022 - Julio 2024",
+      extra: undefined,
     },
     {
       title: "ERASMUS +",
       institution: "Tallina Tehnikaülikool (TalTech) - Tallin/Estonia",
       date: "Enero 2022 - Junio 2022",
+      extra: undefined,
     },
     {
       title: "DOBLE GRADO EN INGENIERÍA DE SOFTWARE Y TECNOLOGÍA PARA LA SOCIEDAD DE LA INFORMACIÓN",
       institution: "Universidad Politécnica de Madrid - ETSISI",
       date: "Septiembre 2017 - Junio 2023",
+      extra: undefined,
     },
     {
       title: "GRADO SUPERIOR DE ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS Y REDES",
       institution: "IES Europa, Rivas – Vaciamadrid",
       date: "Septiembre 2014 - Junio 2016",
+      extra: undefined,
     },
   ];
 
