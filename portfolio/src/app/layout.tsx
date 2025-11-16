@@ -1,8 +1,10 @@
-
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+
+// Fuentes Geist correctamente importadas
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,12 +18,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" suppressHydrationWarning className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-        >
+    <html
+      lang="es"
+      suppressHydrationWarning
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+    >
+      <body className="min-h-screen antialiased">
+        <ThemeProvider attribute="class" defaultTheme="light">
           {children}
         </ThemeProvider>
       </body>
