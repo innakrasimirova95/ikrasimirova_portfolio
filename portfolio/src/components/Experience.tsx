@@ -47,7 +47,7 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
                 <FaBuilding className="w-4 h-4" /> {exp.company}
               </p>
 
-              <p className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <p className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-2">
                 <FaCalendarAlt className="w-4 h-4" /> {exp.period}
               </p>
 

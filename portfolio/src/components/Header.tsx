@@ -10,7 +10,7 @@ import { Menu } from "lucide-react";
 
 const navItems = [
   { href: "#proyectos", label: "<Proyectos/>" },
-  { href: "#experiencia", label: "<Experiencia/>" },
+  { href: "#experience", label: "<Experiencia/>" },
   { href: "#educacion", label: "<Educación/>" },
   { href: "#tecnologias", label: "<Tecnologías/>" },
 ];
