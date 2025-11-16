@@ -38,13 +38,18 @@ export function Header({ showName, activeSection }: { showName: boolean; activeS
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background shadow-md backdrop-blur-sm">
-      <div className="container mx-auto flex items-center justify-between px-6 py-4">
+      <div className={cn(
+        "container mx-auto flex items-center justify-between px-6 py-4",
+        showName ? "justify-between" : "justify-center"
+      )}>
         {/* Logo */}
-        <Link href="/" className="text-lg font-semibold tracking-tight text-primary hover:opacity-90 transition mr-4">
-          <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent whitespace-nowrap">
-            {showName ? "Inna Krasimirova" : ""}
-          </span>
-        </Link>
+        {showName && (
+          <Link href="/" className="text-lg font-semibold tracking-tight text-primary hover:opacity-90 transition mr-4">
+            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent whitespace-nowrap">
+              Inna Krasimirova
+            </span>
+          </Link>
+        )}
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center space-x-8">

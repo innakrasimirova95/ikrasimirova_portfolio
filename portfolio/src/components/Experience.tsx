@@ -1,10 +1,11 @@
 import React from 'react';
+import { FaBuilding, FaCalendarAlt } from 'react-icons/fa';
 
 const experienceData = [
   {
     company: 'AECOM',
     role: 'Digital Solution Developer',
-    period: 'Mayo 2025 - Actualmente',
+    period: 'Mayo 2025 - Octubre 2025',
     description: 'Desarrollo de soluciones digitales full stack para proyectos de ingeniería, incluyendo análisis, diseño, desarrollo, pruebas y despliegue. Tecnologías: React, Typescript, Python, Django, Azure.',
   },
   {
@@ -31,8 +32,12 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-white group-hover:bg-gradient-to-b from-blue-500 via-purple-600 to-pink-500 transition-all duration-300"></div>
             <div className="pl-6">
               <h3 className="text-xl font-semibold">{exp.role}</h3>
-              <p className="text-md font-medium text-muted-foreground">{exp.company}</p>
-              <p className="text-sm text-muted-foreground mb-2">{exp.period}</p>
+              <p className="text-md font-medium text-muted-foreground flex items-center gap-2">
+                <FaBuilding className="inline-block" /> {exp.company}
+              </p>
+              <p className="text-sm text-muted-foreground mb-2 flex items-center gap-2">
+                <FaCalendarAlt className="inline-block" /> {exp.period}
+              </p>
               <p className="text-base">{exp.description}</p>
             </div>
           </div>

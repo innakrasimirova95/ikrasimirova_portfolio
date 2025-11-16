@@ -11,6 +11,7 @@ import { TypingEffect } from "@/components/ui/TypingEffect";
 import { Download } from "lucide-react";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
+import { Projects } from "@/components/Projects"; // Import the Projects component
 
 export default function Home() {
   const [showNameInHeader, setShowNameInHeader] = useState(false);
@@ -133,29 +134,10 @@ export default function Home() {
     </section>
 
       <main className="container mx-auto px-6 py-12 space-y-32">
-        <section id="proyectos" ref={proyectosRef}>
-          <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">&lt;Proyectos/&gt;</h2>
-          <p className="text-muted-foreground mb-6">
-            Aquí puedes mostrar algunos de tus proyectos destacados como desarrolladora Full Stack.
-          </p>
-          {/* Puedes agregar tarjetas de proyectos aquí */}
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="rounded-xl border p-4 shadow-sm">Proyecto 1</div>
-            <div className="rounded-xl border p-4 shadow-sm">Proyecto 2</div>
-          </div>
-        </section>
-
+        <Projects ref={proyectosRef} />
         <Experience ref={experienciaRef} />
-
-        <section id="educacion" ref={educacionRef}>
-          <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">&lt;Educación/&gt;</h2>
-          <EducationTimeline></EducationTimeline>
-        </section>
-
-        <section id="tecnologias" ref={tecnologiasRef}>
-          <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">&lt;Tecnologías/&gt;</h2>
-          <TechIcons/>
-        </section>
+        <EducationTimeline ref={educacionRef} />
+        <TechIcons ref={tecnologiasRef} />
       </main>
     </>
   );

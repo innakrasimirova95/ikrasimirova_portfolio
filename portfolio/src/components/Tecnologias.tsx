@@ -46,12 +46,13 @@ const techStack = [
 
 ];
 
-export function TechIcons() {
+export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <section className="max-w-5xl mx-auto px-6 py-12">
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8 justify-items-center">
+    <section id="tecnologias" ref={ref}>
+      <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">&lt;Tecnologías/&gt;</h2>
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8">
         {techStack.map(({ icon: Icon, baseColor, hoverColor, name }, i) => {
           const isHovered = hovered === i;
           return (
@@ -73,4 +74,6 @@ export function TechIcons() {
       </div>
     </section>
   );
-}
+});
+
+TechIcons.displayName = "TechIcons";
