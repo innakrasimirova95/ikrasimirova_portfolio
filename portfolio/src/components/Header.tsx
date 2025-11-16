@@ -13,6 +13,7 @@ const navItems = [
   { href: "#experience", label: "<Experiencia/>" },
   { href: "#educacion", label: "<Educación/>" },
   { href: "#tecnologias", label: "<Tecnologías/>" },
+  { href: "#contacto", label: "<Contacto/>" },
 ];
 
 export function Header({ showName, activeSection }: { showName: boolean; activeSection: string }) {
@@ -49,7 +50,7 @@ export function Header({ showName, activeSection }: { showName: boolean; activeS
         </div>
 
         {/* CENTER - NAV ALWAYS CENTERED */}
-        <nav className="hidden md:flex items-center gap-8 mx-auto">
+        <nav className="hidden xs:flex items-center gap-6 mx-auto">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -72,7 +73,7 @@ export function Header({ showName, activeSection }: { showName: boolean; activeS
           <ModeToggle />
 
           {/* MOBILE MENU */}
-          <div className="md:hidden">
+          <div className="xs:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon">
