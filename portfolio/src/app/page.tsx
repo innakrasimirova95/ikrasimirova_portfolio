@@ -53,7 +53,7 @@ export default function Home() {
       { ref: experienciaRef, id: "experiencia" },
       { ref: educacionRef, id: "educacion" },
       { ref: tecnologiasRef, id: "tecnologias" },
-      { ref: contactoRef, id: "contacto" }, // Add new ref
+      { ref: contactoRef, id: "contacto" },
     ];
 
     const observerOptions = {
@@ -195,7 +195,7 @@ export default function Home() {
         <Experience ref={experienciaRef} />
         <EducationTimeline ref={educacionRef} />
         <TechIcons ref={tecnologiasRef} />
-        <ContactForm ref={contactoRef} /> {/* Add ContactForm */}
+        <ContactForm ref={contactoRef} />
       </main>
     </>
   );

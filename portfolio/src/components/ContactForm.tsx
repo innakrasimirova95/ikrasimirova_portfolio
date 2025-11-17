@@ -63,14 +63,9 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
         className={cn("scroll-mt-24 w-full", className)}
       >
         <div>
-          <SectionTitle className="text-3xl md:text-4xl mb-4">
+          <SectionTitle className="mb-4">
             &lt;Contacto/&gt;
           </SectionTitle>
-
-          <p className="text-sm md:text-base text-foreground mb-10 max-w-3xl">
-            Si quieres hablar sobre oportunidades, colaboración o simplemente
-            saludar, puedes enviarme un mensaje a través de este formulario.
-          </p>
 
           <div className="relative">
             <div className="pointer-events-none absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-br from-blue-500/20 via-purple-500/10 to-pink-500/20 blur-3xl" />

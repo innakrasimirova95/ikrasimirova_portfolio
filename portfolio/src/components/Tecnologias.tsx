@@ -53,7 +53,7 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
   return (
     <section id="tecnologias" ref={ref}>
       <SectionTitle>&lt;Tecnologías/&gt;</SectionTitle>
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8">
+      <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-6">
         {techStack.map(({ icon: Icon, baseColor, hoverColor, name }, i) => {
           const isHovered = hovered === i;
           return (
@@ -68,7 +68,7 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
                 transform: isHovered ? "scale(1.1)" : "scale(1)",
               }}
             >
-              <Icon className="text-6xl" />
+              <Icon className="text-4xl sm:text-5xl md:text-6xl" />
             </div>
           );
         })}

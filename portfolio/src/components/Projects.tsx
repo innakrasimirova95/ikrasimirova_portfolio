@@ -49,16 +49,16 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
             {/* Contenido */}
             <div className="p-6">
               <div className="flex justify-between items-center mb-3">
-                <h3 className="text-xl font-semibold text-foreground">
+                <h3 className="text-base sm:text-xl font-semibold text-foreground">
                   {project.title}
                 </h3>
-                <span className="flex items-center text-sm text-foreground gap-1">
+                <span className="flex items-center text-xs sm:text-sm text-foreground gap-1">
                   <HiOutlineCalendar className="w-4 h-4" />
                   {project.year}
                 </span>
               </div>
 
-              <p className="text-sm text-foreground mb-4 leading-relaxed">
+              <p className="text-xs sm:text-sm text-foreground mb-4 leading-relaxed">
                 {project.description}
               </p>
 

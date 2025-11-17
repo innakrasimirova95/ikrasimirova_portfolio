@@ -40,17 +40,17 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-white group-hover:bg-gradient-to-b from-blue-500 via-purple-600 to-pink-500 transition-all duration-300" />
 
             <div className="pl-6">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-1">{exp.role}</h3>
+              <h3 className="text-base sm:text-xl font-semibold text-gray-900 dark:text-white mb-1">{exp.role}</h3>
 
               <p className="flex items-center gap-2 text-primary font-medium italic mb-1">
                 <FaBuilding className="w-4 h-4" /> {exp.company}
               </p>
 
-              <p className="flex items-center gap-2 text-sm text-foreground mb-2">
+              <p className="flex items-center gap-2 text-xs sm:text-sm text-foreground mb-2">
                 <FaCalendarAlt className="w-4 h-4" /> {exp.period}
               </p>
 
-              <p className="text-base text-foreground">
+              <p className="text-xs sm:text-base text-foreground">
                 {exp.description}
               </p>
             </div>
