@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/toggle-theme";
-import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
@@ -103,9 +102,7 @@ export function Header({
                     className={cn(
                       "relative flex items-center gap-2 px-4 py-2 text-sm text-left rounded-xl transition-all",
                       "hover:bg-muted/20",
-                      isActive
-                        ? "text-foreground"
-                        : "text-foreground"
+                      "text-foreground"
                     )}
                   >
                     {isActive && (
