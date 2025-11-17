@@ -11,6 +11,8 @@ import { Download } from "lucide-react";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { Projects } from "@/components/Projects";
+import { ContactForm } from "@/components/ContactForm"; // Import ContactForm
+import { motion } from "framer-motion";
 
 export default function Home() {
   const [showNameInHeader, setShowNameInHeader] = useState(false);
@@ -21,10 +23,11 @@ export default function Home() {
   const experienciaRef = useRef<HTMLElement>(null);
   const educacionRef = useRef<HTMLElement>(null);
   const tecnologiasRef = useRef<HTMLElement>(null);
+  const contactoRef = useRef<HTMLElement>(null); // New ref for ContactForm
 
   // Observer para mostrar/ocultar el nombre en el header
   useEffect(() => {
-    const element = nameRef.current; // copiamos el valor del ref
+    const element = nameRef.current;
 
     if (!element) return;
 
@@ -50,6 +53,7 @@ export default function Home() {
       { ref: experienciaRef, id: "experiencia" },
       { ref: educacionRef, id: "educacion" },
       { ref: tecnologiasRef, id: "tecnologias" },
+      { ref: contactoRef, id: "contacto" }, // Add new ref
     ];
 
     const observerOptions = {
@@ -74,28 +78,50 @@ export default function Home() {
 
     return () => {
       sectionRefs.forEach(({ ref }) => {
-        if (ref.current) {
-          sectionObserver.unobserve(ref.current);
+        const currentRef = ref.current;
+        if (currentRef) {
+          sectionObserver.unobserve(currentRef);
         }
       });
       sectionObserver.disconnect();
     };
   }, []);
 
+  // Variantes elegantes para el hero
+  const heroItem = {
+    hidden: { opacity: 0, y: 12 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5 },
+    },
+  };
+
   return (
     <>
       <Header showName={showNameInHeader} activeSection={activeSection} />
 
       {/* Hero Section */}
-      <section className="min-h-[60vh] flex flex-col justify-center items-center text-center px-4 space-y-6">
-        <h1
+      <motion.section
+        className="min-h-screen flex flex-col justify-center items-center px-6 text-center"
+        initial="hidden"
+        animate="visible"
+        transition={{ staggerChildren: 0.15 }}
+      >
+        {/* Nombre */}
+        <motion.h1
           ref={nameRef}
-          className="text-4xl md:text-6xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+          variants={heroItem}
+          className="text-4xl md:text-7xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
         >
           Inna Krasimirova
-        </h1>
+        </motion.h1>
 
-        <div className="text-lg md:text-2xl text-muted-foreground">
+        {/* Subtítulo con typing */}
+        <motion.div
+          variants={heroItem}
+          className="mt-3 text-lg md:text-2xl text-foreground"
+        >
           <TypingEffect
             text="Ingeniera de Software | Desarrolladora Full Stack"
             typingSpeed={240}
@@ -103,46 +129,73 @@ export default function Home() {
             pauseTime={1500}
             fontSize="clamp(1rem, 1vw, 2.5rem)"
           />
-        </div>
+        </motion.div>
+
+        {/* Descripción breve */}
+        <motion.p
+          variants={heroItem}
+          className="mt-12 max-w-3xl text-center text-xs md:text-sm text-foreground leading-relaxed"
+        >
+        Apasionada por diseñar experiencias digitales claras, funcionales y centradas en las personas.
+        Me motiva mejorar cada día, asumir nuevos desafíos y trabajar en equipo. Fuera del ámbito tecnológico, disfruto 
+        viajar y conocer culturas que me inspiran a ver las cosas desde nuevas perspectivas.
+
+        </motion.p>
+
+        {/* Línea decorativa */}
+        <motion.div
+          variants={heroItem}
+          className="mt-4 h-px w-24 bg-gradient-to-r from-blue-500/60 via-purple-500/60 to-pink-500/60 rounded-full"
+        />
 
         {/* Icon Links */}
-        <div className="flex items-center gap-8 mt-6 text-muted-foreground">
-          <a
+        <motion.div
+          variants={heroItem}
+          className="mt-6 flex items-center gap-6 md:gap-8 text-foreground"
+        >
+          <motion.a
+            whileHover={{ y: -2, scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
             href="https://www.linkedin.com/in/innakrasimirova/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="hover:text-blue-600 transition"
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 transition-colors"
           >
-            <FaLinkedin size={32} />
-          </a>
+            <FaLinkedin size={24} />
+          </motion.a>
 
-          <a
+          <motion.a
+            whileHover={{ y: -2, scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
             href="https://github.com/innakrasimirova95"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="hover:text-gray-800 dark:hover:text-white transition"
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 transition-colors"
           >
-            <FaGithub size={32} />
-          </a>
+            <FaGithub size={24} />
+          </motion.a>
 
-          <a
+          <motion.a
+            whileHover={{ y: -2, scale: 1.05 }}
+            whileTap={{ scale: 0.96 }}
             href="/CV Inna Krasimirova.pdf"
             download
             aria-label="Descargar CV"
-            className="hover:text-green-600 transition"
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 transition-colors"
           >
-            <Download size={32} />
-          </a>
-        </div>
-      </section>
+            <Download size={24} />
+          </motion.a>
+        </motion.div>
+      </motion.section>
 
       <main className="container mx-auto px-6 py-12 space-y-32">
         <Projects ref={proyectosRef} />
         <Experience ref={experienciaRef} />
         <EducationTimeline ref={educacionRef} />
         <TechIcons ref={tecnologiasRef} />
+        <ContactForm ref={contactoRef} /> {/* Add ContactForm */}
       </main>
     </>
   );

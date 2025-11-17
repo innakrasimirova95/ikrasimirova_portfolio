@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaBuilding, FaCalendarAlt } from 'react-icons/fa';
+import { SectionTitle } from './ui/SectionTitle';
 
 const experienceData = [
   {
@@ -28,9 +29,7 @@ const experienceData = [
 const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
   return (
     <section id="experience" ref={ref} className="scroll-mt-24 py-16">
-      <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">
-        &lt;Experiencia/&gt;
-      </h2>
+      <SectionTitle>&lt;Experiencia/&gt;</SectionTitle>
 
       <div className="space-y-4">
         {experienceData.map((exp, index) => (
@@ -47,11 +46,11 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
                 <FaBuilding className="w-4 h-4" /> {exp.company}
               </p>
 
-              <p className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 mb-2">
+              <p className="flex items-center gap-2 text-sm text-foreground mb-2">
                 <FaCalendarAlt className="w-4 h-4" /> {exp.period}
               </p>
 
-              <p className="text-base text-gray-600 dark:text-gray-400">
+              <p className="text-base text-foreground">
                 {exp.description}
               </p>
             </div>
