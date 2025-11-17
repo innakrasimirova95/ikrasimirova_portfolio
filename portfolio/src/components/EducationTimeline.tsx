@@ -1,5 +1,6 @@
 import React from "react";
 import { HiOutlineCalendar, HiOutlineLocationMarker } from "react-icons/hi";
+import { SectionTitle } from "./ui/SectionTitle";
 
 const educationData = [
   {
@@ -31,7 +32,7 @@ const educationData = [
 export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
   return (
     <section id="educacion" ref={ref}>
-      <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">&lt;Educación/&gt;</h2>
+      <SectionTitle>&lt;Educación/&gt;</SectionTitle>
       <div className="space-y-4">
         {educationData.map((item, i) => (
           <div key={i} className="group relative transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg p-6 mb-8">
@@ -46,13 +47,13 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
                 {item.institution}
               </p>
 
-              <p className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <p className="flex items-center gap-2 text-sm text-foreground">
                 <HiOutlineCalendar className="w-5 h-5" />
                 {item.date}
               </p>
 
               {item.extra && (
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{item.extra}</p>
+                <p className="mt-1 text-sm text-foreground">{item.extra}</p>
               )}
             </div>
           </div>

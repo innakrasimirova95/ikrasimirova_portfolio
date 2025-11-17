@@ -4,9 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/toggle-theme";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navItems = [
   { href: "#proyectos", label: "<Proyectos/>" },
@@ -16,32 +15,36 @@ const navItems = [
   { href: "#contacto", label: "<Contacto/>" },
 ];
 
-export function Header({ showName, activeSection }: { showName: boolean; activeSection: string }) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+export function Header({
+  showName,
+  activeSection,
+}: {
+  showName: boolean;
+  activeSection: string;
+}) {
+  const [open, setOpen] = React.useState(false);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-
     const targetId = e.currentTarget.href.split("#")[1];
     const target = document.getElementById(targetId);
     const offset = document.querySelector("header")?.offsetHeight || 0;
 
     if (target) {
-      const pos = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top: pos, behavior: "smooth" });
+      const top =
+        target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: "smooth" });
     }
 
-    setIsMobileMenuOpen(false);
+    setOpen(false);
   };
 
   return (
     <header className="sticky top-0 z-50 w-full bg-background shadow-md backdrop-blur-sm">
-      <div className="w-full max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-
-        {/* LEFT - logo (invisible placeholder when hidden) */}
-        <div className="w-40 flex justify-start">
+      <div className="w-full max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative">
+        <div className="w-40">
           {showName && (
-            <Link href="/" className="text-lg font-semibold tracking-tight">
+            <Link href="/" className="text-lg font-normal tracking-tight">
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent whitespace-nowrap">
                 Inna Krasimirova
               </span>
@@ -49,8 +52,7 @@ export function Header({ showName, activeSection }: { showName: boolean; activeS
           )}
         </div>
 
-        {/* CENTER - NAV ALWAYS CENTERED */}
-        <nav className="hidden xs:flex items-center gap-6 mx-auto">
+        <nav className="hidden lg:flex items-center gap-8 mx-auto">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -59,8 +61,8 @@ export function Header({ showName, activeSection }: { showName: boolean; activeS
               className={cn(
                 "text-sm font-medium relative px-2 py-1 transition-colors",
                 activeSection === item.href.substring(1)
-                  ? "text-foreground before:absolute before:-bottom-1 before:left-0 before:w-full before:h-[2px] before:bg-foreground"
-                  : "text-muted-foreground hover:text-foreground hover:before:absolute hover:before:-bottom-1 hover:before:left-0 hover:before:w-full hover:before:h-[2px] hover:before:bg-foreground"
+                  ? "text-foreground before:absolute before:-bottom-1 before:left-1/2 before:-translate-x-1/2 before:w-10 before:h-[2px] before:bg-gradient-to-r before:from-blue-500 before:via-purple-600 before:to-pink-500"
+                  : "text-foreground hover:text-foreground hover:before:absolute hover:before:-bottom-1 hover:before:left-1/2 hover:before:-translate-x-1/2 hover:before:w-10 hover:before:h-[2px] hover:before:bg-gradient-to-r hover:before:from-blue-500 hover:before:via-purple-600 hover:before:to-pink-500"
               )}
             >
               {item.label}
@@ -68,44 +70,62 @@ export function Header({ showName, activeSection }: { showName: boolean; activeS
           ))}
         </nav>
 
-        {/* RIGHT - DARK MODE TOGGLE + MOBILE MENU */}
-        <div className="w-40 flex justify-end items-center gap-2 md:gap-3">
+        <div className="w-40 flex justify-end items-center gap-2">
           <ModeToggle />
 
-          {/* MOBILE MENU */}
-          <div className="xs:hidden">
-            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-5 w-5" />
-                </Button>
-              </SheetTrigger>
+          <button
+            className="lg:hidden p-2 rounded-md hover:bg-muted/30 transition-colors"
+            onClick={() => setOpen((prev) => !prev)}
+          >
+            {open ? <X size={20} /> : <Menu size={20} />}
+          </button>
 
-              <SheetContent side="right" className="w-64 sm:w-72 p-6 bg-background/95">
-                <SheetTitle className="sr-only">Navigation</SheetTitle>
-
-                <nav className="mt-12 flex flex-col gap-4 text-center">
-                  {navItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={handleNavClick}
+          {open && (
+            <div
+              className="
+                absolute right-6 top-[60px]
+                w-56 py-3
+                rounded-2xl
+                bg-background/90
+                backdrop-blur-xl
+                border border-border/60
+                shadow-[0_18px_45px_rgba(0,0,0,0.55)]
+                flex flex-col gap-1
+              "
+            >
+              {navItems.map((item) => {
+                const isActive = activeSection === item.href.substring(1);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={handleNavClick}
+                    className={cn(
+                      "relative flex items-center gap-2 px-4 py-2 text-sm text-left rounded-xl transition-all",
+                      "hover:bg-muted/20",
+                      isActive
+                        ? "text-foreground"
+                        : "text-foreground"
+                    )}
+                  >
+                    {isActive && (
+                      <span className="h-6 w-[2px] rounded-full bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500" />
+                    )}
+                    <span
                       className={cn(
-                        "block text-lg py-3 rounded-lg transition-all duration-200 hover:bg-muted-foreground/10",
-                        activeSection === item.href.substring(1)
-                          ? "text-foreground font-semibold"
-                          : "text-muted-foreground"
+                        "flex-1",
+                        isActive &&
+                          "font-semibold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
                       )}
                     >
                       {item.label}
-                    </Link>
-                  ))}
-                </nav>
-              </SheetContent>
-            </Sheet>
-          </div>
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </div>
-
       </div>
     </header>
   );

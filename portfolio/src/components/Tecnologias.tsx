@@ -23,6 +23,7 @@ import {
   SiGit,
 } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
+import { SectionTitle } from "./ui/SectionTitle";
 
 const techStack = [
   { name: "Python", icon: FaPython, baseColor: "#6b7280", hoverColor: "#3776AB" },
@@ -51,7 +52,7 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
 
   return (
     <section id="tecnologias" ref={ref}>
-      <h2 className="text-4xl font-extrabold mb-12 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">&lt;Tecnologías/&gt;</h2>
+      <SectionTitle>&lt;Tecnologías/&gt;</SectionTitle>
       <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8">
         {techStack.map(({ icon: Icon, baseColor, hoverColor, name }, i) => {
           const isHovered = hovered === i;

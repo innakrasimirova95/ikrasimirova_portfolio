@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { HiOutlineCalendar, HiOutlineExternalLink } from "react-icons/hi";
+import { SectionTitle } from "./ui/SectionTitle";
 
 const projectsData = [
   {
@@ -18,9 +19,7 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
   return (
     <section id="proyectos" ref={ref} className="scroll-mt-24 py-16">
       {/* Título */}
-      <h2 className="text-4xl font-extrabold mb-8 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">
-        &lt;Proyectos/&gt;
-      </h2>
+      <SectionTitle className="mb-8">&lt;Proyectos/&gt;</SectionTitle>
 
       {/* Grid de proyectos */}
       <div className="grid gap-8 sm:grid-cols-2">
@@ -53,13 +52,13 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
                 <h3 className="text-xl font-semibold text-foreground">
                   {project.title}
                 </h3>
-                <span className="flex items-center text-sm text-muted-foreground gap-1">
+                <span className="flex items-center text-sm text-foreground gap-1">
                   <HiOutlineCalendar className="w-4 h-4" />
                   {project.year}
                 </span>
               </div>
 
-              <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+              <p className="text-sm text-foreground mb-4 leading-relaxed">
                 {project.description}
               </p>
 

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { SectionTitle } from "./ui/SectionTitle";
 
 type ContactFormProps = { className?: string };
 
@@ -62,11 +63,11 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
         className={cn("scroll-mt-24 w-full", className)}
       >
         <div>
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-4 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 bg-clip-text text-transparent ml-[-1.5rem]">
+          <SectionTitle className="text-3xl md:text-4xl mb-4">
             &lt;Contacto/&gt;
-          </h2>
+          </SectionTitle>
 
-          <p className="text-sm md:text-base text-muted-foreground mb-10 max-w-3xl">
+          <p className="text-sm md:text-base text-foreground mb-10 max-w-3xl">
             Si quieres hablar sobre oportunidades, colaboración o simplemente
             saludar, puedes enviarme un mensaje a través de este formulario.
           </p>
@@ -81,7 +82,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
               >
                 <div className="grid gap-5 md:grid-cols-2">
                   <div className="space-y-2">
-                    <label className="text-xs font-semibold tracking-[0.12em] uppercase text-muted-foreground">
+                    <label className="text-xs font-semibold tracking-[0.12em] uppercase text-foreground">
                       Nombre
                     </label>
                     <Input
@@ -95,7 +96,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-xs font-semibold tracking-[0.12em] uppercase text-muted-foreground">
+                    <label className="text-xs font-semibold tracking-[0.12em] uppercase text-foreground">
                       Email
                     </label>
                     <Input
@@ -111,7 +112,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold tracking-[0.12em] uppercase text-muted-foreground">
+                  <label className="text-xs font-semibold tracking-[0.12em] uppercase text-foreground">
                     Asunto
                   </label>
                   <Input
@@ -125,7 +126,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-xs font-semibold tracking-[0.12em] uppercase text-muted-foreground">
+                  <label className="text-xs font-semibold tracking-[0.12em] uppercase text-foreground">
                     Mensaje
                   </label>
                   <Textarea
@@ -174,7 +175,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                     </Button>
                   </div>
 
-                  <span className="text-[11px] text-muted-foreground/80 md:text-right">
+                  <span className="text-[11px] text-foreground md:text-right">
                     También puedes escribirme por{" "}
                     <a
                       href="https://www.linkedin.com/in/innakrasimirova/"

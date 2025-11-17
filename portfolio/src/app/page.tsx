@@ -120,7 +120,7 @@ export default function Home() {
         {/* Subtítulo con typing */}
         <motion.div
           variants={heroItem}
-          className="mt-3 text-lg md:text-2xl text-muted-foreground"
+          className="mt-3 text-lg md:text-2xl text-foreground"
         >
           <TypingEffect
             text="Ingeniera de Software | Desarrolladora Full Stack"
@@ -134,7 +134,7 @@ export default function Home() {
         {/* Descripción breve */}
         <motion.p
           variants={heroItem}
-          className="mt-12 max-w-3xl text-center text-xs md:text-sm text-muted-foreground/80 leading-relaxed"
+          className="mt-12 max-w-3xl text-center text-xs md:text-sm text-foreground leading-relaxed"
         >
         Apasionada por diseñar experiencias digitales claras, funcionales y centradas en las personas.
         Me motiva mejorar cada día, asumir nuevos desafíos y trabajar en equipo. Fuera del ámbito tecnológico, disfruto 
@@ -151,7 +151,7 @@ export default function Home() {
         {/* Icon Links */}
         <motion.div
           variants={heroItem}
-          className="mt-6 flex items-center gap-6 md:gap-8 text-muted-foreground"
+          className="mt-6 flex items-center gap-6 md:gap-8 text-foreground"
         >
           <motion.a
             whileHover={{ y: -2, scale: 1.05 }}
