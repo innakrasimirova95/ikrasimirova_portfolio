@@ -4,25 +4,25 @@ import { SectionTitle } from "./ui/SectionTitle";
 
 const educationData = [
   {
-    title: "MÁSTER EN DIRECCIÓN Y GESTIÓN DE PROYECTOS SOFTWARE",
+    title: "Máster en dirección y gestión de proyectos software",
     institution: "Universidad Politécnica de Madrid - ETSII",
     date: "Octubre 2022 - Julio 2024",
     extra: undefined,
   },
   {
-    title: "ERASMUS +",
+    title: "Erasmus +",
     institution: "Tallina Tehnikaülikool (TalTech) - Tallin/Estonia",
     date: "Enero 2022 - Junio 2022",
     extra: undefined,
   },
   {
-    title: "DOBLE GRADO EN INGENIERÍA DE SOFTWARE Y TECNOLOGÍA PARA LA SOCIEDAD DE LA INFORMACIÓN",
+    title: "Doble grado en ingeniería de software y tecnología para la sociedad de la información",
     institution: "Universidad Politécnica de Madrid - ETSISI",
     date: "Septiembre 2017 - Junio 2023",
     extra: undefined,
   },
   {
-    title: "GRADO SUPERIOR DE ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS Y REDES",
+    title: "Grado superior de administración de sistemas informáticos y redes",
     institution: "IES Europa, Rivas – Vaciamadrid",
     date: "Septiembre 2014 - Junio 2016",
     extra: undefined,
