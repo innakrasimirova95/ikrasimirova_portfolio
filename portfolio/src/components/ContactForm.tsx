@@ -66,9 +66,11 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
           <SectionTitle className="mb-6">&lt;Contacto/&gt;</SectionTitle>
 
           <div className="relative">
-            <div className="pointer-events-none absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-[80px]" />
+            {/* halo suave de color */}
+            <div className="pointer-events-none absolute inset-0 -z-10 rounded-[2rem] bg-gradient-to-br from-blue-500/10 via-purple-500/8 to-pink-500/10 blur-[80px]" />
 
-            <div className="rounded-[1.6rem] border border-white/5 bg-black/30 backdrop-blur-xl shadow-[0_8px_40px_rgba(0,0,0,0.35)]">
+            {/* tarjeta principal */}
+            <div className="rounded-[1.6rem] border border-border bg-background/95 backdrop-blur-xl shadow-[0_8px_40px_rgba(0,0,0,0.15)]">
               <form
                 onSubmit={handleSubmit}
                 className="p-6 md:p-8 lg:p-10 space-y-5"
@@ -78,7 +80,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                   <div className="space-y-1.5">
                     <label
                       htmlFor="contact-name"
-                      className="text-[10px] font-medium tracking-[0.14em] uppercase text-white/60"
+                      className="text-[11px] font-semibold tracking-[0.18em] uppercase text-foreground/80"
                     >
                       Nombre
                     </label>
@@ -89,14 +91,14 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                       placeholder="Tu nombre"
                       value={form.name}
                       onChange={handleChange}
-                      className="bg-white/5 border-white/10 text-sm rounded-lg px-3 py-2"
+                      className="bg-background border-border text-sm text-foreground rounded-lg px-3 py-2 placeholder:text-muted-foreground"
                     />
                   </div>
 
                   <div className="space-y-1.5">
                     <label
                       htmlFor="contact-email"
-                      className="text-[10px] font-medium tracking-[0.14em] uppercase text-white/60"
+                      className="text-[11px] font-semibold tracking-[0.18em] uppercase text-foreground/80"
                     >
                       Email
                     </label>
@@ -108,7 +110,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                       placeholder="tucorreo@email.com"
                       value={form.email}
                       onChange={handleChange}
-                      className="bg-white/5 border-white/10 text-sm rounded-lg px-3 py-2"
+                      className="bg-background border-border text-sm text-foreground rounded-lg px-3 py-2 placeholder:text-muted-foreground"
                     />
                   </div>
                 </div>
@@ -117,7 +119,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                 <div className="space-y-1.5">
                   <label
                     htmlFor="contact-subject"
-                    className="text-[10px] font-medium tracking-[0.14em] uppercase text-white/60"
+                    className="text-[11px] font-semibold tracking-[0.18em] uppercase text-foreground/80"
                   >
                     Asunto
                   </label>
@@ -128,7 +130,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                     placeholder="Sobre qué quieres hablar"
                     value={form.subject}
                     onChange={handleChange}
-                    className="bg-white/5 border-white/10 text-sm rounded-lg px-3 py-2"
+                    className="bg-background border-border text-sm text-foreground rounded-lg px-3 py-2 placeholder:text-muted-foreground"
                   />
                 </div>
 
@@ -136,7 +138,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                 <div className="space-y-1.5">
                   <label
                     htmlFor="contact-message"
-                    className="text-[10px] font-medium tracking-[0.14em] uppercase text-white/60"
+                    className="text-[11px] font-semibold tracking-[0.18em] uppercase text-foreground/80"
                   >
                     Mensaje
                   </label>
@@ -148,19 +150,19 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                     placeholder="Cuéntame un poco más..."
                     value={form.message}
                     onChange={handleChange}
-                    className="bg-white/5 border-white/10 text-sm rounded-lg px-3 py-2 min-h-[120px]"
+                    className="bg-background border-border text-sm text-foreground rounded-lg px-3 py-2 min-h-[120px] placeholder:text-muted-foreground"
                   />
                 </div>
 
                 {/* Estado */}
                 <div aria-live="polite" className="min-h-[1.25rem]">
                   {status === "success" && (
-                    <p className="text-sm text-emerald-400">
+                    <p className="text-sm text-emerald-600">
                       ¡Gracias! He recibido tu mensaje.
                     </p>
                   )}
                   {status === "error" && (
-                    <p className="text-sm text-red-400">
+                    <p className="text-sm text-red-600">
                       Ha ocurrido un error al enviar el mensaje.
                     </p>
                   )}
@@ -172,9 +174,8 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full sm:w-auto px-8 py-2 font-medium text-white rounded-lg
-                               bg-gradient-to-r from-blue-500/70 via-purple-500/70 to-pink-500/70
-                               hover:from-blue-500 hover:via-purple-500 hover:to-pink-500
-                               transition-all duration-300 shadow-[0_0_20px_rgba(100,100,255,0.2)]"
+                               bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
+                               hover:brightness-110 transition-all duration-300 shadow-[0_0_20px_rgba(100,100,255,0.25)]"
                   >
                     {isSubmitting ? "Enviando..." : "Enviar mensaje"}
                   </Button>
@@ -182,20 +183,20 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                   <button
                     type="button"
                     onClick={handleClear}
-                    className="text-xs text-white/55 hover:text-white/85 transition underline underline-offset-4 decoration-white/25"
+                    className="text-xs text-muted-foreground hover:text-foreground transition underline underline-offset-4 decoration-muted-foreground/70"
                   >
                     Limpiar
                   </button>
                 </div>
 
                 {/* Nota final */}
-                <p className="text-[11px] text-white/40 pt-2">
+                <p className="text-[11px] text-muted-foreground pt-2">
                   También puedes escribirme por{" "}
                   <a
                     href="https://www.linkedin.com/in/innakrasimirova/"
                     target="_blank"
                     rel="noreferrer"
-                    className="underline underline-offset-4 decoration-purple-500/60 hover:text-white"
+                    className="underline underline-offset-4 decoration-purple-500/60 hover:text-foreground"
                   >
                     LinkedIn
                   </a>
