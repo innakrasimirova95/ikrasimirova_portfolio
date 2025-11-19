@@ -175,7 +175,8 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                     disabled={isSubmitting}
                     className="w-full sm:w-auto px-8 py-2 font-medium text-white rounded-lg
                                bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
-                               hover:brightness-110 transition-all duration-300 shadow-[0_0_20px_rgba(100,100,255,0.25)]"
+                               hover:brightness-110 active:brightness-110
+                               transition-all duration-300 shadow-[0_0_20px_rgba(100,100,255,0.25)]"
                   >
                     {isSubmitting ? "Enviando..." : "Enviar mensaje"}
                   </Button>
@@ -183,7 +184,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                   <button
                     type="button"
                     onClick={handleClear}
-                    className="text-xs text-muted-foreground hover:text-foreground transition underline underline-offset-4 decoration-muted-foreground/70"
+                    className="text-xs text-muted-foreground hover:text-foreground active:text-foreground transition underline underline-offset-4 decoration-muted-foreground/70"
                   >
                     Limpiar
                   </button>
@@ -196,7 +197,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                     href="https://www.linkedin.com/in/innakrasimirova/"
                     target="_blank"
                     rel="noreferrer"
-                    className="underline underline-offset-4 decoration-purple-500/60 hover:text-foreground"
+                    className="underline underline-offset-4 decoration-purple-500/60 hover:text-foreground active:text-foreground"
                   >
                     LinkedIn
                   </a>

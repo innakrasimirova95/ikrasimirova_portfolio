@@ -11,7 +11,7 @@ import { Download } from "lucide-react";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { Projects } from "@/components/Projects";
-import { ContactForm } from "@/components/ContactForm"; // Import ContactForm
+import { ContactForm } from "@/components/ContactForm";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -23,7 +23,7 @@ export default function Home() {
   const experienciaRef = useRef<HTMLElement>(null);
   const educacionRef = useRef<HTMLElement>(null);
   const tecnologiasRef = useRef<HTMLElement>(null);
-  const contactoRef = useRef<HTMLElement>(null); // New ref for ContactForm
+  const contactoRef = useRef<HTMLElement>(null);
 
   // Observer para mostrar/ocultar el nombre en el header
   useEffect(() => {
@@ -136,10 +136,11 @@ export default function Home() {
           variants={heroItem}
           className="mt-12 max-w-3xl text-center text-xs md:text-sm text-foreground leading-relaxed"
         >
-        Apasionada por diseñar experiencias digitales claras, funcionales y centradas en las personas.
-        Me motiva mejorar cada día, asumir nuevos desafíos y trabajar en equipo. Fuera del ámbito tecnológico, disfruto 
-        viajar y conocer culturas que me inspiran a ver las cosas desde nuevas perspectivas.
-
+          Apasionada por diseñar experiencias digitales claras, funcionales y
+          centradas en las personas. Me motiva mejorar cada día, asumir nuevos
+          desafíos y trabajar en equipo. Fuera del ámbito tecnológico, disfruto
+          viajar y conocer culturas que me inspiran a ver las cosas desde nuevas
+          perspectivas.
         </motion.p>
 
         {/* Línea decorativa */}
@@ -160,7 +161,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 transition-colors"
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 active:bg-muted/40 transition-colors"
           >
             <FaLinkedin size={24} />
           </motion.a>
@@ -172,7 +173,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 transition-colors"
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 active:bg-muted/40 transition-colors"
           >
             <FaGithub size={24} />
           </motion.a>
@@ -183,7 +184,7 @@ export default function Home() {
             href="/CV Inna Krasimirova.pdf"
             download
             aria-label="Descargar CV"
-            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 transition-colors"
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 active:bg-muted/40 transition-colors"
           >
             <Download size={24} />
           </motion.a>

@@ -18,10 +18,8 @@ const projectsData = [
 export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
   return (
     <section id="proyectos" ref={ref} className="scroll-mt-24 py-16">
-      {/* Título */}
       <SectionTitle className="mb-8">&lt;Proyectos/&gt;</SectionTitle>
 
-      {/* Grid de proyectos */}
       <div className="grid gap-8 sm:grid-cols-2">
         {projectsData.map((project, index) => (
           <a
@@ -29,7 +27,15 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative rounded-2xl overflow-hidden bg-card border border-border/60 hover:border-border/80 hover:shadow-[0_0_25px_rgba(147,51,234,0.25)] transition-all duration-500 hover:scale-[1.02]"
+            className="
+              group relative rounded-2xl overflow-hidden bg-card
+              border border-border/60
+              hover:border-border/80 active:border-border/80
+              hover:shadow-[0_0_25px_rgba(147,51,234,0.25)]
+              active:shadow-[0_0_25px_rgba(147,51,234,0.25)]
+              transition-all duration-500
+              hover:scale-[1.02] active:scale-[1.02]
+            "
           >
             {/* Imagen */}
             <div className="relative w-full h-56 overflow-hidden">
@@ -37,12 +43,14 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
                 src={project.image}
                 alt={project.title}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                className="
+                  object-cover transition-transform duration-500
+                  group-hover:scale-105 group-active:scale-105
+                "
                 sizes="(max-width: 768px) 100vw, 50vw"
-                priority={index === 0} 
+                priority={index === 0}
               />
 
-              {/* Overlay claro/oscuro */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent dark:from-background/90 dark:via-transparent dark:to-transparent" />
             </div>
 
@@ -79,7 +87,13 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
               </div>
 
               {/* Botón enlace */}
-              <div className="mt-5 flex items-center gap-2 text-sm font-medium text-primary group-hover:text-foreground transition-colors">
+              <div
+                className="
+                  mt-5 flex items-center gap-2 text-sm font-medium text-primary
+                  group-hover:text-foreground group-active:text-foreground
+                  transition-colors
+                "
+              >
                 <HiOutlineExternalLink className="w-4 h-4" />
                 Ver proyecto
               </div>
