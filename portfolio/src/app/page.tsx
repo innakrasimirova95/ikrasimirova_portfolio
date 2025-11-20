@@ -13,6 +13,7 @@ import { FaGithub } from "react-icons/fa";
 import { Projects } from "@/components/Projects";
 import { ContactForm } from "@/components/ContactForm";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext"; // Import useLanguage
 
 export default function Home() {
   const [showNameInHeader, setShowNameInHeader] = useState(false);
@@ -24,6 +25,8 @@ export default function Home() {
   const educacionRef = useRef<HTMLElement>(null);
   const tecnologiasRef = useRef<HTMLElement>(null);
   const contactoRef = useRef<HTMLElement>(null);
+
+  const { t } = useLanguage(); // Initialize useLanguage
 
   // Observer para mostrar/ocultar el nombre en el header
   useEffect(() => {
@@ -123,7 +126,7 @@ export default function Home() {
           className="mt-3 text-lg md:text-2xl text-foreground"
         >
           <TypingEffect
-            text="Ingeniera de Software | Desarrolladora Full Stack"
+            text={t("hero.title")}
             typingSpeed={240}
             deletingSpeed={120}
             pauseTime={1500}
@@ -136,11 +139,7 @@ export default function Home() {
           variants={heroItem}
           className="mt-12 max-w-3xl text-center text-xs md:text-sm text-foreground leading-relaxed"
         >
-          Apasionada por diseñar experiencias digitales claras, funcionales y
-          centradas en las personas. Me motiva mejorar cada día, asumir nuevos
-          desafíos y trabajar en equipo. Fuera del ámbito tecnológico, disfruto
-          viajar y conocer culturas que me inspiran a ver las cosas desde nuevas
-          perspectivas.
+          {t("hero.description")}
         </motion.p>
 
         {/* Línea decorativa */}
@@ -160,7 +159,7 @@ export default function Home() {
             href="https://www.linkedin.com/in/innakrasimirova/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn"
+            aria-label={t("hero.ariaLinkedIn")}
             className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 active:bg-muted/40 transition-colors"
           >
             <FaLinkedin size={24} />
@@ -172,7 +171,7 @@ export default function Home() {
             href="https://github.com/innakrasimirova95"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub"
+            aria-label={t("hero.ariaGitHub")}
             className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 active:bg-muted/40 transition-colors"
           >
             <FaGithub size={24} />
@@ -183,7 +182,7 @@ export default function Home() {
             whileTap={{ scale: 0.96 }}
             href="/CV Inna Krasimirova.pdf"
             download
-            aria-label="Descargar CV"
+            aria-label={t("hero.ariaCV")}
             className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 active:bg-muted/40 transition-colors"
           >
             <Download size={24} />

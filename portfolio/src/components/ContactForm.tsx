@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { SectionTitle } from "./ui/SectionTitle";
+import { useLanguage } from "@/context/LanguageContext";
 
 type ContactFormProps = { className?: string };
 
@@ -20,6 +21,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+    const { t } = useLanguage();
 
     const handleChange = (
       e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -63,7 +65,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
         className={cn("scroll-mt-24 w-full", className)}
       >
         <div>
-          <SectionTitle className="mb-6">&lt;Contacto/&gt;</SectionTitle>
+          <SectionTitle className="mb-6">{t("contact.title")}</SectionTitle>
 
           <div className="relative">
             {/* halo suave de color */}
@@ -82,13 +84,13 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                       htmlFor="contact-name"
                       className="text-[11px] font-semibold tracking-[0.18em] uppercase text-foreground/80"
                     >
-                      Nombre
+                      {t("contact.form.name")}
                     </label>
                     <Input
                       id="contact-name"
                       name="name"
                       required
-                      placeholder="Tu nombre"
+                      placeholder={t("contact.form.namePlaceholder")}
                       value={form.name}
                       onChange={handleChange}
                       className="bg-background border-border text-sm text-foreground rounded-lg px-3 py-2 placeholder:text-muted-foreground"
@@ -100,14 +102,14 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                       htmlFor="contact-email"
                       className="text-[11px] font-semibold tracking-[0.18em] uppercase text-foreground/80"
                     >
-                      Email
+                      {t("contact.form.email")}
                     </label>
                     <Input
                       id="contact-email"
                       name="email"
                       type="email"
                       required
-                      placeholder="tucorreo@email.com"
+                      placeholder={t("contact.form.emailPlaceholder")}
                       value={form.email}
                       onChange={handleChange}
                       className="bg-background border-border text-sm text-foreground rounded-lg px-3 py-2 placeholder:text-muted-foreground"
@@ -121,13 +123,13 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                     htmlFor="contact-subject"
                     className="text-[11px] font-semibold tracking-[0.18em] uppercase text-foreground/80"
                   >
-                    Asunto
+                    {t("contact.form.subject")}
                   </label>
                   <Input
                     id="contact-subject"
                     name="subject"
                     required
-                    placeholder="Sobre qué quieres hablar"
+                    placeholder={t("contact.form.subjectPlaceholder")}
                     value={form.subject}
                     onChange={handleChange}
                     className="bg-background border-border text-sm text-foreground rounded-lg px-3 py-2 placeholder:text-muted-foreground"
@@ -140,14 +142,14 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                     htmlFor="contact-message"
                     className="text-[11px] font-semibold tracking-[0.18em] uppercase text-foreground/80"
                   >
-                    Mensaje
+                    {t("contact.form.message")}
                   </label>
                   <Textarea
                     id="contact-message"
                     name="message"
                     required
                     rows={5}
-                    placeholder="Cuéntame un poco más..."
+                    placeholder={t("contact.form.messagePlaceholder")}
                     value={form.message}
                     onChange={handleChange}
                     className="bg-background border-border text-sm text-foreground rounded-lg px-3 py-2 min-h-[120px] placeholder:text-muted-foreground"
@@ -158,12 +160,12 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                 <div aria-live="polite" className="min-h-[1.25rem]">
                   {status === "success" && (
                     <p className="text-sm text-emerald-600">
-                      ¡Gracias! He recibido tu mensaje.
+                      {t("contact.form.success")}
                     </p>
                   )}
                   {status === "error" && (
                     <p className="text-sm text-red-600">
-                      Ha ocurrido un error al enviar el mensaje.
+                      {t("contact.form.error")}
                     </p>
                   )}
                 </div>
@@ -178,7 +180,9 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                                hover:brightness-110 active:brightness-110
                                transition-all duration-300 shadow-[0_0_20px_rgba(100,100,255,0.25)]"
                   >
-                    {isSubmitting ? "Enviando..." : "Enviar mensaje"}
+                    {isSubmitting
+                      ? t("contact.form.submittingButton")
+                      : t("contact.form.submitButton")}
                   </Button>
 
                   <button
@@ -186,13 +190,13 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                     onClick={handleClear}
                     className="text-xs text-muted-foreground hover:text-foreground active:text-foreground transition underline underline-offset-4 decoration-muted-foreground/70"
                   >
-                    Limpiar
+                    {t("contact.form.clearButton")}
                   </button>
                 </div>
 
                 {/* Nota final */}
                 <p className="text-[11px] text-muted-foreground pt-2">
-                  También puedes escribirme por{" "}
+                  {t("contact.linkedinPrompt")}{" "}
                   <a
                     href="https://www.linkedin.com/in/innakrasimirova/"
                     target="_blank"

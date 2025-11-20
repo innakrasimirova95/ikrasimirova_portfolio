@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/ui/theme-provider";
+import { LanguageProvider } from "@/context/LanguageContext";
 
 // Fuentes Geist correctamente importadas
 import { GeistSans } from "geist/font/sans";
@@ -25,7 +26,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark">
-          {children}
+          <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

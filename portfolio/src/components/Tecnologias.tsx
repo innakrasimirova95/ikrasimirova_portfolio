@@ -24,6 +24,7 @@ import {
 } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
 import { SectionTitle } from "./ui/SectionTitle";
+import { useLanguage } from "@/context/LanguageContext";
 
 const techStack = [
   { name: "Python", icon: FaPython, baseColor: "#6b7280", hoverColor: "#3776AB" },
@@ -48,10 +49,11 @@ const techStack = [
 
 export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
   const [hovered, setHovered] = useState<number | null>(null);
+  const { t } = useLanguage();
 
   return (
     <section id="tecnologias" ref={ref}>
-      <SectionTitle>&lt;Tecnologías/&gt;</SectionTitle>
+      <SectionTitle>{t("technologies.title")}</SectionTitle>
 
       <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-6">
         {techStack.map(({ icon: Icon, baseColor, hoverColor, name }, i) => {

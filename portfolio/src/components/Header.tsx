@@ -5,14 +5,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/toggle-theme";
 import { Menu, X } from "lucide-react";
-
-const navItems = [
-  { href: "#proyectos", label: "<Proyectos/>" },
-  { href: "#experience", label: "<Experiencia/>" },
-  { href: "#educacion", label: "<Educación/>" },
-  { href: "#tecnologias", label: "<Tecnologías/>" },
-  { href: "#contacto", label: "<Contacto/>" },
-];
+import { useLanguage } from "@/context/LanguageContext";
 
 export function Header({
   showName,
@@ -22,6 +15,15 @@ export function Header({
   activeSection: string;
 }) {
   const [open, setOpen] = React.useState(false);
+  const { lang, setLang, t } = useLanguage();
+
+  const navItems = [
+    { href: "#proyectos", key: "nav.projects" },
+    { href: "#experience", key: "nav.experience" },
+    { href: "#educacion", key: "nav.education" },
+    { href: "#tecnologias", key: "nav.technologies" },
+    { href: "#contacto", key: "nav.contact" },
+  ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
@@ -78,12 +80,18 @@ export function Header({
                       "hover:before:to-pink-500 active:before:to-pink-500"
               )}
             >
-              {item.label}
+              {t(item.key)}
             </Link>
           ))}
         </nav>
 
         <div className="w-40 flex justify-end items-center gap-2">
+          <button
+            onClick={() => setLang(lang === "es" ? "en" : "es")}
+            className="px-3 py-1 rounded-md bg-muted/20 hover:bg-muted/40 active:bg-muted/40 transition-colors text-sm font-medium"
+          >
+            {lang.toUpperCase()}
+          </button>
           <ModeToggle />
 
           {/* BOTÓN MENÚ MÓVIL */}
@@ -131,7 +139,7 @@ export function Header({
                           "font-semibold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
                       )}
                     >
-                      {item.label}
+                      {t(item.key)}
                     </span>
                   </Link>
                 );

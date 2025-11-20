@@ -1,35 +1,17 @@
 import React from 'react';
 import { FaBuilding, FaCalendarAlt } from 'react-icons/fa';
 import { SectionTitle } from './ui/SectionTitle';
-
-const experienceData = [
-  {
-    company: 'AECOM',
-    role: 'Digital Solution Developer',
-    period: 'Mayo 2025 - Octubre 2025',
-    description:
-      'Desarrollo de soluciones digitales full stack para proyectos de ingeniería, incluyendo análisis, diseño, desarrollo, pruebas y despliegue. Tecnologías: React, Typescript, Python, Django, Azure.',
-  },
-  {
-    company: 'IGNIS',
-    role: 'Investigadora Desarrolladora Full Stack',
-    period: 'Julio 2023 - Abril 2025',
-    description:
-      'Investigación, identificación de necesidades y selección de tecnologías para el desarrollo de aplicaciones, APIs y webs. Tecnologías: Next.js, React, TypeScript, TailwindCSS, shadcn/ui, CSS Modules, Django, Python, FastAPI y SQLAlchemy.',
-  },
-  {
-    company: 'Deloitte',
-    role: 'Risk Advisory Cyber - Infrastructure Protection',
-    period: 'Noviembre 2022 - Enero 2023',
-    description:
-      'Evaluación de riesgos y mejora de prácticas de seguridad para detectar amenazas y brechas.',
-  },
-];
+import { useLanguage, useDictionary } from "@/context/LanguageContext";
 
 const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
+  const { t } = useLanguage();
+  const dictionary = useDictionary();
+
+  const experienceData = dictionary.experience.roles;
+
   return (
     <section id="experience" ref={ref} className="scroll-mt-24 py-16">
-      <SectionTitle>&lt;Experiencia/&gt;</SectionTitle>
+      <SectionTitle>{t("experience.title")}</SectionTitle>
 
       <div className="space-y-4">
         {experienceData.map((exp, index) => (
