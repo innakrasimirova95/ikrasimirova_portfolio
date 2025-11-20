@@ -1,4 +1,7 @@
 export const en = {
+  common: {
+    fullName: "Inna Krasimirova",
+  },
   nav: {
     projects: "<Projects/>",
     experience: "<Experience/>",

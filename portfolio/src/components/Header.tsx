@@ -47,7 +47,7 @@ export function Header({
           {showName && (
             <Link href="/" className="text-lg font-normal tracking-tight">
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent whitespace-nowrap">
-                Inna Krasimirova
+                {t('common.fullName')}
               </span>
             </Link>
           )}
@@ -87,7 +87,11 @@ export function Header({
 
         <div className="w-40 flex justify-end items-center gap-2">
           <button
-            onClick={() => setLang(lang === "es" ? "en" : "es")}
+            onClick={() => {
+              if (lang === "es") setLang("en");
+              else if (lang === "en") setLang("bg");
+              else setLang("es");
+            }}
             className="px-3 py-1 rounded-md bg-muted/20 hover:bg-muted/40 active:bg-muted/40 transition-colors text-sm font-medium"
           >
             {lang.toUpperCase()}

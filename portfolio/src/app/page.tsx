@@ -117,7 +117,7 @@ export default function Home() {
           variants={heroItem}
           className="text-4xl md:text-7xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
         >
-          Inna Krasimirova
+          {t('common.fullName')}
         </motion.h1>
 
         {/* Subtítulo con typing */}
