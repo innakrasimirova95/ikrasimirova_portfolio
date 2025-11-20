@@ -26,7 +26,15 @@ export default function Home() {
   const tecnologiasRef = useRef<HTMLElement>(null);
   const contactoRef = useRef<HTMLElement>(null);
 
-  const { t } = useLanguage(); // Initialize useLanguage
+  const { lang, t } = useLanguage(); // Initialize useLanguage
+
+  const cvPaths: Record<string, string> = {
+    es: "/CV_ES Inna Krasimirova.pdf",
+    en: "/CV_EN Inna Krasimirova.pdf",
+    bg: "/CV_BG Inna Krasimirova.pdf",
+  };
+
+  const cvPath = cvPaths[lang] || cvPaths.es;
 
   // Observer para mostrar/ocultar el nombre en el header
   useEffect(() => {
@@ -180,7 +188,7 @@ export default function Home() {
           <motion.a
             whileHover={{ y: -2, scale: 1.05 }}
             whileTap={{ scale: 0.96 }}
-            href="/CV Inna Krasimirova.pdf"
+            href={cvPath}
             download
             aria-label={t("hero.ariaCV")}
             className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 active:bg-muted/40 transition-colors"

@@ -91,7 +91,7 @@ export const LanguageProvider = ({
       return JSON.stringify(result);
     }
 
-    return result;
+    return String(result);
   };
 
   const contextValue = useMemo(
