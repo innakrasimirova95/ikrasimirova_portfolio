@@ -11,8 +11,9 @@ import { Download } from "lucide-react";
 import { FaLinkedin } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 import { Projects } from "@/components/Projects";
-import { ContactForm } from "@/components/ContactForm"; // Import ContactForm
+import { ContactForm } from "@/components/ContactForm";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext"; // Import useLanguage
 
 export default function Home() {
   const [showNameInHeader, setShowNameInHeader] = useState(false);
@@ -23,7 +24,17 @@ export default function Home() {
   const experienciaRef = useRef<HTMLElement>(null);
   const educacionRef = useRef<HTMLElement>(null);
   const tecnologiasRef = useRef<HTMLElement>(null);
-  const contactoRef = useRef<HTMLElement>(null); // New ref for ContactForm
+  const contactoRef = useRef<HTMLElement>(null);
+
+  const { lang, t } = useLanguage(); // Initialize useLanguage
+
+  const cvPaths: Record<string, string> = {
+    es: "/CV_ES Inna Krasimirova.pdf",
+    en: "/CV_EN Inna Krasimirova.pdf",
+    bg: "/CV_BG Inna Krasimirova.pdf",
+  };
+
+  const cvPath = cvPaths[lang] || cvPaths.es;
 
   // Observer para mostrar/ocultar el nombre en el header
   useEffect(() => {
@@ -53,7 +64,7 @@ export default function Home() {
       { ref: experienciaRef, id: "experiencia" },
       { ref: educacionRef, id: "educacion" },
       { ref: tecnologiasRef, id: "tecnologias" },
-      { ref: contactoRef, id: "contacto" }, // Add new ref
+      { ref: contactoRef, id: "contacto" },
     ];
 
     const observerOptions = {
@@ -114,7 +125,7 @@ export default function Home() {
           variants={heroItem}
           className="text-4xl md:text-7xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
         >
-          Inna Krasimirova
+          {t('common.fullName')}
         </motion.h1>
 
         {/* Subtítulo con typing */}
@@ -123,7 +134,7 @@ export default function Home() {
           className="mt-3 text-lg md:text-2xl text-foreground"
         >
           <TypingEffect
-            text="Ingeniera de Software | Desarrolladora Full Stack"
+            text={t("hero.title")}
             typingSpeed={240}
             deletingSpeed={120}
             pauseTime={1500}
@@ -136,10 +147,7 @@ export default function Home() {
           variants={heroItem}
           className="mt-12 max-w-3xl text-center text-xs md:text-sm text-foreground leading-relaxed"
         >
-        Apasionada por diseñar experiencias digitales claras, funcionales y centradas en las personas.
-        Me motiva mejorar cada día, asumir nuevos desafíos y trabajar en equipo. Fuera del ámbito tecnológico, disfruto 
-        viajar y conocer culturas que me inspiran a ver las cosas desde nuevas perspectivas.
-
+          {t("hero.description")}
         </motion.p>
 
         {/* Línea decorativa */}
@@ -159,8 +167,8 @@ export default function Home() {
             href="https://www.linkedin.com/in/innakrasimirova/"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 transition-colors"
+            aria-label={t("hero.ariaLinkedIn")}
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 active:bg-muted/40 transition-colors"
           >
             <FaLinkedin size={24} />
           </motion.a>
@@ -171,8 +179,8 @@ export default function Home() {
             href="https://github.com/innakrasimirova95"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 transition-colors"
+            aria-label={t("hero.ariaGitHub")}
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 active:bg-muted/40 transition-colors"
           >
             <FaGithub size={24} />
           </motion.a>
@@ -180,10 +188,10 @@ export default function Home() {
           <motion.a
             whileHover={{ y: -2, scale: 1.05 }}
             whileTap={{ scale: 0.96 }}
-            href="/CV Inna Krasimirova.pdf"
+            href={cvPath}
             download
-            aria-label="Descargar CV"
-            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 transition-colors"
+            aria-label={t("hero.ariaCV")}
+            className="flex items-center justify-center w-12 h-12 rounded-full bg-muted/20 hover:bg-muted/40 active:bg-muted/40 transition-colors"
           >
             <Download size={24} />
           </motion.a>
@@ -195,7 +203,7 @@ export default function Home() {
         <Experience ref={experienciaRef} />
         <EducationTimeline ref={educacionRef} />
         <TechIcons ref={tecnologiasRef} />
-        <ContactForm ref={contactoRef} /> {/* Add ContactForm */}
+        <ContactForm ref={contactoRef} />
       </main>
     </>
   );

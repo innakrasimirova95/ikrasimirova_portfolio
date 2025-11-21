@@ -24,6 +24,7 @@ import {
 } from "react-icons/si";
 import { VscAzure } from "react-icons/vsc";
 import { SectionTitle } from "./ui/SectionTitle";
+import { useLanguage } from "@/context/LanguageContext";
 
 const techStack = [
   { name: "Python", icon: FaPython, baseColor: "#6b7280", hoverColor: "#3776AB" },
@@ -43,32 +44,45 @@ const techStack = [
   { name: "Keycloak", icon: SiKeycloak, baseColor: "#6b7280", hoverColor: "#3C4E8C" },
   { name: "Docker", icon: FaDocker, baseColor: "#6b7280", hoverColor: "#2496ED" },
   { name: "Azure", icon: VscAzure, baseColor: "#6b7280", hoverColor: "#0078D4" },
-  { name: "Git", icon: SiGit, baseColor: "#6b7280", hoverColor: "#F05032" }, // Añadido Git
-
+  { name: "Git", icon: SiGit, baseColor: "#6b7280", hoverColor: "#F05032" },
 ];
 
 export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
   const [hovered, setHovered] = useState<number | null>(null);
+  const { t } = useLanguage();
 
   return (
     <section id="tecnologias" ref={ref}>
-      <SectionTitle>&lt;Tecnologías/&gt;</SectionTitle>
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8">
+      <SectionTitle>{t("technologies.title")}</SectionTitle>
+
+      <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-6">
         {techStack.map(({ icon: Icon, baseColor, hoverColor, name }, i) => {
           const isHovered = hovered === i;
+
           return (
             <div
               key={i}
-              className="cursor-pointer transition-transform transition-colors duration-300"
+              className="
+                cursor-pointer
+                transition-transform transition-colors duration-300
+                touch-manipulation
+              "
+              // Hover desktop
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
+
+              // Touch mobile → simula hover
+              onTouchStart={() => setHovered(i)}
+              onTouchEnd={() => setHovered(null)}
+              onTouchCancel={() => setHovered(null)}
+
               title={name}
               style={{
                 color: isHovered ? hoverColor : baseColor,
-                transform: isHovered ? "scale(1.1)" : "scale(1)",
+                transform: isHovered ? "scale(1.12)" : "scale(1)",
               }}
             >
-              <Icon className="text-6xl" />
+              <Icon className="text-4xl sm:text-5xl md:text-6xl" />
             </div>
           );
         })}
