@@ -34,7 +34,7 @@ import { DiVisualstudio } from "react-icons/di";
 import { VscAzure } from "react-icons/vsc";
 import { SectionTitle } from "./ui/SectionTitle";
 import { useLanguage } from "@/context/LanguageContext";
-import { motion, useMotionValue, PanInfo, animate } from "framer-motion";
+import { motion, useMotionValue, animate } from "framer-motion";
 
 const skillsStack = [
   { name: "Python", icon: FaPython, hoverColor: "#3776AB" },
@@ -113,7 +113,7 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
   }, [activeTab, buttonWidth, x]);
 
 
-  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+  const handleDragEnd = () => {
     const currentX = x.get();
     const midPoint = (dragConstraints.right - dragConstraints.left) / 2;
 
