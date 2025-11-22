@@ -8,6 +8,7 @@ export const bg = {
     education: "<Образование/>",
     technologies: "<Технологии/>",
     contact: "<Контакт/>",
+    toggleTheme: "Превключване на тема",
   },
   hero: {
     title: "Софтуерен инженер | Full Stack програмист",

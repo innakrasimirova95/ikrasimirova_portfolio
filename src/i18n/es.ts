@@ -8,6 +8,7 @@ export const es = {
     education: "<Educación/>",
     technologies: "<Tecnologías/>",
     contact: "<Contacto/>",
+    toggleTheme: "Cambiar tema",
   },
   hero: {
     title: "Ingeniera de Software | Desarrolladora Full Stack",

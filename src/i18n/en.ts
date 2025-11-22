@@ -8,6 +8,7 @@ export const en = {
     education: "<Education/>",
     technologies: "<Technologies/>",
     contact: "<Contact/>",
+    toggleTheme: "Toggle theme",
   },
   hero: {
     title: "Software Engineer | Full Stack Developer",
