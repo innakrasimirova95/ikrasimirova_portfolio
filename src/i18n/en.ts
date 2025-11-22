@@ -84,6 +84,8 @@ export const en = {
   },
   technologies: {
     title: "<Technologies/>",
+    skills: "Skills",
+    tools: "Tools",
   },
   contact: {
     title: "<Contact/>",

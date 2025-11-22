@@ -84,6 +84,8 @@ export const es = {
   },
   technologies: {
     title: "<Tecnologías/>",
+    skills: "Habilidades",
+    tools: "Herramientas",
   },
   contact: {
     title: "<Contacto/>",

@@ -33,7 +33,7 @@ function IconNav({
   isDragging: boolean;
 }) {
   const iconMap: { [key: string]: React.ReactNode } = {
-    "#": <Home size={20} />,
+    "#home": <Home size={20} />,
     "#proyectos": <LayoutTemplate size={20} />,
     "#experience": <BriefcaseBusiness size={20} />,
     "#educacion": <GraduationCap size={20} />,
@@ -52,9 +52,7 @@ function IconNav({
       )}
     >
       {navItems.map((item) => {
-        const isActive =
-          activeSection === item.href.substring(1) ||
-          (item.href === "#" && activeSection === "");
+        const isActive = activeSection === item.href.substring(1);
 
         return (
           <button
@@ -105,10 +103,10 @@ export function Header({
   const { lang, setLang, t } = useLanguage();
 
   const navItems = [
-    { href: "#", key: "nav.home" },
+    { href: "#home", key: "nav.home" },
     { href: "#proyectos", key: "nav.projects" },
     { href: "#experience", key: "nav.experience" },
-    { href: "#educacion", key: "nav.education" },
+    { href: "#educacion", key: "#educacion" },
     { href: "#tecnologias", key: "nav.technologies" },
     { href: "#contacto", key: "nav.contact" },
   ];
@@ -130,7 +128,7 @@ export function Header({
     href: string,
     behavior: ScrollBehavior = "smooth"
   ) => {
-    if (href === "#") {
+    if (href === "#home") {
       window.scrollTo({ top: 0, behavior });
       return;
     }

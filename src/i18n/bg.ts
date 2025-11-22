@@ -82,6 +82,8 @@ export const bg = {
   },
   technologies: {
     title: "<Технологии/>",
+    skills: "Умения",
+    tools: "Инструменти",
   },
   contact: {
     title: "<Контакт/>",

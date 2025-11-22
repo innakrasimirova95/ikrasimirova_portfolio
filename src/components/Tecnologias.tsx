@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   FaPython,
   FaJs,
@@ -34,6 +34,7 @@ import { DiVisualstudio } from "react-icons/di";
 import { VscAzure } from "react-icons/vsc";
 import { SectionTitle } from "./ui/SectionTitle";
 import { useLanguage } from "@/context/LanguageContext";
+import { motion, useMotionValue, PanInfo, animate } from "framer-motion";
 
 const skillsStack = [
   { name: "Python", icon: FaPython, hoverColor: "#3776AB" },
@@ -73,9 +74,56 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
   const [activeTab, setActiveTab] = useState<"skills" | "tools">("skills");
   const { t } = useLanguage();
 
+  const tabContainerRef = useRef<HTMLDivElement>(null);
+  const skillsButtonRef = useRef<HTMLButtonElement>(null);
+  const toolsButtonRef = useRef<HTMLButtonElement>(null);
+  const x = useMotionValue(0);
+
+  const [buttonWidth, setButtonWidth] = useState(0);
+  const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
+
   useEffect(() => {
     setHovered(null);
   }, [activeTab]);
+
+  // Effect for setting dimensions and constraints on mount and resize
+  useEffect(() => {
+    const updateDimensions = () => {
+      if (tabContainerRef.current && skillsButtonRef.current) {
+        const containerWidth = tabContainerRef.current.offsetWidth;
+        const skillsWidth = skillsButtonRef.current.offsetWidth;
+        const indicatorWidth = skillsWidth;
+
+        setButtonWidth(indicatorWidth);
+        setDragConstraints({ left: 0, right: containerWidth - indicatorWidth });
+      }
+    };
+
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
+  }, []);
+
+  // Effect for updating the indicator position when activeTab changes
+  useEffect(() => {
+    if (tabContainerRef.current && buttonWidth > 0) {
+      const targetX = activeTab === "skills" ? 0 : tabContainerRef.current.offsetWidth - buttonWidth;
+      animate(x, targetX, { type: "spring", stiffness: 380, damping: 30 });
+    }
+  }, [activeTab, buttonWidth, x]);
+
+
+  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const currentX = x.get();
+    const midPoint = (dragConstraints.right - dragConstraints.left) / 2;
+
+    if (currentX < midPoint) {
+      setActiveTab("skills");
+    } else {
+      setActiveTab("tools");
+    }
+  };
+
 
   const currentStack = activeTab === "skills" ? skillsStack : toolsStack;
 
@@ -85,27 +133,42 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
 
       {/* Toggle menú */}
       <div className="flex justify-center mb-8">
-        <div className="inline-flex items-center rounded-full border border-border/70 bg-background/80 backdrop-blur px-1 py-1 shadow-lg">
+        <div ref={tabContainerRef} className="relative inline-flex items-center rounded-full border border-border/70 bg-background/80 backdrop-blur p-1 shadow-lg">
+          {/* Draggable background indicator */}
+          {buttonWidth > 0 && ( // Render only after buttonWidth is calculated
+            <motion.div
+              className="absolute top-1 left-1 h-[calc(100%-0.5rem)] rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+              style={{ width: buttonWidth, x }}
+              drag="x"
+              dragConstraints={dragConstraints}
+              onDragEnd={handleDragEnd}
+              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+            />
+          )}
+
+          {/* Buttons */}
           <button
+            ref={skillsButtonRef}
             onClick={() => setActiveTab("skills")}
-            className={`px-4 py-1.5 text-xs sm:text-sm rounded-full transition-all duration-150 ${
+            className={`relative z-10 px-4 py-1.5 text-xs sm:text-sm rounded-full transition-colors duration-150 ${
               activeTab === "skills"
-                ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-black"
+                ? "text-black"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            Skills
+            {t("technologies.skills")}
           </button>
 
           <button
+            ref={toolsButtonRef}
             onClick={() => setActiveTab("tools")}
-            className={`px-4 py-1.5 text-xs sm:text-sm rounded-full transition-all duration-150 ${
+            className={`relative z-10 px-4 py-1.5 text-xs sm:text-sm rounded-full transition-colors duration-150 ${
               activeTab === "tools"
-                ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-black"
+                ? "text-black"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            Tools
+            {t("technologies.tools")}
           </button>
         </div>
       </div>
