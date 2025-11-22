@@ -41,33 +41,9 @@ function IconNav({
     "#contacto": <Mail size={20} />,
   };
 
-  const touchNavigateTimeout = useRef<number | null>(null);
-
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
-
-    const { clientX, clientY } = e;
-    const targetElement = document.elementFromPoint(clientX, clientY);
-
-    if (!targetElement) return;
-
-    const buttonElement = targetElement.closest("button");
-    if (!buttonElement) return;
-
-    const href = buttonElement.getAttribute("data-href");
-    if (!href) return;
-
-    const currentSection = href.substring(1);
-    if (activeSection === currentSection) return;
-
-    // Debounce para no spamear navegación durante el drag
-    if (touchNavigateTimeout.current) {
-      window.clearTimeout(touchNavigateTimeout.current);
-    }
-    touchNavigateTimeout.current = window.setTimeout(() => {
-      onDragNavigate(href, "auto");
-    }, 40);
-  };
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
+  const lastHrefRef = useRef<string | null>(null);
 
   const handlePointerDown = () => {
     setIsDragging(true);
@@ -75,30 +51,74 @@ function IconNav({
 
   const handlePointerUp = () => {
     setIsDragging(false);
+    lastHrefRef.current = null;
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    const { clientX, clientY } = e;
+    const rect = container.getBoundingClientRect();
+
+    const marginY = 60;
+    if (clientY < rect.top - marginY || clientY > rect.bottom + marginY) return;
+
+    // Buscar el ÍNDICE del botón cuyo centro esté más cerca del dedo en X
+    let bestIndex = -1;
+    let minDist = Infinity;
+
+    buttonsRef.current.forEach((btn, index) => {
+      if (!btn) return;
+      const bRect = btn.getBoundingClientRect();
+      const centerX = bRect.left + bRect.width / 2;
+      const dist = Math.abs(centerX - clientX);
+      if (dist < minDist) {
+        minDist = dist;
+        bestIndex = index;
+      }
+    });
+
+    if (bestIndex === -1) return;
+
+    const href = navItems[bestIndex].href; // <-- string seguro
+    if (!href || href === lastHrefRef.current) return;
+
+    lastHrefRef.current = href;
+    const currentSection = href.substring(1); // aquí ya NO es never
+    if (currentSection === activeSection) return;
+
+    onDragNavigate(href, "auto");
   };
 
   return (
     <div
+      ref={containerRef}
       className={cn(
-        "flex items-center gap-2 rounded-full px-2 select-none touch-none", // touch-none: el gesto es nuestro
+        "flex items-center gap-2 rounded-full px-2 select-none touch-none",
         "bg-muted/70 dark:bg-background/80 backdrop-blur-xl",
         "border border-border/60 shadow-[0_18px_45px_rgba(0,0,0,0.35)]",
         "overflow-visible",
         className
       )}
-      onPointerMove={handlePointerMove}
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
       onPointerLeave={handlePointerUp}
+      onPointerMove={handlePointerMove}
     >
-      {navItems.map((item) => {
+      {navItems.map((item, index) => {
         const isActive = activeSection === item.href.substring(1);
 
         return (
           <button
             key={item.href}
             type="button"
+            ref={(el) => {
+              buttonsRef.current[index] = el;
+            }}
             onClick={() => handleNavClick(item.href)}
             title={`${t(item.key)} · ${
               t("nav.dragHint") ?? "Click o arrastra para navegar"
@@ -121,7 +141,6 @@ function IconNav({
             style={{
               cursor: isDragging ? "grabbing" : "pointer",
             }}
-            data-href={item.href}
           >
             {iconMap[item.href]}
           </button>
