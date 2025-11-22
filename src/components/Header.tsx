@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/toggle-theme";
@@ -41,6 +41,37 @@ function IconNav({
     "#contacto": <Mail size={20} />,
   };
 
+  const touchNavigateTimeout = useRef<NodeJS.Timeout | null>(null);
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (isDragging) {
+      e.preventDefault(); // Prevent default scrolling/panning
+      const touch = e.touches[0];
+      const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+
+      if (targetElement) {
+        const buttonElement = targetElement.closest('button');
+        if (buttonElement) {
+          const href = buttonElement.getAttribute('data-href');
+          if (href) {
+            const currentSection = href.substring(1);
+            
+            if (activeSection !== currentSection) {
+              // Debounce to prevent excessive calls during rapid movement
+              if (touchNavigateTimeout.current) {
+                clearTimeout(touchNavigateTimeout.current);
+              }
+              touchNavigateTimeout.current = setTimeout(() => {
+                onDragNavigate(href, "auto");
+              }, 50); // 50ms debounce
+            }
+          }
+        }
+      }
+    }
+  };
+
+
   return (
     <div
       className={cn(
@@ -50,6 +81,7 @@ function IconNav({
         "overflow-visible", // permite sobresalir
         className
       )}
+      onTouchMove={handleTouchMove} // Add onTouchMove to the container
     >
       {navItems.map((item) => {
         const isActive = activeSection === item.href.substring(1);
@@ -83,6 +115,7 @@ function IconNav({
             style={{
               cursor: isDragging ? "grabbing" : "pointer",
             }}
+            data-href={item.href} // Add data-href attribute
           >
             {iconMap[item.href]}
           </button>
