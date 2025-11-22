@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/toggle-theme";
 import {
   Globe,
-  Briefcase,
+  BriefcaseBusiness,
   GraduationCap,
-  FolderKanban,
-  Cpu,
+  LayoutTemplate,
+  Code2,
   Mail,
   Home,
 } from "lucide-react";
@@ -21,53 +21,73 @@ function IconNav({
   handleNavClick,
   t,
   className,
+  onDragNavigate,
+  isDragging,
 }: {
   navItems: { href: string; key: string }[];
   activeSection: string;
-  handleNavClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+  handleNavClick: (href: string, behavior?: ScrollBehavior) => void;
   t: (key: string) => string;
   className?: string;
+  onDragNavigate: (href: string, behavior?: ScrollBehavior) => void;
+  isDragging: boolean;
 }) {
   const iconMap: { [key: string]: React.ReactNode } = {
     "#": <Home size={20} />,
-    "#proyectos": <FolderKanban size={20} />,
-    "#experience": <Briefcase size={20} />,
+    "#proyectos": <LayoutTemplate size={20} />,
+    "#experience": <BriefcaseBusiness size={20} />,
     "#educacion": <GraduationCap size={20} />,
-    "#tecnologias": <Cpu size={20} />,
+    "#tecnologias": <Code2 size={20} />,
     "#contacto": <Mail size={20} />,
   };
 
   return (
     <div
       className={cn(
-        "flex items-center gap-2 rounded-full px-3 py-2",
-        "bg-muted/70 dark:bg-background/80",
-        "backdrop-blur-xl border border-border/60",
-        "shadow-[0_18px_45px_rgba(0,0,0,0.35)]",
+        "flex items-center gap-2 rounded-full px-2 select-none", 
+        "bg-muted/70 dark:bg-background/80 backdrop-blur-xl",
+        "border border-border/60 shadow-[0_18px_45px_rgba(0,0,0,0.35)]",
+        "overflow-visible", // permite sobresalir
         className
       )}
     >
       {navItems.map((item) => {
-        const isActive = activeSection === item.href.substring(1) ||
+        const isActive =
+          activeSection === item.href.substring(1) ||
           (item.href === "#" && activeSection === "");
 
         return (
-          <Link
+          <button
             key={item.href}
-            href={item.href}
-            onClick={handleNavClick}
-            title={t(item.key)}
+            type="button"
+            onClick={() => handleNavClick(item.href)}
+            onMouseEnter={() => {
+              if (isDragging) onDragNavigate(item.href, "auto");
+            }}
+            title={`${t(item.key)} · ${
+              t("nav.dragHint") ?? "Click o arrastra para navegar"
+            }`}
             className={cn(
-              "relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full",
-              "transition-all duration-250 ease-out",
-              "text-muted-foreground/90",
-              !isActive && "hover:text-foreground hover:bg-foreground/5 dark:hover:bg-white/5",
-              isActive &&
-                "bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500 text-white shadow-[0_0_18px_rgba(168,85,247,0.7)] scale-[1.06]"
+              "relative flex items-center justify-center rounded-full",
+              "h-10 w-10 sm:h-11 sm:w-11",
+              "transition-all duration-150 text-muted-foreground/90",
+              "cursor-pointer",
+              isActive
+                ? [
+                    "bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500",
+                    "text-white",
+                    "scale-150", // más grande
+                    "-my-4", // sobresale fuerte y pasa el borde del menú
+                    "z-10",
+                  ].join(" ")
+                : "hover:text-foreground hover:bg-foreground/5 dark:hover:bg-white/5"
             )}
+            style={{
+              cursor: isDragging ? "grabbing" : "pointer",
+            }}
           >
             {iconMap[item.href]}
-          </Link>
+          </button>
         );
       })}
     </div>
@@ -81,29 +101,8 @@ export function Header({
   showName: boolean;
   activeSection: string;
 }) {
-  const [langMenuOpen, setLangMenuOpen] = React.useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const { lang, setLang, t } = useLanguage();
-
-  const langMenuRef = useRef<HTMLDivElement>(null);
-  const langBtnRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        langMenuRef.current &&
-        !langMenuRef.current.contains(event.target as Node) &&
-        langBtnRef.current &&
-        !langBtnRef.current.contains(event.target as Node)
-      ) {
-        setLangMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   const navItems = [
     { href: "#", key: "nav.home" },
@@ -114,46 +113,48 @@ export function Header({
     { href: "#contacto", key: "nav.contact" },
   ];
 
-  const languages = ["es", "en", "bg"] as const;
-  const languageLabels: Record<(typeof languages)[number], string> = {
-    es: "ES",
-    en: "EN",
-    bg: "BG",
-  };
-  const languageNames: Record<(typeof languages)[number], string> = {
-    es: "Español",
-    en: "English",
-    bg: "Български",
-  };
+  useEffect(() => {
+    const handleDown = () => setIsDragging(true);
+    const handleUp = () => setIsDragging(false);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const href = e.currentTarget.href;
+    window.addEventListener("mousedown", handleDown);
+    window.addEventListener("mouseup", handleUp);
 
-    if (href.endsWith("#")) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    return () => {
+      window.removeEventListener("mousedown", handleDown);
+      window.removeEventListener("mouseup", handleUp);
+    };
+  }, []);
+
+  const handleNavClick = (
+    href: string,
+    behavior: ScrollBehavior = "smooth"
+  ) => {
+    if (href === "#") {
+      window.scrollTo({ top: 0, behavior });
       return;
     }
 
-    const targetId = href.split("#")[1];
-    const target = document.getElementById(targetId);
+    const id = href.replace("#", "");
+    const el = document.getElementById(id);
     const offset = document.querySelector("header")?.offsetHeight || 0;
 
-    if (target) {
-      const top =
-        target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: "smooth" });
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior });
     }
   };
 
-  const toggleLangMenu = () => {
-    setLangMenuOpen((prev) => !prev);
+  const cycleLang = () => {
+    if (lang === "es") setLang("en");
+    else if (lang === "en") setLang("bg");
+    else setLang("es");
   };
 
   return (
     <>
       <header className="sticky top-0 z-50 w-full bg-background/90 shadow-md backdrop-blur-sm">
-        <div className="w-full max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative">
           <div className="w-40">
             {showName && (
               <Link href="/" className="text-lg font-normal tracking-tight">
@@ -170,80 +171,33 @@ export function Header({
               navItems={navItems}
               activeSection={activeSection}
               handleNavClick={handleNavClick}
+              onDragNavigate={handleNavClick}
+              isDragging={isDragging}
               t={t}
             />
           </nav>
 
-          {/* CLUSTER IDIOMA + TEMA */}
+          {/* IDIOMA + TEMA */}
           <div
             className="
-              relative
-              flex items-center gap-1
-              rounded-full border border-border/60 bg-background/90
-              backdrop-blur-md px-1
+              relative flex items-center gap-1 rounded-full
+              border border-border/60 bg-background/90 backdrop-blur-md px-1
             "
           >
-            {/* Botón idioma → abre dropdown */}
             <button
-              ref={langBtnRef}
-              onClick={toggleLangMenu}
+              onClick={cycleLang}
               className="
-                h-9 px-3 rounded-full
-                flex items-center justify-center gap-1
-                text-sm font-medium
-                text-muted-foreground hover:text-foreground
-                transition-colors hover:bg-foreground/5 dark:hover:bg-white/5
+                h-9 px-3 rounded-full flex items-center justify-center gap-1
+                text-sm font-medium text-muted-foreground
+                hover:text-foreground hover:bg-foreground/5 dark:hover:bg-white/5
+                transition-colors
               "
-              aria-haspopup="listbox"
-              aria-expanded={langMenuOpen}
               aria-label="Cambiar idioma"
+              title={t("nav.changeLanguageHint") ?? "Cambiar idioma"}
             >
               <Globe size={16} />
-              {languageLabels[lang as (typeof languages)[number]]}
+              {lang.toUpperCase()}
             </button>
-
-            {/* Dropdown de idiomas */}
-            {langMenuOpen && (
-              <div
-                ref={langMenuRef}
-                className="
-                  absolute right-0 top-11
-                  w-40 rounded-2xl border border-border/70
-                  bg-background/95 backdrop-blur-xl
-                  shadow-[0_18px_45px_rgba(0,0,0,0.55)]
-                  py-2 z-50
-                "
-                role="listbox"
-              >
-                {languages.map((code) => {
-                  const isActive = code === lang;
-                  return (
-                    <button
-                      key={code}
-                      type="button"
-                      onClick={() => {
-                        setLang(code);
-                        setLangMenuOpen(false);
-                      }}
-                      className={cn(
-                        "w-full px-3 py-1.5 text-left text-xs flex items-center justify-between gap-2",
-                        "hover:bg-muted/20 active:bg-muted/20",
-                        isActive && "font-semibold text-foreground"
-                      )}
-                      role="option"
-                      aria-selected={isActive}
-                    >
-                      <span>
-                        {languageLabels[code]} · {languageNames[code]}
-                      </span>
-                      {isActive && (
-                        <span className="h-2 w-2 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500" />
-                      )}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
 
             <ModeToggle />
           </div>
@@ -256,6 +210,8 @@ export function Header({
           navItems={navItems}
           activeSection={activeSection}
           handleNavClick={handleNavClick}
+          onDragNavigate={handleNavClick}
+          isDragging={isDragging}
           t={t}
         />
       </nav>
