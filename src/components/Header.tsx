@@ -1,6 +1,4 @@
-"use client";
-
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/toggle-theme";
@@ -23,6 +21,7 @@ function IconNav({
   className,
   onDragNavigate,
   isDragging,
+  setIsDragging,
 }: {
   navItems: { href: string; key: string }[];
   activeSection: string;
@@ -31,6 +30,7 @@ function IconNav({
   className?: string;
   onDragNavigate: (href: string, behavior?: ScrollBehavior) => void;
   isDragging: boolean;
+  setIsDragging: (value: boolean) => void;
 }) {
   const iconMap: { [key: string]: React.ReactNode } = {
     "#home": <Home size={20} />,
@@ -41,47 +41,56 @@ function IconNav({
     "#contacto": <Mail size={20} />,
   };
 
-  const touchNavigateTimeout = useRef<NodeJS.Timeout | null>(null);
+  const touchNavigateTimeout = useRef<number | null>(null);
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (isDragging) {
-      e.preventDefault(); // Prevent default scrolling/panning
-      const touch = e.touches[0];
-      const targetElement = document.elementFromPoint(touch.clientX, touch.clientY);
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
 
-      if (targetElement) {
-        const buttonElement = targetElement.closest('button');
-        if (buttonElement) {
-          const href = buttonElement.getAttribute('data-href');
-          if (href) {
-            const currentSection = href.substring(1);
-            
-            if (activeSection !== currentSection) {
-              // Debounce to prevent excessive calls during rapid movement
-              if (touchNavigateTimeout.current) {
-                clearTimeout(touchNavigateTimeout.current);
-              }
-              touchNavigateTimeout.current = setTimeout(() => {
-                onDragNavigate(href, "auto");
-              }, 50); // 50ms debounce
-            }
-          }
-        }
-      }
+    const { clientX, clientY } = e;
+    const targetElement = document.elementFromPoint(clientX, clientY);
+
+    if (!targetElement) return;
+
+    const buttonElement = targetElement.closest("button");
+    if (!buttonElement) return;
+
+    const href = buttonElement.getAttribute("data-href");
+    if (!href) return;
+
+    const currentSection = href.substring(1);
+    if (activeSection === currentSection) return;
+
+    // Debounce para no spamear navegación durante el drag
+    if (touchNavigateTimeout.current) {
+      window.clearTimeout(touchNavigateTimeout.current);
     }
+    touchNavigateTimeout.current = window.setTimeout(() => {
+      onDragNavigate(href, "auto");
+    }, 40);
   };
 
+  const handlePointerDown = () => {
+    setIsDragging(true);
+  };
+
+  const handlePointerUp = () => {
+    setIsDragging(false);
+  };
 
   return (
     <div
       className={cn(
-        "flex items-center gap-2 rounded-full px-2 select-none", 
+        "flex items-center gap-2 rounded-full px-2 select-none touch-none", // touch-none: el gesto es nuestro
         "bg-muted/70 dark:bg-background/80 backdrop-blur-xl",
         "border border-border/60 shadow-[0_18px_45px_rgba(0,0,0,0.35)]",
-        "overflow-visible", // permite sobresalir
+        "overflow-visible",
         className
       )}
-      onTouchMove={handleTouchMove} // Add onTouchMove to the container
+      onPointerMove={handlePointerMove}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={handlePointerUp}
+      onPointerLeave={handlePointerUp}
     >
       {navItems.map((item) => {
         const isActive = activeSection === item.href.substring(1);
@@ -91,9 +100,6 @@ function IconNav({
             key={item.href}
             type="button"
             onClick={() => handleNavClick(item.href)}
-            onMouseEnter={() => {
-              if (isDragging) onDragNavigate(item.href, "auto");
-            }}
             title={`${t(item.key)} · ${
               t("nav.dragHint") ?? "Click o arrastra para navegar"
             }`}
@@ -104,10 +110,10 @@ function IconNav({
               "cursor-pointer",
               isActive
                 ? [
-                    "bg-gradient-to-tr from-blue-500 via-purple-500 to-pink-500",
+                    "bg-gradient-to-tr from-blue-400/80 via-purple-400/80 to-pink-400/80",
                     "text-white",
-                    "scale-150", // más grande
-                    "-my-4", // sobresale fuerte y pasa el borde del menú
+                    "scale-150",
+                    "-my-4",
                     "z-10",
                   ].join(" ")
                 : "hover:text-foreground hover:bg-foreground/5 dark:hover:bg-white/5"
@@ -115,7 +121,7 @@ function IconNav({
             style={{
               cursor: isDragging ? "grabbing" : "pointer",
             }}
-            data-href={item.href} // Add data-href attribute
+            data-href={item.href}
           >
             {iconMap[item.href]}
           </button>
@@ -139,30 +145,10 @@ export function Header({
     { href: "#home", key: "nav.home" },
     { href: "#proyectos", key: "nav.projects" },
     { href: "#experience", key: "nav.experience" },
-    { href: "#educacion", key: "#educacion" },
+    { href: "#educacion", key: "nav.education" },
     { href: "#tecnologias", key: "nav.technologies" },
     { href: "#contacto", key: "nav.contact" },
   ];
-
-  useEffect(() => {
-    const handleDown = () => setIsDragging(true);
-    const handleUp = () => setIsDragging(false);
-    const handleTouchStart = () => setIsDragging(true);
-    const handleTouchEnd = () => setIsDragging(false);
-
-
-    window.addEventListener("mousedown", handleDown);
-    window.addEventListener("mouseup", handleUp);
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchend", handleTouchEnd);
-
-    return () => {
-      window.removeEventListener("mousedown", handleDown);
-      window.removeEventListener("mouseup", handleUp);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchend", handleTouchEnd);
-    };
-  }, []);
 
   const handleNavClick = (
     href: string,
@@ -211,17 +197,13 @@ export function Header({
               handleNavClick={handleNavClick}
               onDragNavigate={handleNavClick}
               isDragging={isDragging}
+              setIsDragging={setIsDragging}
               t={t}
             />
           </nav>
 
           {/* IDIOMA + TEMA */}
-          <div
-            className="
-              relative flex items-center gap-1 rounded-full
-              border border-border/60 bg-background/90 backdrop-blur-md px-1
-            "
-          >
+          <div className="relative flex items-center gap-1 rounded-full border border-border/60 bg-background/90 backdrop-blur-md px-1">
             <button
               onClick={cycleLang}
               className="
@@ -250,6 +232,7 @@ export function Header({
           handleNavClick={handleNavClick}
           onDragNavigate={handleNavClick}
           isDragging={isDragging}
+          setIsDragging={setIsDragging}
           t={t}
         />
       </nav>
