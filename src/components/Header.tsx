@@ -114,13 +114,20 @@ export function Header({
   useEffect(() => {
     const handleDown = () => setIsDragging(true);
     const handleUp = () => setIsDragging(false);
+    const handleTouchStart = () => setIsDragging(true);
+    const handleTouchEnd = () => setIsDragging(false);
+
 
     window.addEventListener("mousedown", handleDown);
     window.addEventListener("mouseup", handleUp);
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchEnd);
 
     return () => {
       window.removeEventListener("mousedown", handleDown);
       window.removeEventListener("mouseup", handleUp);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
 
