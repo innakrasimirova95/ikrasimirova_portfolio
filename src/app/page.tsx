@@ -19,7 +19,13 @@ export default function Home() {
   const [showNameInHeader, setShowNameInHeader] = useState(false);
   const nameRef = useRef<HTMLHeadingElement>(null);
 
-  const [activeSection, setActiveSection] = useState("");
+  const [activeSection, setActiveSection] = useState("home");
+  const activeSectionRef = useRef(activeSection); // Ref to hold the latest activeSection
+  useEffect(() => {
+    activeSectionRef.current = activeSection;
+  }, [activeSection]);
+
+  const heroRef = useRef<HTMLElement>(null);
   const proyectosRef = useRef<HTMLElement>(null);
   const experienciaRef = useRef<HTMLElement>(null);
   const educacionRef = useRef<HTMLElement>(null);
@@ -57,9 +63,22 @@ export default function Home() {
     };
   }, []);
 
+  // Scroll listener para el botón Home
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0) {
+        setActiveSection("home");
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+
   // Observer para sección activa
   useEffect(() => {
     const sectionRefs = [
+      { ref: heroRef, id: "home" },
       { ref: proyectosRef, id: "proyectos" },
       { ref: experienciaRef, id: "experiencia" },
       { ref: educacionRef, id: "educacion" },
@@ -70,15 +89,27 @@ export default function Home() {
     const observerOptions = {
       root: null,
       rootMargin: "0px",
-      threshold: 0.5,
+      threshold: [0, 0.25, 0.5, 0.75, 1], // Use multiple thresholds for more granular detection
     };
 
     const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
+      const intersectingEntries = entries.filter(entry => entry.isIntersecting);
+
+      if (intersectingEntries.length > 0) {
+        // Sort by intersectionRatio to get the most visible section
+        intersectingEntries.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+        const mostVisibleSectionId = intersectingEntries[0].target.id;
+        
+        // Only update if it's different from the current active section
+        if (mostVisibleSectionId !== activeSectionRef.current) { // Use ref here
+            setActiveSection(mostVisibleSectionId);
         }
-      });
+      } else {
+        // If no entries are intersecting (e.g., fast scrolling between sections),
+        // we might want to keep the current activeSection or let the scroll listener handle it.
+        // Given the scroll listener for home, this else block can be ignored for home.
+        // For other sections, if no section is visible, it will just retain the last one.
+      }
     }, observerOptions);
 
     sectionRefs.forEach(({ ref }) => {
@@ -96,8 +127,8 @@ export default function Home() {
       });
       sectionObserver.disconnect();
     };
-  }, []);
-
+  }, []); // Removed activeSection from dependencies
+  
   // Variantes elegantes para el hero
   const heroItem = {
     hidden: { opacity: 0, y: 12 },
@@ -114,6 +145,8 @@ export default function Home() {
 
       {/* Hero Section */}
       <motion.section
+        id="home"
+        ref={heroRef}
         className="min-h-screen flex flex-col justify-center items-center px-6 text-center"
         initial="hidden"
         animate="visible"
