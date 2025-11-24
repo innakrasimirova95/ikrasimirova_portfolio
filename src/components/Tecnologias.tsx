@@ -72,58 +72,84 @@ const toolsStack = [
 export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<"skills" | "tools">("skills");
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   const tabContainerRef = useRef<HTMLDivElement>(null);
   const skillsButtonRef = useRef<HTMLButtonElement>(null);
   const toolsButtonRef = useRef<HTMLButtonElement>(null);
-  const x = useMotionValue(0);
 
-  const [buttonWidth, setButtonWidth] = useState(0);
-  const [dragConstraints, setDragConstraints] = useState({ left: 0, right: 0 });
+  // motion values del pill
+  const x = useMotionValue(0);
+  const width = useMotionValue(0);
+
+  const [skillsWidth, setSkillsWidth] = useState(0);
+  const [toolsWidth, setToolsWidth] = useState(0);
+
+  // para swipe
+  const dragStartX = useRef<number | null>(null);
 
   useEffect(() => {
     setHovered(null);
   }, [activeTab]);
 
-  // Effect for setting dimensions and constraints on mount and resize
+  // Medir botones (inicio, cambio idioma, resize)
   useEffect(() => {
     const updateDimensions = () => {
-      if (tabContainerRef.current && skillsButtonRef.current) {
-        const containerWidth = tabContainerRef.current.offsetWidth;
-        const skillsWidth = skillsButtonRef.current.offsetWidth;
-        const indicatorWidth = skillsWidth;
+      if (!skillsButtonRef.current || !toolsButtonRef.current) return;
 
-        setButtonWidth(indicatorWidth);
-        setDragConstraints({ left: 0, right: containerWidth - indicatorWidth });
+      const sWidth = skillsButtonRef.current.offsetWidth;
+      const tWidth = toolsButtonRef.current.offsetWidth;
+
+      setSkillsWidth(sWidth);
+      setToolsWidth(tWidth);
+
+      if (activeTab === "skills") {
+        x.set(0);
+        width.set(sWidth);
+      } else {
+        x.set(sWidth);
+        width.set(tWidth);
       }
     };
 
     updateDimensions();
     window.addEventListener("resize", updateDimensions);
     return () => window.removeEventListener("resize", updateDimensions);
-  }, []);
+  }, [lang, activeTab, x, width]);
 
-  // Effect for updating the indicator position when activeTab changes
+  // Animar pill cuando cambia la pestaña
   useEffect(() => {
-    if (tabContainerRef.current && buttonWidth > 0) {
-      const targetX = activeTab === "skills" ? 0 : tabContainerRef.current.offsetWidth - buttonWidth;
-      animate(x, targetX, { type: "spring", stiffness: 380, damping: 30 });
-    }
-  }, [activeTab, buttonWidth, x]);
+    if (!skillsWidth || !toolsWidth) return;
 
+    const targetX = activeTab === "skills" ? 0 : skillsWidth;
+    const targetWidth = activeTab === "skills" ? skillsWidth : toolsWidth;
 
-  const handleDragEnd = () => {
-    const currentX = x.get();
-    const midPoint = (dragConstraints.right - dragConstraints.left) / 2;
+    animate(x, targetX, { type: "spring", stiffness: 380, damping: 30 });
+    animate(width, targetWidth, { type: "spring", stiffness: 380, damping: 30 });
+  }, [activeTab, skillsWidth, toolsWidth, x, width]);
 
-    if (currentX < midPoint) {
-      setActiveTab("skills");
-    } else {
-      setActiveTab("tools");
-    }
+  const handleSwipeStart = (clientX: number) => {
+    dragStartX.current = clientX;
   };
 
+  const handleSwipeEnd = (clientX: number) => {
+    if (dragStartX.current === null) return;
+
+    const diff = clientX - dragStartX.current;
+    const threshold = 25; // píxeles mínimos para considerar swipe
+
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        // desliza hacia la derecha → tools
+        setActiveTab("tools");
+      } else {
+        // desliza hacia la izquierda → skills
+        setActiveTab("skills");
+      }
+    }
+
+    dragStartX.current = null;
+  };
 
   const currentStack = activeTab === "skills" ? skillsStack : toolsStack;
 
@@ -133,20 +159,25 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
 
       {/* Toggle menú */}
       <div className="flex justify-center mb-8">
-        <div ref={tabContainerRef} className="relative inline-flex items-center rounded-full border border-border/70 bg-background/80 backdrop-blur p-1 shadow-lg">
-          {/* Draggable background indicator */}
-          {buttonWidth > 0 && ( // Render only after buttonWidth is calculated
+        <div
+          ref={tabContainerRef}
+          className="relative inline-flex items-center rounded-full border border-border/70 bg-background/80 backdrop-blur p-1 shadow-lg select-none"
+          // swipe con ratón
+          onMouseDown={(e) => handleSwipeStart(e.clientX)}
+          onMouseUp={(e) => handleSwipeEnd(e.clientX)}
+          // swipe con touch
+          onTouchStart={(e) => handleSwipeStart(e.touches[0].clientX)}
+          onTouchEnd={(e) => handleSwipeEnd(e.changedTouches[0].clientX)}
+        >
+          {/* Pill animado */}
+          {skillsWidth > 0 && toolsWidth > 0 && (
             <motion.div
               className="absolute top-1 left-1 h-[calc(100%-0.5rem)] rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
-              style={{ width: buttonWidth, x }}
-              drag="x"
-              dragConstraints={dragConstraints}
-              onDragEnd={handleDragEnd}
-              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              style={{ x, width }}
             />
           )}
 
-          {/* Buttons */}
+          {/* Botón Skills */}
           <button
             ref={skillsButtonRef}
             onClick={() => setActiveTab("skills")}
@@ -159,6 +190,7 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
             {t("technologies.skills")}
           </button>
 
+          {/* Botón Tools */}
           <button
             ref={toolsButtonRef}
             onClick={() => setActiveTab("tools")}

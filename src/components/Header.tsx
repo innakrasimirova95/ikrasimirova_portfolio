@@ -10,6 +10,7 @@ import {
   Code2,
   Mail,
   Home,
+  ChevronDown,
 } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 
@@ -83,11 +84,11 @@ function IconNav({
 
     if (bestIndex === -1) return;
 
-    const href = navItems[bestIndex].href; // <-- string seguro
+    const href = navItems[bestIndex].href;
     if (!href || href === lastHrefRef.current) return;
 
     lastHrefRef.current = href;
-    const currentSection = href.substring(1); // aquí ya NO es never
+    const currentSection = href.substring(1);
     if (currentSection === activeSection) return;
 
     onDragNavigate(href, "auto");
@@ -158,6 +159,7 @@ export function Header({
   activeSection: string;
 }) {
   const [isDragging, setIsDragging] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
   const { lang, setLang, t } = useLanguage();
 
   const navItems = [
@@ -168,6 +170,21 @@ export function Header({
     { href: "#tecnologias", key: "nav.technologies" },
     { href: "#contacto", key: "nav.contact" },
   ];
+
+  const languages: { code: "es" | "en" | "bg"; label: string; name: string }[] =
+    [
+      { code: "es", label: "ES", name: "Español" },
+      { code: "en", label: "EN", name: "English" },
+      { code: "bg", label: "BG", name: "Български" },
+    ];
+
+  const currentLang =
+    languages.find((l) => l.code === lang) || languages[0];
+
+  const handleChangeLang = (code: "es" | "en" | "bg") => {
+    setLang(code);
+    setIsLangOpen(false);
+  };
 
   const handleNavClick = (
     href: string,
@@ -188,15 +205,9 @@ export function Header({
     }
   };
 
-  const cycleLang = () => {
-    if (lang === "es") setLang("en");
-    else if (lang === "en") setLang("bg");
-    else setLang("es");
-  };
-
   return (
     <>
-      <header className="sticky top-0 z-50 w-full bg-background/90 shadow-md backdrop-blur-sm">
+      <header className="sticky top-0 z-50 w-full backdrop-blur-sm">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative">
           <div className="w-40">
             {showName && (
@@ -222,23 +233,77 @@ export function Header({
           </nav>
 
           {/* IDIOMA + TEMA */}
-          <div className="relative flex items-center gap-1 rounded-full border border-border/60 bg-background/90 backdrop-blur-md px-1">
-            <button
-              onClick={cycleLang}
-              className="
-                h-9 px-3 rounded-full flex items-center justify-center gap-1
-                text-sm font-medium text-muted-foreground
-                hover:text-foreground hover:bg-foreground/5 dark:hover:bg-white/5
-                transition-colors
-              "
-              aria-label="Cambiar idioma"
-              title={t("nav.changeLanguageHint") ?? "Cambiar idioma"}
-            >
-              <Globe size={16} />
-              {lang.toUpperCase()}
-            </button>
+          <div className="flex items-center gap-2">
+            {/* Selector de idioma (pill) */}
+            <div className="relative">
+              <button
+                onClick={() => setIsLangOpen((open) => !open)}
+                className={cn(
+                  "h-9 px-3 rounded-full flex items-center justify-center gap-2",
+                  "text-sm font-medium",
+                  "border border-border/60 bg-background/90 backdrop-blur-md",
+                  "text-zinc-200 dark:text-muted-foreground",
+                  "hover:bg-foreground/5 dark:hover:bg-white/5",
+                  "transition-colors"
+                )}
+                aria-label="Cambiar idioma"
+              >
+                <Globe size={16} />
+                <span>{currentLang.label}</span>
+                <ChevronDown
+                  size={14}
+                  className={cn(
+                    "transition-transform",
+                    isLangOpen ? "rotate-180" : "rotate-0"
+                  )}
+                />
+              </button>
 
-            <ModeToggle />
+              {isLangOpen && (
+                <div
+                  className={cn(
+                    "absolute right-0 mt-2 w-48 rounded-2xl overflow-hidden z-50 shadow-xl border",
+                    "bg-zinc-100/95 text-zinc-900 border-zinc-300",
+                    "dark:bg-background/95 dark:text-foreground dark:border-white/10",
+                    "backdrop-blur-xl"
+                  )}
+                >
+                  {languages.map((l) => {
+                    const active = l.code === lang;
+
+                    return (
+                      <button
+                        key={l.code}
+                        onClick={() => handleChangeLang(l.code)}
+                        className={cn(
+                          "w-full flex items-center justify-between px-3 py-2 text-sm text-left transition-colors",
+                          active
+                            ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white"
+                            : "text-zinc-800 dark:text-muted-foreground hover:bg-zinc-200/90 dark:hover:bg-white/10"
+                        )}
+                      >
+                        <span>{l.name}</span>
+                        <span
+                          className={cn(
+                            "text-xs font-semibold",
+                            active
+                              ? "text-white"
+                              : "text-zinc-700 dark:text-muted-foreground"
+                          )}
+                        >
+                          {l.label}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Botón de tema con el mismo estilo pill */}
+            <div className="h-9 w-9 rounded-full border border-border/60 bg-background/90 backdrop-blur-md flex items-center justify-center">
+              <ModeToggle />
+            </div>
           </div>
         </div>
       </header>
