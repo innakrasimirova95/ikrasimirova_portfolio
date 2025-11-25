@@ -5,8 +5,15 @@ import { LanguageProvider } from "@/context/LanguageContext";
 // Fuentes Geist correctamente importadas
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { Alex_Brush } from "next/font/google";
 
 import "./globals.css";
+
+const alex = Alex_Brush({
+  subsets: ["latin"],
+  variable: "--font-alex",
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   title: "Inna Krasimirova - Portfolio",
@@ -22,7 +29,7 @@ export default function RootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${alex.variable}`}
     >
       <body className="min-h-screen antialiased">
         <ThemeProvider attribute="class" defaultTheme="light">

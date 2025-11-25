@@ -174,7 +174,7 @@ export default function Home() {
           <motion.h1
             ref={nameRef}
             variants={heroItem}
-            className="text-4xl md:text-7xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+            className="text-4xl md:text-7xl font-extrabold bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent font-alex"
           >
             {t("common.fullName")}
           </motion.h1>

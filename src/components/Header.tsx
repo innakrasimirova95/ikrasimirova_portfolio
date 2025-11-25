@@ -242,7 +242,7 @@ export function Header({
                   "h-9 px-3 rounded-full flex items-center justify-center gap-2",
                   "text-sm font-medium",
                   "border border-border/60 bg-background/90 backdrop-blur-md",
-                  "text-zinc-200 dark:text-muted-foreground",
+                  "text-black dark:text-muted-foreground",
                   "hover:bg-foreground/5 dark:hover:bg-white/5",
                   "transition-colors"
                 )}

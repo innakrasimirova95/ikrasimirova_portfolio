@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+const config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,6 +10,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        alex: ['var(--font-alex)', 'cursive'],
+      },
       screens: {
         // 'xs': '480px', // Custom extra-small breakpoint
       },
@@ -17,3 +20,5 @@ module.exports = {
   },
   plugins: [],
 }
+
+export default config;
