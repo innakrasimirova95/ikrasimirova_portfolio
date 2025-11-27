@@ -14,7 +14,7 @@ import { Projects } from "@/components/Projects";
 import { ContactForm } from "@/components/ContactForm";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
-import LiquidEther from "@/components/ui/LiquidEther"; // ajusta si tu ruta es otra
+import LiquidEther from "@/components/ui/LiquidEther";
 
 export default function Home() {
   const [showNameInHeader, setShowNameInHeader] = useState(false);
@@ -174,7 +174,7 @@ export default function Home() {
           <motion.h1
             ref={nameRef}
             variants={heroItem}
-            className="text-4xl md:text-7xl font-extrabold font-science-gothic dark:text-white text-black font-thin"
+            className="text-6xl md:text-7xl font-extrabold font-science-gothic dark:text-white text-black font-thin"
           >
             {t("common.fullName")}
           </motion.h1>

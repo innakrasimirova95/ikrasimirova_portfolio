@@ -54,12 +54,13 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
               <div
                 className="
                   group
-                  rounded-2xl border border-white/10
-                  bg-gradient-to-br from-slate-950/90 via-slate-900/80 to-slate-900/40
-                  backdrop-blur
+                  rounded-2xl border border-gray-300 dark:border-border
+                  bg-secondary shadow-sm
+                  dark:bg-gradient-to-br dark:from-slate-950/90 dark:via-slate-900/80 dark:to-slate-900/40
+                  backdrop-blur-xl
                   px-5 py-4 sm:px-7 sm:py-5
                   transition-all duration-300 ease-out
-                  hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(15,23,42,0.9)]
+                  hover:-translate-y-1 hover:shadow-md dark:hover:shadow-[0_18px_45px_rgba(15,23,42,0.9)]
                   hover:border-purple-500/60
                   relative overflow-hidden
                 "
@@ -92,7 +93,7 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
                 </p>
 
                 {/* Fecha */}
-                <p className="relative inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs sm:text-[13px] text-muted-foreground">
+                <p className="relative inline-flex items-center gap-2 rounded-full border border-border bg-background/50 px-3 py-1 text-xs sm:text-[13px] text-muted-foreground">
                   <HiOutlineCalendar className="w-4 h-4" />
                   <time dateTime={item.date}>{item.date}</time>
                 </p>
