@@ -212,7 +212,7 @@ export function Header({
           <div className="w-40">
             {showName && (
               <Link href="/" className="text-lg font-normal tracking-tight">
-                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent whitespace-nowrap">
+                <span className="font-science-gothic dark:text-white text-black whitespace-nowrap font-thin">
                   {t("common.fullName")}
                 </span>
               </Link>

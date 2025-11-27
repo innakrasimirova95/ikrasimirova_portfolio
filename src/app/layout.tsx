@@ -5,14 +5,14 @@ import { LanguageProvider } from "@/context/LanguageContext";
 // Fuentes Geist correctamente importadas
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Alex_Brush } from "next/font/google";
+import { Space_Grotesk } from "next/font/google";
 
 import "./globals.css";
 
-const alex = Alex_Brush({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
-  variable: "--font-alex",
-  weight: "400",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-space-grotesk",
 });
 
 export const metadata: Metadata = {
@@ -29,7 +29,7 @@ export default function RootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${GeistSans.variable} ${GeistMono.variable} ${alex.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${spaceGrotesk.variable}`}
     >
       <body className="min-h-screen antialiased">
         <ThemeProvider attribute="class" defaultTheme="light">

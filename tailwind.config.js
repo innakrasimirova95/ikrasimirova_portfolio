@@ -11,7 +11,8 @@ const config = {
   theme: {
     extend: {
       fontFamily: {
-        alex: ['var(--font-alex)', 'cursive'],
+        display: ["var(--font-space-grotesk)", "system-ui", "sans-serif"],
+        "science-gothic": ["var(--font-science-gothic)", "sans-serif"],
       },
       screens: {
         // 'xs': '480px', // Custom extra-small breakpoint
