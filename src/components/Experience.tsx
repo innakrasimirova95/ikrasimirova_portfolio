@@ -1,23 +1,15 @@
 import React, { useState } from "react";
-import { FaBuilding, FaCalendarAlt } from "react-icons/fa";
+import { HiOutlineCalendar, HiOutlineLocationMarker } from "react-icons/hi";
 import { SectionTitle } from "./ui/SectionTitle";
 import { useLanguage, useDictionary } from "@/context/LanguageContext";
 import { cn } from "@/lib/utils";
 
-interface ExperienceRole {
-  company: string;
-  role: string;
-  period: string;
-  description: string;
-  techStack?: string;
-}
-
-const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
+export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
   const { t } = useLanguage();
   const dictionary = useDictionary();
-  const experienceData: ExperienceRole[] = dictionary.experience.roles;
 
-  // índice activo para móvil / touch (card expandida)
+  const educationData = dictionary.education.degrees;
+
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const handleToggle = (index: number) => {
@@ -26,16 +18,16 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
 
   return (
     <section
-      id="experience"
+      id="educacion"
       ref={ref}
       className="scroll-mt-24 py-16 px-4 sm:px-0"
-      aria-labelledby="experience-title"
+      aria-labelledby="education-title"
     >
-      <SectionTitle id="experience-title">
-        {t("experience.title")}
+      <SectionTitle id="education-title">
+        {t("education.title")}
       </SectionTitle>
 
-      <div className="relative max-w-4xl mx-auto mt-10 pb-20">
+      <div className="relative max-w-4xl mx-auto mt-10 pb-16">
         {/* Línea vertical del timeline (solo en pantallas medianas+) */}
         <div
           className="
@@ -48,17 +40,16 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
         />
 
         <div className="space-y-10">
-          {experienceData.map((exp, index) => {
-            const isActive = activeIndex === index;
+          {educationData.map((item, i) => {
+            const isActive = activeIndex === i;
 
             return (
               <article
-                key={index}
-                aria-labelledby={`exp-${index}-title`}
-                // más padding izquierdo para que se vea bien el punto en móvil
+                key={i}
+                aria-labelledby={`edu-${i}-title`}
                 className="relative pl-10 sm:pl-16"
               >
-                {/* Nodo del timeline (visible y limpio en móvil) */}
+                {/* Nodo del timeline visible en móvil */}
                 <span
                   className={cn(
                     "absolute left-4 sm:left-5 top-3 z-10",
@@ -71,14 +62,14 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
                   aria-hidden="true"
                 />
 
-                {/* Tarjeta de experiencia */}
+                {/* Tarjeta de educación */}
                 <div
                   role="button"
                   tabIndex={0}
-                  onClick={() => handleToggle(index)}
+                  onClick={() => handleToggle(i)}
                   onKeyDown={(e) =>
                     (e.key === "Enter" || e.key === " ") &&
-                    (e.preventDefault(), handleToggle(index))
+                    (e.preventDefault(), handleToggle(i))
                   }
                   className={cn(
                     "group cursor-pointer",
@@ -88,9 +79,7 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
                     "backdrop-blur-xl",
                     "px-5 py-4 sm:px-7 sm:py-5",
                     "transition-all duration-300 ease-out",
-                    // efecto hover para desktop
                     "hover:-translate-y-1 hover:shadow-md dark:hover:shadow-[0_18px_45px_rgba(15,23,42,0.9)] hover:border-purple-500/60",
-                    // efecto “activo” persistente para móvil / tap
                     isActive &&
                       "-translate-y-1 shadow-md dark:shadow-[0_18px_45px_rgba(15,23,42,0.9)] border-purple-500/60"
                   )}
@@ -107,49 +96,26 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
                     aria-hidden="true"
                   />
 
-                  {/* Cabecera: rol + periodo */}
-                  <header className="relative flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-3">
+                  <header className="relative mb-2">
                     <h3
-                      id={`exp-${index}-title`}
+                      id={`edu-${i}-title`}
                       className="text-lg sm:text-xl font-semibold text-foreground tracking-tight"
                     >
-                      {exp.role}
+                      {item.title}
                     </h3>
-
-                    <p className="inline-flex items-center gap-2 self-start rounded-full border border-border bg-background/50 px-3 py-1 text-xs sm:text-[13px] text-muted-foreground">
-                      <FaCalendarAlt className="w-3 h-3" />
-                      <time dateTime={exp.period}>{exp.period}</time>
-                    </p>
                   </header>
 
-                  {/* Empresa */}
+                  {/* Institución */}
                   <p className="relative flex items-center gap-2 text-sm font-medium text-primary/90 italic mb-2">
-                    <FaBuilding className="w-4 h-4" />
-                    <span>{exp.company}</span>
+                    <HiOutlineLocationMarker className="w-5 h-5" />
+                    <span>{item.institution}</span>
                   </p>
 
-                  {/* Contenido */}
-                  <div className="relative space-y-2">
-                    <p
-                      className={cn(
-                        "text-sm sm:text-[15px] text-foreground/90 leading-relaxed transition-all duration-300",
-                        // En móvil: contraído si no está activo. En sm+ siempre completo.
-                        !isActive &&
-                          "max-h-16 overflow-hidden opacity-80 sm:max-h-none sm:opacity-100"
-                      )}
-                    >
-                      {exp.description}
-                    </p>
-
-                    {exp.techStack && (
-                      <p className="text-xs sm:text-[13px] text-muted-foreground">
-                        <span className="font-semibold text-foreground">
-                          Tech:
-                        </span>{" "}
-                        {exp.techStack}
-                      </p>
-                    )}
-                  </div>
+                  {/* Fecha */}
+                  <p className="relative inline-flex items-center gap-2 rounded-full border border-border bg-background/50 px-3 py-1 text-xs sm:text-[13px] text-muted-foreground">
+                    <HiOutlineCalendar className="w-4 h-4" />
+                    <time dateTime={item.date}>{item.date}</time>
+                  </p>
                 </div>
               </article>
             );
@@ -160,6 +126,4 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
   );
 });
 
-ExperienceComponent.displayName = "Experience";
-
-export const Experience = ExperienceComponent;
+EducationTimeline.displayName = "EducationTimeline";
