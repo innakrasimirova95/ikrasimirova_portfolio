@@ -17,7 +17,7 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
   const dictionary = useDictionary();
   const experienceData: ExperienceRole[] = dictionary.experience.roles;
 
-  // índice activo para móvil / touch
+  // índice activo para móvil / touch (card expandida)
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const handleToggle = (index: number) => {
@@ -55,12 +55,14 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
               <article
                 key={index}
                 aria-labelledby={`exp-${index}-title`}
-                className="relative pl-6 sm:pl-16"
+                // más padding izquierdo para que se vea bien el punto en móvil
+                className="relative pl-10 sm:pl-16"
               >
-                {/* Nodo del timeline */}
+                {/* Nodo del timeline (visible y limpio en móvil) */}
                 <span
                   className={cn(
-                    "absolute left-4 sm:left-5 top-3 w-3 h-3 rounded-full",
+                    "absolute left-4 sm:left-5 top-3 z-10",
+                    "w-3 h-3 rounded-full",
                     "bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500",
                     "shadow-[0_0_18px_rgba(168,85,247,0.9)]",
                     "transition-transform duration-300",
@@ -128,7 +130,14 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
 
                   {/* Contenido */}
                   <div className="relative space-y-2">
-                    <p className="text-sm sm:text-[15px] text-foreground/90 leading-relaxed">
+                    <p
+                      className={cn(
+                        "text-sm sm:text-[15px] text-foreground/90 leading-relaxed transition-all duration-300",
+                        // En móvil: contraído si no está activo. En sm+ siempre completo.
+                        !isActive &&
+                          "max-h-16 overflow-hidden opacity-80 sm:max-h-none sm:opacity-100"
+                      )}
+                    >
                       {exp.description}
                     </p>
 
