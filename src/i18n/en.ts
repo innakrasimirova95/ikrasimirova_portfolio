@@ -104,6 +104,9 @@ export const en = {
       clearButton: "Clear",
       success: "Thank you! I have received your message.",
       error: "An error occurred while sending the message.",
+      sectionHint: "Get in touch",
+      sectionDescription:
+        "Tell me briefly what you need and I will get back to you as soon as possible.",
     },
     linkedinPrompt: "You can also write to me on",
   },

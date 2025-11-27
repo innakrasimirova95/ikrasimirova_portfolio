@@ -1,6 +1,6 @@
-import React from 'react';
-import { FaBuilding, FaCalendarAlt } from 'react-icons/fa';
-import { SectionTitle } from './ui/SectionTitle';
+import React from "react";
+import { FaBuilding, FaCalendarAlt } from "react-icons/fa";
+import { SectionTitle } from "./ui/SectionTitle";
 import { useLanguage, useDictionary } from "@/context/LanguageContext";
 
 const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
@@ -10,48 +10,113 @@ const ExperienceComponent = React.forwardRef<HTMLElement>((props, ref) => {
   const experienceData = dictionary.experience.roles;
 
   return (
-    <section id="experience" ref={ref} className="scroll-mt-24 py-16">
-      <SectionTitle>{t("experience.title")}</SectionTitle>
+    <section
+      id="experience"
+      ref={ref}
+      className="scroll-mt-24 py-16 px-4 sm:px-0"
+      aria-labelledby="experience-title"
+    >
+      <SectionTitle id="experience-title">
+        {t("experience.title")}
+      </SectionTitle>
 
-      <div className="space-y-4">
-        {experienceData.map((exp, index) => (
-          <div
-            key={index}
-            className="
-              group relative transition-all duration-300 ease-in-out transform
-              hover:scale-105 active:scale-105
-              hover:shadow-lg active:shadow-lg
-              p-6 mb-8
-            "
-          >
-            <div
-              className="
-                absolute left-0 top-0 bottom-0 w-1 bg-white
-                group-hover:bg-gradient-to-b group-active:bg-gradient-to-b
-                from-blue-500 via-purple-600 to-pink-500
-                transition-all duration-300
-              "
-            />
+      <div className="relative max-w-4xl mx-auto mt-10 pb-20">
+        {/* Línea vertical del timeline (solo en pantallas medianas+) */}
+        <div
+          className="
+            hidden sm:block
+            absolute left-6 top-0 bottom-0
+            w-px
+            bg-gradient-to-b from-blue-500/60 via-purple-500/40 to-pink-500/60
+          "
+          aria-hidden="true"
+        />
 
-            <div className="pl-6">
-              <h3 className="text-base sm:text-xl font-semibold text-gray-900 dark:text-white mb-1">
-                {exp.role}
-              </h3>
+        <div className="space-y-10">
+          {experienceData.map((exp, index) => (
+            <article
+              key={index}
+              aria-labelledby={`exp-${index}-title`}
+              className="relative pl-6 sm:pl-16"
+            >
+              {/* Nodo del timeline */}
+              <span
+                className="
+                  absolute left-4 sm:left-5 top-3
+                  w-3 h-3 rounded-full
+                  bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500
+                  shadow-[0_0_18px_rgba(168,85,247,0.9)]
+                "
+                aria-hidden="true"
+              />
 
-              <p className="flex items-center gap-2 text-primary font-medium italic mb-1">
-                <FaBuilding className="w-4 h-4" /> {exp.company}
-              </p>
+              {/* Tarjeta de experiencia */}
+              <div
+                className="
+                  group
+                  rounded-2xl border border-white/10
+                  bg-gradient-to-br from-slate-950/90 via-slate-900/80 to-slate-900/40
+                  backdrop-blur
+                  px-5 py-4 sm:px-7 sm:py-5
+                  transition-all duration-300 ease-out
+                  hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(15,23,42,0.9)]
+                  hover:border-purple-500/60
+                  relative overflow-hidden
+                "
+              >
+                {/* Glow de fondo */}
+                <div
+                  className="
+                    pointer-events-none
+                    absolute -right-10 -top-10 h-32 w-32
+                    rounded-full bg-gradient-to-br
+                    from-blue-500/10 via-purple-500/15 to-pink-500/5
+                    blur-3xl
+                  "
+                  aria-hidden="true"
+                />
 
-              <p className="flex items-center gap-2 text-xs sm:text-sm text-foreground mb-2">
-                <FaCalendarAlt className="w-4 h-4" /> {exp.period}
-              </p>
+                {/* Cabecera: rol + periodo */}
+                <header className="relative flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2 mb-3">
+                  <h3
+                    id={`exp-${index}-title`}
+                    className="text-lg sm:text-xl font-semibold text-foreground tracking-tight"
+                  >
+                    {exp.role}
+                  </h3>
 
-              <p className="text-xs sm:text-base text-foreground">
-                {exp.description}
-              </p>
-            </div>
-          </div>
-        ))}
+                  <p className="inline-flex items-center gap-2 self-start rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs sm:text-[13px] text-muted-foreground">
+                    <FaCalendarAlt className="w-3 h-3" />
+                    <time dateTime={exp.period}>{exp.period}</time>
+                  </p>
+                </header>
+
+                {/* Empresa */}
+                <p className="relative flex items-center gap-2 text-sm font-medium text-primary/90 italic mb-2">
+                  <FaBuilding className="w-4 h-4" />
+                  <span>{exp.company}</span>
+                </p>
+
+                {/* Contenido */}
+                <div className="relative space-y-2">
+                  <p className="text-sm sm:text-[15px] text-foreground/90 leading-relaxed">
+                    {exp.description}
+                  </p>
+
+                  {/* Tech stack opcional si lo añades al diccionario */}
+                  {(exp as any).techStack && (
+                    <p className="text-xs sm:text-[13px] text-muted-foreground">
+                      <span className="font-semibold text-foreground">
+                        Tech:
+                      </span>{" "}
+                      {(exp as any).techStack}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

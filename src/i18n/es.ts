@@ -104,6 +104,9 @@ export const es = {
       clearButton: "Limpiar",
       success: "¡Gracias! He recibido tu mensaje.",
       error: "Ha ocurrido un error al enviar el mensaje.",
+      sectionHint: "Ponte en contacto",
+      sectionDescription:
+        "Cuéntame brevemente qué necesitas y te responderé lo antes posible.",
     },
     linkedinPrompt: "También puedes escribirme por",
   },
