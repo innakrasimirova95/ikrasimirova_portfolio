@@ -20,14 +20,14 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
     <section
       id="educacion"
       ref={ref}
-      className="scroll-mt-24 py-16 px-4 sm:px-0"
+      className="scroll-mt-24 py-16"
       aria-labelledby="education-title"
     >
       <SectionTitle id="education-title">
         {t("education.title")}
       </SectionTitle>
 
-      <div className="relative max-w-4xl mx-auto mt-10 pb-16">
+      <div className="relative max-w-6xl mx-auto mt-10 pb-16">
         {/* Línea vertical del timeline (solo en pantallas medianas+) */}
         <div
           className="

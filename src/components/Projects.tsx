@@ -40,7 +40,7 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
     <section
       id="proyectos"
       ref={ref}
-      className="scroll-mt-24 py-16 px-4 sm:px-0"
+      className="scroll-mt-24 py-16"
       aria-labelledby="projects-title"
     >
       <SectionTitle id="projects-title" className="mb-8">

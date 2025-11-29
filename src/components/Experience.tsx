@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import { HiOutlineCalendar, HiOutlineLocationMarker } from "react-icons/hi";
+import {
+  HiOutlineOfficeBuilding,
+  HiOutlineCalendar,
+  HiOutlineBriefcase,
+} from "react-icons/hi";
 import { SectionTitle } from "./ui/SectionTitle";
 import { useLanguage, useDictionary } from "@/context/LanguageContext";
 import { cn } from "@/lib/utils";
 
-export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
+export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
   const { t } = useLanguage();
   const dictionary = useDictionary();
 
-  const educationData = dictionary.education.degrees;
+  const experienceData = dictionary.experience.roles;
 
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(0); // Open the first item by default
 
   const handleToggle = (index: number) => {
     setActiveIndex((prev) => (prev === index ? null : index));
@@ -18,17 +22,15 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
 
   return (
     <section
-      id="educacion"
+      id="experiencia"
       ref={ref}
-      className="scroll-mt-24 py-16 px-4 sm:px-0"
-      aria-labelledby="education-title"
+      className="scroll-mt-24 py-16"
+      aria-labelledby="experience-title"
     >
-      <SectionTitle id="education-title">
-        {t("education.title")}
-      </SectionTitle>
+      <SectionTitle id="experience-title">{t("experience.title")}</SectionTitle>
 
-      <div className="relative max-w-4xl mx-auto mt-10 pb-16">
-        {/* Línea vertical del timeline (solo en pantallas medianas+) */}
+      <div className="relative max-w-6xl mx-auto mt-10 pb-4">
+        {/* Línea vertical del timeline */}
         <div
           className="
             hidden sm:block
@@ -40,16 +42,16 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
         />
 
         <div className="space-y-10">
-          {educationData.map((item, i) => {
+          {experienceData.map((job, i) => {
             const isActive = activeIndex === i;
 
             return (
               <article
                 key={i}
-                aria-labelledby={`edu-${i}-title`}
+                aria-labelledby={`job-${i}-role`}
                 className="relative pl-10 sm:pl-16"
               >
-                {/* Nodo del timeline visible en móvil */}
+                {/* Nodo del timeline */}
                 <span
                   className={cn(
                     "absolute left-4 sm:left-5 top-3 z-10",
@@ -62,60 +64,58 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
                   aria-hidden="true"
                 />
 
-                {/* Tarjeta de educación */}
+                {/* Tarjeta de experiencia */}
                 <div
-                  role="button"
-                  tabIndex={0}
-                  onClick={() => handleToggle(i)}
-                  onKeyDown={(e) =>
-                    (e.key === "Enter" || e.key === " ") &&
-                    (e.preventDefault(), handleToggle(i))
-                  }
                   className={cn(
-                    "group cursor-pointer",
                     "rounded-2xl border border-gray-300 dark:border-border",
                     "bg-secondary shadow-sm",
                     "dark:bg-gradient-to-br dark:from-slate-950/90 dark:via-slate-900/80 dark:to-slate-900/40",
                     "backdrop-blur-xl",
-                    "px-5 py-4 sm:px-7 sm:py-5",
-                    "transition-all duration-300 ease-out",
-                    "hover:-translate-y-1 hover:shadow-md dark:hover:shadow-[0_18px_45px_rgba(15,23,42,0.9)] hover:border-purple-500/60",
-                    isActive &&
-                      "-translate-y-1 shadow-md dark:shadow-[0_18px_45px_rgba(15,23,42,0.9)] border-purple-500/60"
+                    "transition-shadow duration-300",
+                    isActive && "shadow-md dark:shadow-[0_18px_45px_rgba(15,23,42,0.9)]"
                   )}
                 >
-                  {/* Glow de fondo */}
-                  <div
-                    className="
-                      pointer-events-none
-                      absolute -right-10 -top-10 h-32 w-32
-                      rounded-full bg-gradient-to-br
-                      from-blue-500/10 via-purple-500/15 to-pink-500/5
-                      blur-3xl
-                    "
-                    aria-hidden="true"
-                  />
-
-                  <header className="relative mb-2">
+                  <header
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => handleToggle(i)}
+                    onKeyDown={(e) =>
+                      (e.key === "Enter" || e.key === " ") &&
+                      (e.preventDefault(), handleToggle(i))
+                    }
+                    className="group cursor-pointer px-5 py-4 sm:px-7 sm:py-5"
+                  >
                     <h3
-                      id={`edu-${i}-title`}
-                      className="text-lg sm:text-xl font-semibold text-foreground tracking-tight"
+                      id={`job-${i}-role`}
+                      className="text-lg sm:text-xl font-semibold text-foreground tracking-tight group-hover:text-primary transition-colors"
                     >
-                      {item.title}
+                      {job.role}
                     </h3>
+                    <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-muted-foreground">
+                      <p className="flex items-center gap-2">
+                        <HiOutlineOfficeBuilding className="w-5 h-5" />
+                        <span>{job.company}</span>
+                      </p>
+                      <p className="flex items-center gap-2">
+                        <HiOutlineCalendar className="w-5 h-5" />
+                        <time dateTime={job.period}>{job.period}</time>
+                      </p>
+                    </div>
                   </header>
 
-                  {/* Institución */}
-                  <p className="relative flex items-center gap-2 text-sm font-medium text-primary/90 italic mb-2">
-                    <HiOutlineLocationMarker className="w-5 h-5" />
-                    <span>{item.institution}</span>
-                  </p>
-
-                  {/* Fecha */}
-                  <p className="relative inline-flex items-center gap-2 rounded-full border border-border bg-background/50 px-3 py-1 text-xs sm:text-[13px] text-muted-foreground">
-                    <HiOutlineCalendar className="w-4 h-4" />
-                    <time dateTime={item.date}>{item.date}</time>
-                  </p>
+                  {/* Descripción (colapsable) */}
+                  <div
+                    className={cn(
+                      "overflow-hidden transition-all duration-300 ease-in-out",
+                      isActive ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+                    )}
+                  >
+                    <div className="border-t border-border/80 px-5 py-4 sm:px-7 sm:py-5">
+                      <p className="text-sm text-foreground/80 leading-relaxed">
+                        {job.description}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </article>
             );
@@ -126,4 +126,4 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
   );
 });
 
-EducationTimeline.displayName = "EducationTimeline";
+Experience.displayName = "Experience";
