@@ -67,7 +67,6 @@ function IconNav({
     const marginY = 60;
     if (clientY < rect.top - marginY || clientY > rect.bottom + marginY) return;
 
-    // Buscar el ÍNDICE del botón cuyo centro esté más cerca del dedo en X
     let bestIndex = -1;
     let minDist = Infinity;
 
@@ -212,7 +211,12 @@ export function Header({
           <div className="w-40">
             {showName && (
               <Link href="/" className="text-lg font-normal tracking-tight">
-                <span className="font-science-gothic dark:text-white text-black whitespace-nowrap font-thin">
+                <span  className={cn(
+                      "font-science-gothic whitespace-nowrap font-bold",
+                      "text-transparent bg-clip-text",
+                      "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500",
+                      "tracking-[0.12em] text-lg sm:text-m"
+                    )}>
                   {t("common.fullName")}
                 </span>
               </Link>
@@ -242,7 +246,7 @@ export function Header({
                   "h-9 px-3 rounded-full flex items-center justify-center gap-2",
                   "text-sm font-medium",
                   "border border-border/60 bg-background/90 backdrop-blur-md",
-                  "text-black dark:text-muted-foreground",
+                  "text-foreground",
                   "hover:bg-foreground/5 dark:hover:bg-white/5",
                   "transition-colors"
                 )}

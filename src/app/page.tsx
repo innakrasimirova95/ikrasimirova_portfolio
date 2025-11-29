@@ -149,7 +149,7 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0 z-0">
           <div style={{ width: "100%", height: "100%", position: "relative" }}>
             <LiquidEther
-              colors={["#5227FF", "#FF9FFC", "#B19EEF"]}
+              colors={["#8063a1ff", "#FF9FFC", "#B19EEF"]}
               mouseForce={20}
               cursorSize={100}
               isViscous={false}
