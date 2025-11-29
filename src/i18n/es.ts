@@ -38,7 +38,13 @@ export const es = {
         role: "Digital Solution Developer",
         period: "Mayo 2025 - Octubre 2025",
         description:
-          "Desarrollo de soluciones digitales full stack para proyectos de ingeniería, incluyendo análisis, diseño, desarrollo, pruebas y despliegue. Tecnologías: React, Typescript, Python, Django, Azure.",
+          "Durante cinco meses desarrollé un visor BIM 3D utilizando ThatOpenCompany y Three.js, creando una interfaz interactiva para modelos IFC dentro de una aplicación con React, TypeScript, Vite y Material UI. Convertí este visor en una librería reusable, desarrollé una API con FastAPI conectada a Autodesk ACC para descargar modelos BIM y desplegué los proyectos en Azure, integrándolos en el entorno cloud de la empresa.
+
+          Además, desarrollé e integré un proyecto completo de gestión de modelos BIM cuyo frontend estaba hecho con React y el backend con Django, donde implementé la autenticación con Entra ID, la conexión con la API de Autodesk ACC para importar modelos BIM y la carga de modelos desde local. También incorporé mi visor BIM dentro de este sistema, permitiendo visualizar los modelos directamente en la plataforma.
+
+          Posteriormente, colaboré tanto en frontend como en backend en un proyecto orientado a sensores IoT, integrando mi visor y apoyando en dashboards con Recharts, navegación con React Router y visualización de datos en tiempo real. También trabajé en el backend con Node.js, PostgreSQL, WebSockets y servicios de Azure como Blob Storage.
+
+          Esta experiencia me permitió llevar un visor BIM propio desde su concepción hasta su integración en plataformas reales: un gestor de proyectos BIM empresarial y una solución cloud de datos IoT.
       },
       {
         company: "IGNIS",
