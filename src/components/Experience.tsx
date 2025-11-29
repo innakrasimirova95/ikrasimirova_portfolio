@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import {
   HiOutlineOfficeBuilding,
   HiOutlineCalendar,
-  HiOutlineBriefcase,
 } from "react-icons/hi";
 import { SectionTitle } from "./ui/SectionTitle";
 import { useLanguage, useDictionary } from "@/context/LanguageContext";
