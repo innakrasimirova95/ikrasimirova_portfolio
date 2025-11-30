@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { useTheme } from 'next-themes';
 
 export interface LiquidEtherProps {
   mouseForce?: number;
@@ -54,7 +53,6 @@ interface LiquidEtherWebGL {
 }
 
 const defaultColors = ['#7E57C2', '#FF9FFC', '#C3B5E5'];
-const lightColors = ['#4A4C62', '#4A0D66', '#310A47'];
 
 export default function LiquidEther({
   mouseForce = 20,

@@ -150,7 +150,7 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                         </p>
                       ) : (
                         <div className="flex flex-wrap gap-2">
-                          {(job.technologies ?? []).map((tech: any, i: number) => (
+                          {(job.technologies ?? []).map((tech: string, i: number) => (
                             <span
                               key={i}
                               className="
