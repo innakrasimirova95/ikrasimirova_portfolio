@@ -14,7 +14,7 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
 
   const experienceData = dictionary.experience.roles;
 
-  const [activeIndex, setActiveIndex] = useState<number | null>(0); // Open the first item by default
+  const [activeIndex, setActiveIndex] = useState<number | null>(null); // All items collapsed by default
 
   const handleToggle = (index: number) => {
     setActiveIndex((prev) => (prev === index ? null : index));
