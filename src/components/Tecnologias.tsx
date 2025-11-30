@@ -154,7 +154,7 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
   const currentStack = activeTab === "skills" ? skillsStack : toolsStack;
 
   return (
-    <section id="tecnologias" ref={ref} className="scroll-mt-24">
+    <section id="technologies" ref={ref} className="scroll-mt-24">
       <SectionTitle className="mb-4">{t("technologies.title")}</SectionTitle>
 
       {/* Toggle menú */}

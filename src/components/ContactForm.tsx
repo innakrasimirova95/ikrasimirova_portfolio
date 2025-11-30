@@ -71,7 +71,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
 
     return (
       <section
-        id="contacto"
+        id="contact"
         ref={ref}
         className={cn("scroll-mt-24 w-full py-16 px-4 sm:px-0", className)}
         aria-labelledby="contact-title"

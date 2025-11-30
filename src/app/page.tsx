@@ -27,11 +27,10 @@ export default function Home() {
   }, [activeSection]);
 
   const heroRef = useRef<HTMLElement>(null);
-  const proyectosRef = useRef<HTMLElement>(null);
-  const experienciaRef = useRef<HTMLElement>(null);
-  const educacionRef = useRef<HTMLElement>(null);
-  const tecnologiasRef = useRef<HTMLElement>(null);
-  const contactoRef = useRef<HTMLElement>(null);
+  const projectsRef = useRef<HTMLElement>(null);
+  const educationRef = useRef<HTMLElement>(null);
+  const technologiesRef = useRef<HTMLElement>(null);
+  const contactRef = useRef<HTMLElement>(null);
 
   const { lang, t } = useLanguage();
 
@@ -79,30 +78,27 @@ export default function Home() {
   useEffect(() => {
     const sectionRefs = [
       { ref: heroRef, id: "home" },
-      { ref: proyectosRef, id: "proyectos" },
-      { ref: experienciaRef, id: "experiencia" },
-      { ref: educacionRef, id: "educacion" },
-      { ref: tecnologiasRef, id: "tecnologias" },
-      { ref: contactoRef, id: "contacto" },
+      { ref: projectsRef, id: "projects" },
+      { ref: educationRef, id: "education" },
+      { ref: technologiesRef, id: "technologies" },
+      { ref: contactRef, id: "contact" },
     ];
 
     const observerOptions = {
       root: null,
-      rootMargin: "0px",
-      threshold: [0, 0.25, 0.5, 0.75, 1],
+      rootMargin: `-${(document.querySelector("header")?.offsetHeight ?? 64) * 2}px 0px 0px 0px`,
+      threshold: 0,
     };
 
     const sectionObserver = new IntersectionObserver((entries) => {
-      const intersectingEntries = entries.filter((entry) => entry.isIntersecting);
-
-      if (intersectingEntries.length > 0) {
-        intersectingEntries.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-        const mostVisibleSectionId = intersectingEntries[0].target.id;
-
-        if (mostVisibleSectionId !== activeSectionRef.current) {
-          setActiveSection(mostVisibleSectionId);
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const sectionId = entry.target.id;
+          if (sectionId !== activeSectionRef.current) {
+            setActiveSection(sectionId);
+          }
         }
-      }
+      });
     }, observerOptions);
 
     sectionRefs.forEach(({ ref }) => {
@@ -163,7 +159,7 @@ export default function Home() {
               autoIntensity={2.2}
               takeoverDuration={0.25}
               autoResumeDelay={3000}
-              autoRampDuration={0.6}
+      autoRampDuration={0.6}
             />
           </div>
         </div>
@@ -251,11 +247,11 @@ export default function Home() {
       </motion.section>
 
       <main className="container mx-auto px-6 py-12 space-y-32">
-        <Projects ref={proyectosRef} />
-        <Experience ref={experienciaRef} />
-        <EducationTimeline ref={educacionRef} />
-        <TechIcons ref={tecnologiasRef} />
-        <ContactForm ref={contactoRef} />
+        <Projects ref={projectsRef} />
+        <Experience />
+        <EducationTimeline ref={educationRef} />
+        <TechIcons ref={technologiesRef} />
+        <ContactForm ref={contactRef} />
       </main>
     </>
   );

@@ -38,7 +38,7 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
 
   return (
     <section
-      id="proyectos"
+      id="projects"
       ref={ref}
       className="scroll-mt-24 py-16"
       aria-labelledby="projects-title"

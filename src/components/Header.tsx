@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/toggle-theme";
@@ -20,7 +20,6 @@ function IconNav({
   handleNavClick,
   t,
   className,
-  onDragNavigate,
   isDragging,
   setIsDragging,
 }: {
@@ -29,30 +28,38 @@ function IconNav({
   handleNavClick: (href: string, behavior?: ScrollBehavior) => void;
   t: (key: string) => string;
   className?: string;
-  onDragNavigate: (href: string, behavior?: ScrollBehavior) => void;
   isDragging: boolean;
   setIsDragging: (value: boolean) => void;
 }) {
   const iconMap: { [key: string]: React.ReactNode } = {
     "#home": <Home size={20} />,
-    "#proyectos": <LayoutTemplate size={20} />,
+    "#projects": <LayoutTemplate size={20} />,
     "#experience": <BriefcaseBusiness size={20} />,
-    "#educacion": <GraduationCap size={20} />,
-    "#tecnologias": <Code2 size={20} />,
-    "#contacto": <Mail size={20} />,
+    "#education": <GraduationCap size={20} />,
+    "#technologies": <Code2 size={20} />,
+    "#contact": <Mail size={20} />,
   };
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
-  const lastHrefRef = useRef<string | null>(null);
+  const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
 
   const handlePointerDown = () => {
     setIsDragging(true);
+    const initialIndex = navItems.findIndex(
+      (item) => item.href.substring(1) === activeSection
+    );
+    if (initialIndex !== -1) {
+      setDraggedIndex(initialIndex);
+    }
   };
 
   const handlePointerUp = () => {
     setIsDragging(false);
-    lastHrefRef.current = null;
+    if (draggedIndex !== null) {
+      handleNavClick(navItems[draggedIndex].href);
+    }
+    setDraggedIndex(null);
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -81,16 +88,9 @@ function IconNav({
       }
     });
 
-    if (bestIndex === -1) return;
-
-    const href = navItems[bestIndex].href;
-    if (!href || href === lastHrefRef.current) return;
-
-    lastHrefRef.current = href;
-    const currentSection = href.substring(1);
-    if (currentSection === activeSection) return;
-
-    onDragNavigate(href, "auto");
+    if (bestIndex !== -1) {
+      setDraggedIndex(bestIndex);
+    }
   };
 
   return (
@@ -110,7 +110,9 @@ function IconNav({
       onPointerMove={handlePointerMove}
     >
       {navItems.map((item, index) => {
-        const isActive = activeSection === item.href.substring(1);
+        const isActive = isDragging
+          ? index === draggedIndex
+          : activeSection === item.href.substring(1);
 
         return (
           <button
@@ -163,11 +165,11 @@ export function Header({
 
   const navItems = [
     { href: "#home", key: "nav.home" },
-    { href: "#proyectos", key: "nav.projects" },
+    { href: "#projects", key: "nav.projects" },
     { href: "#experience", key: "nav.experience" },
-    { href: "#educacion", key: "nav.education" },
-    { href: "#tecnologias", key: "nav.technologies" },
-    { href: "#contacto", key: "nav.contact" },
+    { href: "#education", key: "nav.education" },
+    { href: "#technologies", key: "nav.technologies" },
+    { href: "#contact", key: "nav.contact" },
   ];
 
   const languages: { code: "es" | "en" | "bg"; label: string; name: string }[] =
@@ -229,7 +231,6 @@ export function Header({
               navItems={navItems}
               activeSection={activeSection}
               handleNavClick={handleNavClick}
-              onDragNavigate={handleNavClick}
               isDragging={isDragging}
               setIsDragging={setIsDragging}
               t={t}
@@ -318,7 +319,6 @@ export function Header({
           navItems={navItems}
           activeSection={activeSection}
           handleNavClick={handleNavClick}
-          onDragNavigate={handleNavClick}
           isDragging={isDragging}
           setIsDragging={setIsDragging}
           t={t}

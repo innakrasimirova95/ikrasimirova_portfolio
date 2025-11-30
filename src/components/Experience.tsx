@@ -22,7 +22,7 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
 
   return (
     <section
-      id="experiencia"
+      id="experience"
       ref={ref}
       className="scroll-mt-24 py-16"
       aria-labelledby="experience-title"
