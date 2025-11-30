@@ -37,8 +37,13 @@ export const en = {
         company: "AECOM",
         role: "Digital Solution Developer",
         period: "May 2025 - October 2025",
-        description:
-          "Development of full-stack digital solutions for engineering projects, including analysis, design, development, testing, and deployment. Technologies: React, Typescript, Python, Django, Azure.",
+        description: `For five months, I developed a 3D BIM viewer using ThatOpenCompany and Three.js, creating an interactive interface for IFC models within an application with React, TypeScript, Vite, and Material UI. I converted this viewer into a reusable library, developed a FastAPI API connected to Autodesk ACC to download BIM models, and deployed the projects on Azure, integrating them into the company's cloud environment.
+
+Additionally, I developed and integrated a complete BIM model management project with a frontend made with React and a backend with Django, where I implemented authentication with Entra ID, connection to the Autodesk ACC API to import BIM models, and local model loading. I also incorporated my BIM viewer into this system, allowing models to be viewed directly on the platform.
+
+Subsequently, I collaborated on both the frontend and backend of an IoT sensor-oriented project, integrating my viewer and supporting dashboards with Recharts, navigation with React Router, and real-time data visualization. I also worked on the backend with Node.js, PostgreSQL, WebSockets, and Azure services like Blob Storage.
+
+This experience allowed me to take my own BIM viewer from its conception to its integration into real platforms: an enterprise BIM project manager and a cloud IoT data solution.`
       },
       {
         company: "IGNIS",
