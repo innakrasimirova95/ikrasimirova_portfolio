@@ -43,6 +43,11 @@ function IconNav({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const buttonsRef = useRef<(HTMLButtonElement | null)[]>([]);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const draggedIndexRef = useRef(draggedIndex);
+
+  useEffect(() => {
+    draggedIndexRef.current = draggedIndex;
+  }, [draggedIndex]);
 
   const handlePointerDown = () => {
     setIsDragging(true);
@@ -88,8 +93,9 @@ function IconNav({
       }
     });
 
-    if (bestIndex !== -1) {
+    if (bestIndex !== -1 && bestIndex !== draggedIndexRef.current) {
       setDraggedIndex(bestIndex);
+      handleNavClick(navItems[bestIndex].href, "smooth");
     }
   };
 
@@ -283,36 +289,35 @@ export function Header({
               </button>
 
               {isLangOpen && (
-                <div
+              <div
+                className={cn(
+                  "absolute right-0 mt-2 w-32 rounded-xl overflow-hidden z-50 shadow-lg border",
+                  "bg-white/95 text-black-900 border-zinc-200",
+                  "dark:bg-background/95 dark:text-foreground dark:border-white/10",
+                  "backdrop-blur-xl"
+                )}
+              >
+                {languages.map((l) => {
+                  const active = l.code === lang;
+
+                  return (
+               <button
+                  key={l.code}
+                  onClick={() => handleChangeLang(l.code)}
                   className={cn(
-                   "absolute right-0 mt-2 w-32 rounded-xl overflow-hidden z-50 shadow-xl border",
-    "bg-zinc-100/95 text-zinc-900 border-zinc-300",
-    "dark:bg-background/95 dark:text-foreground dark:border-white/10",
-    "backdrop-blur-xl"
+                    "w-full flex items-center justify-center py-1.5 text-sm transition-colors",
+                    active
+                      ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white"
+                      : "text-black hover:bg-zinc-100/80 dark:text-zinc-200 dark:hover:bg-white/5"
                   )}
                 >
-                  {languages.map((l) => {
-                    const active = l.code === lang;
+                  <span className="truncate">{l.name}</span>
+                </button>
+                  );
+                })}
+              </div>
+            )}
 
-                    return (
-                  <button
-                      key={l.code}
-                      onClick={() => handleChangeLang(l.code)}
-                      className={cn(
-                        "w-full flex items-center justify-center py-1.5 text-sm",
-                        "transition-colors rounded-md",
-                        active
-                          ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white"
-                          : "text-zinc-300 hover:bg-white/5"
-                      )}
-                    >
-                      <span className="truncate tracking-wide">{l.name}</span>
-                    </button>
-
-                    );
-                  })}
-                </div>
-              )}
             </div>
 
             {/* Botón de tema con el mismo estilo pill */}
