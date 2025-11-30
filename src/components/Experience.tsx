@@ -29,7 +29,7 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
     >
       <SectionTitle id="experience-title">{t("experience.title")}</SectionTitle>
 
-      <div className="relative max-w-6xl mx-auto mt-10 pb-4 px-4 sm:px-0">
+      <div className="relative max-w-6xl mx-auto mt-10 pb-4 px-2 sm:px-0">
         {/* Línea vertical del timeline (solo desktop) */}
         <div
           className="
@@ -49,7 +49,7 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
               <article
                 key={i}
                 aria-labelledby={`job-${i}-role`}
-                className="relative pl-8 pr-1 sm:pl-16 sm:pr-0"
+                className="relative pl-10 pr-4 sm:pl-16 sm:pr-0"
               >
                 {/* Nodo del timeline */}
                 <span
@@ -101,7 +101,7 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                           {job.role}
                         </h3>
 
-                        {/* Indicador de acción: solo flecha, a la derecha */}
+                        {/* Indicador de acción: solo flecha */}
                         <button
                           type="button"
                           aria-label={
@@ -145,40 +145,31 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                     </div>
                   </header>
 
-                  {/* Contenido colapsable */}
-                  <div
-                    className={cn(
-                      "overflow-hidden transition-all duration-300 ease-in-out",
-                      isActive
-                        ? "max-h-[1000px] opacity-100"
-                        : "max-h-[100px] opacity-100"
+                  {/* Contenido / chips */}
+                  <div className="border-t border-border/80 px-4 py-3 sm:px-7 sm:py-5">
+                    {isActive ? (
+                      <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap text-left">
+                        {job.description}
+                      </p>
+                    ) : (
+                      <div className="flex flex-wrap gap-2">
+                        {(job.technologies ?? []).map(
+                          (tech: string, j: number) => (
+                            <span
+                              key={j}
+                              className="
+                                text-[11px] font-medium px-3 py-1 rounded-full
+                                bg-gradient-to-r from-blue-500/15 via-purple-500/20 to-pink-500/15
+                                text-primary dark:text-white
+                                border border-white/10
+                              "
+                            >
+                              {tech}
+                            </span>
+                          )
+                        )}
+                      </div>
                     )}
-                  >
-                    <div className="border-t border-border/80 px-4 py-3 sm:px-7 sm:py-5">
-                      {isActive ? (
-                        <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap text-left">
-                          {job.description}
-                        </p>
-                      ) : (
-                        <div className="flex flex-wrap gap-2">
-                          {(job.technologies ?? []).map(
-                            (tech: string, i: number) => (
-                              <span
-                                key={i}
-                                className="
-                                  text-[11px] font-medium px-3 py-1 rounded-full
-                                  bg-gradient-to-r from-blue-500/15 via-purple-500/20 to-pink-500/15
-                                  text-primary dark:text-white
-                                  border border-white/10
-                                "
-                              >
-                                {tech}
-                              </span>
-                            )
-                          )}
-                        </div>
-                      )}
-                    </div>
                   </div>
                 </div>
               </article>

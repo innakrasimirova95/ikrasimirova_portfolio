@@ -138,7 +138,7 @@ export default function Home() {
       <motion.section
         id="home"
         ref={heroRef}
-        className="relative min-h-screen flex flex-col justify-center items-center px-6 text-center overflow-hidden bg-background"
+        className="relative min-h-screen flex flex-col justify-center items-center px-4 text-center overflow-hidden bg-background"
         initial="hidden"
         animate="visible"
         transition={{ staggerChildren: 0.15 }}
@@ -167,12 +167,12 @@ export default function Home() {
         </div>
 
         {/* Contenido del hero POR ENCIMA del efecto */}
-        <div className="relative z-10 flex flex-col items-center">
+        <div className="relative z-10 flex flex-col items-center max-w-full">
           {/* Nombre */}
           <motion.h1
             ref={nameRef}
             variants={heroItem}
-            className="text-6xl md:text-7xl font-extrabold font-science-gothic dark:text-white text-black font-thin"
+            className="text-5xl sm:text-6xl md:text-7xl font-extrabold font-science-gothic dark:text-white text-black font-thin"
           >
             {t("common.fullName")}
           </motion.h1>
@@ -180,7 +180,7 @@ export default function Home() {
           {/* Subtítulo con typing */}
           <motion.div
             variants={heroItem}
-            className="mt-3 text-lg md:text-2xl text-foreground"
+            className="mt-3 text-lg sm:text-xl md:text-2xl text-foreground"
           >
             <TypingEffect
               text={t("hero.title")}
