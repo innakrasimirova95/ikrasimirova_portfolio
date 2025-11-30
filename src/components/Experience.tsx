@@ -29,8 +29,8 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
     >
       <SectionTitle id="experience-title">{t("experience.title")}</SectionTitle>
 
-      <div className="relative max-w-6xl mx-auto mt-10 pb-4">
-        {/* Línea vertical del timeline */}
+      <div className="relative max-w-6xl mx-auto mt-10 pb-4 px-4 sm:px-0">
+        {/* Línea vertical del timeline (solo desktop) */}
         <div
           className="
             hidden sm:block
@@ -41,7 +41,7 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
           aria-hidden="true"
         />
 
-        <div className="space-y-10">
+        <div className="space-y-8 sm:space-y-10">
           {experienceData.map((job, i) => {
             const isActive = activeIndex === i;
 
@@ -49,7 +49,7 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
               <article
                 key={i}
                 aria-labelledby={`job-${i}-role`}
-                className="relative pl-10 sm:pl-16"
+                className="relative pl-8 pr-1 sm:pl-16 sm:pr-0"
               >
                 {/* Nodo del timeline */}
                 <span
@@ -86,22 +86,22 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                       (e.preventDefault(), handleToggle(i))
                     }
                     className={cn(
-                      "cursor-pointer px-5 py-4 sm:px-7 sm:py-5",
+                      "cursor-pointer px-4 py-3 sm:px-7 sm:py-5",
                       "transition-colors",
                       "group-hover:bg-slate-50/70 dark:group-hover:bg-white/5"
                     )}
                   >
                     <div className="flex flex-col gap-3 sm:gap-2">
-                      {/* Título + meta */}
-                      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                      {/* Título + flecha alineada a la derecha */}
+                      <div className="flex items-center justify-between gap-2">
                         <h3
                           id={`job-${i}-role`}
-                          className="text-lg sm:text-xl font-semibold text-foreground tracking-tight group-hover:text-primary transition-colors"
+                          className="text-base sm:text-xl font-semibold text-foreground tracking-tight group-hover:text-primary transition-colors"
                         >
                           {job.role}
                         </h3>
 
-                        {/* Indicador de acción: solo flecha */}
+                        {/* Indicador de acción: solo flecha, a la derecha */}
                         <button
                           type="button"
                           aria-label={
@@ -132,13 +132,13 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                       </div>
 
                       {/* Empresa + periodo */}
-                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-muted-foreground">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-muted-foreground">
                         <p className="flex items-center gap-2">
-                          <HiOutlineOfficeBuilding className="w-5 h-5" />
+                          <HiOutlineOfficeBuilding className="w-4 h-4 sm:w-5 sm:h-5" />
                           <span>{job.company}</span>
                         </p>
                         <p className="flex items-center gap-2">
-                          <HiOutlineCalendar className="w-5 h-5" />
+                          <HiOutlineCalendar className="w-4 h-4 sm:w-5 sm:h-5" />
                           <time dateTime={job.period}>{job.period}</time>
                         </p>
                       </div>
@@ -154,7 +154,7 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                         : "max-h-[100px] opacity-100"
                     )}
                   >
-                    <div className="border-t border-border/80 px-5 py-4 sm:px-7 sm:py-5">
+                    <div className="border-t border-border/80 px-4 py-3 sm:px-7 sm:py-5">
                       {isActive ? (
                         <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap text-left">
                           {job.description}

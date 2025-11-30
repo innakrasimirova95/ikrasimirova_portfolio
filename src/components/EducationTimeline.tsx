@@ -27,7 +27,7 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
         {t("education.title")}
       </SectionTitle>
 
-      <div className="relative max-w-6xl mx-auto mt-10 pb-16">
+      <div className="relative max-w-6xl mx-auto mt-10 pb-16 px-4 sm:px-0">
         {/* Línea vertical del timeline (solo en pantallas medianas+) */}
         <div
           className="
@@ -39,7 +39,7 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
           aria-hidden="true"
         />
 
-        <div className="space-y-10">
+        <div className="space-y-8 sm:space-y-10">
           {educationData.map((item, i) => {
             const isActive = activeIndex === i;
 
@@ -47,9 +47,9 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
               <article
                 key={i}
                 aria-labelledby={`edu-${i}-title`}
-                className="relative pl-10 sm:pl-16"
+                className="relative pl-8 pr-1 sm:pl-16 sm:pr-0"
               >
-                {/* Nodo del timeline visible en móvil */}
+                {/* Nodo del timeline */}
                 <span
                   className={cn(
                     "absolute left-4 sm:left-5 top-3 z-10",
@@ -77,7 +77,7 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
                     "bg-secondary shadow-sm",
                     "dark:bg-gradient-to-br dark:from-slate-950/90 dark:via-slate-900/80 dark:to-slate-900/40",
                     "backdrop-blur-xl",
-                    "px-5 py-4 sm:px-7 sm:py-5",
+                    "px-4 py-3 sm:px-7 sm:py-5",
                     "transition-all duration-300 ease-out",
                     "hover:-translate-y-1 hover:shadow-md dark:hover:shadow-[0_18px_45px_rgba(15,23,42,0.9)] hover:border-purple-500/60",
                     isActive &&
@@ -99,20 +99,20 @@ export const EducationTimeline = React.forwardRef<HTMLElement>((props, ref) => {
                   <header className="relative mb-2">
                     <h3
                       id={`edu-${i}-title`}
-                      className="text-lg sm:text-xl font-semibold text-foreground tracking-tight"
+                      className="text-base sm:text-xl font-semibold text-foreground tracking-tight"
                     >
                       {item.title}
                     </h3>
                   </header>
 
                   {/* Institución */}
-                  <p className="relative flex items-center gap-2 text-sm font-medium text-primary/90 italic mb-2">
-                    <HiOutlineLocationMarker className="w-5 h-5" />
+                  <p className="relative flex items-center gap-2 text-xs sm:text-sm font-medium text-primary/90 italic mb-2">
+                    <HiOutlineLocationMarker className="w-4 h-4 sm:w-5 sm:h-5" />
                     <span>{item.institution}</span>
                   </p>
 
                   {/* Fecha */}
-                  <p className="relative inline-flex items-center gap-2 rounded-full border border-border bg-background/50 px-3 py-1 text-xs sm:text-[13px] text-muted-foreground">
+                  <p className="relative inline-flex items-center gap-2 rounded-full border border-border bg-background/50 px-3 py-1 text-[11px] sm:text-[13px] text-muted-foreground">
                     <HiOutlineCalendar className="w-4 h-4" />
                     <time dateTime={item.date}>{item.date}</time>
                   </p>
