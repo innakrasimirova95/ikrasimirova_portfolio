@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   HiOutlineOfficeBuilding,
   HiOutlineCalendar,
+  HiOutlineChevronDown,
 } from "react-icons/hi";
 import { SectionTitle } from "./ui/SectionTitle";
 import { useLanguage, useDictionary } from "@/context/LanguageContext";
@@ -66,39 +67,66 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                 {/* Tarjeta de experiencia */}
                 <div
                   className={cn(
-                    "rounded-2xl border border-gray-300 dark:border-border",
+                    "group rounded-2xl border border-gray-300 dark:border-border",
                     "bg-secondary shadow-sm",
                     "dark:bg-gradient-to-br dark:from-slate-950/90 dark:via-slate-900/80 dark:to-slate-900/40",
                     "backdrop-blur-xl",
-                    "transition-shadow duration-300",
+                    "transition-all duration-300",
+                    "hover:-translate-y-[2px] hover:shadow-md dark:hover:shadow-[0_18px_45px_rgba(15,23,42,0.9)]",
                     isActive && "shadow-md dark:shadow-[0_18px_45px_rgba(15,23,42,0.9)]"
                   )}
                 >
                   <header
                     role="button"
                     tabIndex={0}
+                    aria-expanded={isActive}
                     onClick={() => handleToggle(i)}
                     onKeyDown={(e) =>
                       (e.key === "Enter" || e.key === " ") &&
                       (e.preventDefault(), handleToggle(i))
                     }
-                    className="group cursor-pointer px-5 py-4 sm:px-7 sm:py-5"
+                    className={cn(
+                      "cursor-pointer px-5 py-4 sm:px-7 sm:py-5",
+                      "transition-colors",
+                      "group-hover:bg-slate-50/70 dark:group-hover:bg-white/5"
+                    )}
                   >
-                    <h3
-                      id={`job-${i}-role`}
-                      className="text-lg sm:text-xl font-semibold text-foreground tracking-tight group-hover:text-primary transition-colors"
-                    >
-                      {job.role}
-                    </h3>
-                    <div className="mt-2 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-muted-foreground">
-                      <p className="flex items-center gap-2">
-                        <HiOutlineOfficeBuilding className="w-5 h-5" />
-                        <span>{job.company}</span>
-                      </p>
-                      <p className="flex items-center gap-2">
-                        <HiOutlineCalendar className="w-5 h-5" />
-                        <time dateTime={job.period}>{job.period}</time>
-                      </p>
+                    <div className="flex flex-col gap-3 sm:gap-2">
+                      {/* Título + meta */}
+                      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                        <h3
+                          id={`job-${i}-role`}
+                          className="text-lg sm:text-xl font-semibold text-foreground tracking-tight group-hover:text-primary transition-colors"
+                        >
+                          {job.role}
+                        </h3>
+
+                        {/* Indicador de acción */}
+                        <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium text-muted-foreground uppercase tracking-[0.16em]">
+                          <span>
+                            {isActive ? t("common.hideDetails") : t("common.viewDetails")}
+                          </span>
+                          <HiOutlineChevronDown
+                            className={cn(
+                              "w-3.5 h-3.5 transition-transform",
+                              isActive && "rotate-180"
+                            )}
+                            aria-hidden="true"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Empresa + periodo */}
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-sm text-muted-foreground">
+                        <p className="flex items-center gap-2">
+                          <HiOutlineOfficeBuilding className="w-5 h-5" />
+                          <span>{job.company}</span>
+                        </p>
+                        <p className="flex items-center gap-2">
+                          <HiOutlineCalendar className="w-5 h-5" />
+                          <time dateTime={job.period}>{job.period}</time>
+                        </p>
+                      </div>
                     </div>
                   </header>
 
@@ -110,7 +138,7 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                     )}
                   >
                     <div className="border-t border-border/80 px-5 py-4 sm:px-7 sm:py-5">
-                      <p className="text-sm text-foreground/80 leading-relaxed">
+                      <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap text-left">
                         {job.description}
                       </p>
                     </div>

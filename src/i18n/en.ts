@@ -1,6 +1,8 @@
 export const en = {
   common: {
     fullName: "Inna Krasimirova",
+    hideDetails: "Hide details",
+    viewDetails: "View details",
   },
   nav: {
     projects: "<Projects/>",
@@ -37,20 +39,24 @@ export const en = {
         company: "AECOM",
         role: "Digital Solution Developer",
         period: "May 2025 - October 2025",
-        description: `For five months, I developed a 3D BIM viewer using ThatOpenCompany and Three.js, creating an interactive interface for IFC models within an application with React, TypeScript, Vite, and Material UI. I converted this viewer into a reusable library, developed a FastAPI API connected to Autodesk ACC to download BIM models, and deployed the projects on Azure, integrating them into the company's cloud environment.
+        description: `During these months I developed a BIM viewer using the ThatOpenCompany library and Three.js, creating an interactive interface for IFC models within an application with React, TypeScript, Vite and Material UI. I converted this viewer into a reusable library, developed a FastAPI API connected to Autodesk ACC to download BIM models and deployed the projects on Azure, integrating them into the company's cloud environment.
 
-Additionally, I developed and integrated a complete BIM model management project with a frontend made with React and a backend with Django, where I implemented authentication with Entra ID, connection to the Autodesk ACC API to import BIM models, and local model loading. I also incorporated my BIM viewer into this system, allowing models to be viewed directly on the platform.
+In addition, I developed and integrated a complete BIM model management project whose frontend was made with React and the backend with Django, where I implemented authentication with Entra ID, the connection with the Autodesk ACC API to import BIM models and the loading of models from local. Also incorporate the BIM viewer within this system, allowing you to view the models directly on the platform.
 
-Subsequently, I collaborated on both the frontend and backend of an IoT sensor-oriented project, integrating my viewer and supporting dashboards with Recharts, navigation with React Router, and real-time data visualization. I also worked on the backend with Node.js, PostgreSQL, WebSockets, and Azure services like Blob Storage.
+Subsequently, I collaborated on both frontend and backend on a project oriented to IoT sensors, integrating the viewer and supporting dashboards with Recharts, navigation with React Router and real-time data visualization. I also collaborated on the backend with Node.js, PostgreSQL, WebSockets. The Azure services I have worked with are Blob Storage, Web App, Static Web App, Azure Database for PostgreSQL and Enta ID.
 
-This experience allowed me to take my own BIM viewer from its conception to its integration into real platforms: an enterprise BIM project manager and a cloud IoT data solution.`
+This experience allowed me to take my own BIM viewer from its conception to its integration into real platforms: a corporate BIM project manager and a cloud IoT data solution.`
       },
       {
         company: "IGNIS",
         role: "Full Stack Developer & Researcher",
         period: "July 2023 - April 2025",
-        description:
-          "Research, needs identification, and technology selection for developing applications, APIs, and websites. Technologies: Next.js, React, TypeScript, TailwindCSS, shadcn/ui, CSS Modules, Django, Python, FastAPI, and SQLAlchemy.",
+        description: `In my first job as a developer I learned to work with good practices, clean and structured code, GitFlow and well-configured development environments. I also carried out small projects in Python using Pandas and NumPy to process data and create internal tools.
+
+With this foundation I began to participate in IGNIS projects. I developed a complete web application with Django as a backend, Keycloak for authentication and a FastAPI API to serve and process data.
+On the frontend, built with Next.js, TypeScript, TailwindCSS and shadcn/ui, I implemented routes, navigation, translations and reusable components, ensuring typed and consistent communication with the APIs.
+
+One of my most advanced developments was a module to import, visualize and edit Excel files directly on the web. I used Glide Data Grid to handle large tables with high performance and, using excel.js and xlsx, I implemented file reading, modification and writing, allowing me to download an updated Excel or save the data in the database for later retrieval.`,
       },
       {
         company: "Deloitte",
