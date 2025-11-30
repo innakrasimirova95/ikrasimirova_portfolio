@@ -101,19 +101,34 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                           {job.role}
                         </h3>
 
-                        {/* Indicador de acción */}
-                        <div className="flex items-center gap-1 text-[11px] sm:text-xs font-medium text-muted-foreground uppercase tracking-[0.16em]">
-                          <span>
-                            {isActive ? t("common.hideDetails") : t("common.viewDetails")}
-                          </span>
+                        {/* Indicador de acción: solo flecha */}
+                        <button
+                          type="button"
+                          aria-label={
+                            isActive
+                              ? t("common.hideDetails")
+                              : t("common.viewDetails")
+                          }
+                          className={cn(
+                            "flex items-center justify-center",
+                            "text-muted-foreground",
+                            "hover:text-primary",
+                            "transition-colors duration-200",
+                            "cursor-pointer select-none"
+                          )}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleToggle(i);
+                          }}
+                        >
                           <HiOutlineChevronDown
                             className={cn(
-                              "w-3.5 h-3.5 transition-transform",
+                              "w-5 h-5 transition-transform duration-300",
                               isActive && "rotate-180"
                             )}
                             aria-hidden="true"
                           />
-                        </div>
+                        </button>
                       </div>
 
                       {/* Empresa + periodo */}
@@ -139,30 +154,28 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                         : "max-h-[100px] opacity-100"
                     )}
                   >
-                    <div
-                      className={cn(
-                        "border-t border-border/80 px-5 py-4 sm:px-7 sm:py-5"
-                      )}
-                    >
+                    <div className="border-t border-border/80 px-5 py-4 sm:px-7 sm:py-5">
                       {isActive ? (
                         <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap text-left">
                           {job.description}
                         </p>
                       ) : (
                         <div className="flex flex-wrap gap-2">
-                          {(job.technologies ?? []).map((tech: string, i: number) => (
-                            <span
-                              key={i}
-                              className="
-                                text-[11px] font-medium px-3 py-1 rounded-full
-                                bg-gradient-to-r from-blue-500/15 via-purple-500/20 to-pink-500/15
-                                text-primary dark:text-white
-                                border border-white/10
-                              "
-                            >
-                              {tech}
-                            </span>
-                          ))}
+                          {(job.technologies ?? []).map(
+                            (tech: string, i: number) => (
+                              <span
+                                key={i}
+                                className="
+                                  text-[11px] font-medium px-3 py-1 rounded-full
+                                  bg-gradient-to-r from-blue-500/15 via-purple-500/20 to-pink-500/15
+                                  text-primary dark:text-white
+                                  border border-white/10
+                                "
+                              >
+                                {tech}
+                              </span>
+                            )
+                          )}
                         </div>
                       )}
                     </div>

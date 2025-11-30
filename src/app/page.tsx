@@ -28,6 +28,7 @@ export default function Home() {
 
   const heroRef = useRef<HTMLElement>(null);
   const projectsRef = useRef<HTMLElement>(null);
+  const experienceRef = useRef<HTMLElement>(null);
   const educationRef = useRef<HTMLElement>(null);
   const technologiesRef = useRef<HTMLElement>(null);
   const contactRef = useRef<HTMLElement>(null);
@@ -79,6 +80,7 @@ export default function Home() {
     const sectionRefs = [
       { ref: heroRef, id: "home" },
       { ref: projectsRef, id: "projects" },
+      { ref: experienceRef, id: "experience" },
       { ref: educationRef, id: "education" },
       { ref: technologiesRef, id: "technologies" },
       { ref: contactRef, id: "contact" },
@@ -248,7 +250,7 @@ export default function Home() {
 
       <main className="container mx-auto px-6 py-12 space-y-32">
         <Projects ref={projectsRef} />
-        <Experience />
+        <Experience ref={experienceRef} />
         <EducationTimeline ref={educationRef} />
         <TechIcons ref={technologiesRef} />
         <ContactForm ref={contactRef} />

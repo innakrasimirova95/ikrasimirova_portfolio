@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef} from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/toggle-theme";
