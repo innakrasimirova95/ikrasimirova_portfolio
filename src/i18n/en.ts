@@ -39,6 +39,18 @@ export const en = {
         company: "AECOM",
         role: "Digital Solution Developer",
         period: "May 2025 - October 2025",
+        technologies: [
+          "React",
+          "TypeScript",
+          "Vite",
+          "Material UI",
+          "Three.js",
+          "FastAPI",
+          "Django",
+          "Node.js",
+          "Azure",
+          "PostgreSQL",
+        ],
         description: `During these months I developed a BIM viewer using the ThatOpenCompany library and Three.js, creating an interactive interface for IFC models within an application with React, TypeScript, Vite and Material UI. I converted this viewer into a reusable library, developed a FastAPI API connected to Autodesk ACC to download BIM models and deployed the projects on Azure, integrating them into the company's cloud environment.
 
 In addition, I developed and integrated a complete BIM model management project whose frontend was made with React and the backend with Django, where I implemented authentication with Entra ID, the connection with the Autodesk ACC API to import BIM models and the loading of models from local. Also incorporate the BIM viewer within this system, allowing you to view the models directly on the platform.
@@ -51,6 +63,18 @@ This experience allowed me to take my own BIM viewer from its conception to its 
         company: "IGNIS",
         role: "Full Stack Developer & Researcher",
         period: "July 2023 - April 2025",
+        technologies: [
+          "Python",
+          "Pandas",
+          "NumPy",
+          "Django",
+          "FastAPI",
+          "Next.js",
+          "TypeScript",
+          "TailwindCSS",
+          "shadcn/ui",
+          "Keycloak",
+        ],
         description: `In my first job as a developer I learned to work with good practices, clean and structured code, GitFlow and well-configured development environments. I also carried out small projects in Python using Pandas and NumPy to process data and create internal tools.
 
 With this foundation I began to participate in IGNIS projects. I developed a complete web application with Django as a backend, Keycloak for authentication and a FastAPI API to serve and process data.
@@ -62,8 +86,8 @@ One of my most advanced developments was a module to import, visualize and edit 
         company: "Deloitte",
         role: "Risk Advisory Cyber - Infrastructure Protection",
         period: "November 2022 - January 2023",
-        description:
-          "Risk assessment and improvement of security practices to detect threats and breaches.",
+        technologies: ["Microsoft 365", "Teams", "OneDrive", "Security"],
+        description: `I was responsible for reviewing and validating the correct configuration of corporate tools such as Teams, OneDrive, and other Microsoft 365 services, ensuring that permissions, access, and policies were well-defined. My objective was to prevent information leaks and ensure that only authorized personnel could access resources, contributing to strengthening clients' internal security.`,
       },
     ],
   },

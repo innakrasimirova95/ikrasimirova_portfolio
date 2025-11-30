@@ -130,17 +130,41 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                     </div>
                   </header>
 
-                  {/* Descripción (colapsable) */}
+                  {/* Contenido colapsable */}
                   <div
                     className={cn(
                       "overflow-hidden transition-all duration-300 ease-in-out",
-                      isActive ? "max-h-[1000px] opacity-100" : "max-h-0 opacity-0"
+                      isActive
+                        ? "max-h-[1000px] opacity-100"
+                        : "max-h-[100px] opacity-100"
                     )}
                   >
-                    <div className="border-t border-border/80 px-5 py-4 sm:px-7 sm:py-5">
-                      <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap text-left">
-                        {job.description}
-                      </p>
+                    <div
+                      className={cn(
+                        "border-t border-border/80 px-5 py-4 sm:px-7 sm:py-5"
+                      )}
+                    >
+                      {isActive ? (
+                        <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap text-left">
+                          {job.description}
+                        </p>
+                      ) : (
+                        <div className="flex flex-wrap gap-2">
+                          {(job.technologies ?? []).map((tech: any, i: number) => (
+                            <span
+                              key={i}
+                              className="
+                                text-[11px] font-medium px-3 py-1 rounded-full
+                                bg-gradient-to-r from-blue-500/15 via-purple-500/20 to-pink-500/15
+                                text-primary dark:text-white
+                                border border-white/10
+                              "
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
