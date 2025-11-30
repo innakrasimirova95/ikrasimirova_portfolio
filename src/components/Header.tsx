@@ -1,4 +1,4 @@
-import React, { useState, useRef} from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ModeToggle } from "@/components/ui/toggle-theme";
@@ -140,9 +140,7 @@ function IconNav({
                   ].join(" ")
                 : "hover:text-foreground hover:bg-foreground/5 dark:hover:bg-white/5"
             )}
-            style={{
-              cursor: isDragging ? "grabbing" : "pointer",
-            }}
+            style={{ cursor: isDragging ? "grabbing" : "pointer" }}
           >
             {iconMap[item.href]}
           </button>
@@ -162,6 +160,7 @@ export function Header({
   const [isDragging, setIsDragging] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const { lang, setLang, t } = useLanguage();
+  const langMenuRef = useRef<HTMLDivElement | null>(null);
 
   const navItems = [
     { href: "#home", key: "nav.home" },
@@ -206,19 +205,36 @@ export function Header({
     }
   };
 
+  // Cerrar idioma al hacer clic fuera
+  useEffect(() => {
+    if (!isLangOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (
+        langMenuRef.current &&
+        !langMenuRef.current.contains(e.target as Node)
+      ) {
+        setIsLangOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [isLangOpen]);
+
   return (
     <>
-      <header className="sticky top-0 z-50 w-full backdrop-blur-sm">
+      <header className="sticky top-0 z-50 w-full backdrop-blur-sm bg-background/40">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative">
           <div className="w-40">
             {showName && (
               <Link href="/" className="text-lg font-normal tracking-tight">
-                <span  className={cn(
-                      "font-science-gothic whitespace-nowrap font-light",
-                      "text-transparent bg-clip-text",
-                      "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500",
-                      "tracking-[0.12em] text-base sm:text-lg"
-                    )}>
+                <span
+                  className={cn(
+                    "font-science-gothic whitespace-nowrap font-light",
+                    "text-transparent bg-clip-text",
+                    "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500",
+                    "tracking-[0.12em] text-base sm:text-lg"
+                  )}
+                >
                   {t("common.fullName")}
                 </span>
               </Link>
@@ -238,23 +254,25 @@ export function Header({
           </nav>
 
           {/* IDIOMA + TEMA */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2" ref={langMenuRef}>
             {/* Selector de idioma (pill) */}
             <div className="relative">
               <button
                 onClick={() => setIsLangOpen((open) => !open)}
                 className={cn(
                   "h-9 px-3 rounded-full flex items-center justify-center gap-2",
-                  "text-sm font-medium",
-                  "border border-border/60 bg-background/90 backdrop-blur-md",
+                  "text-xs sm:text-sm font-medium",
+                  "border border-border/70 bg-background/70 backdrop-blur-md",
                   "text-foreground",
-                  "hover:bg-foreground/5 dark:hover:bg-white/5",
-                  "transition-colors"
+                  "hover:border-purple-500/60 hover:bg-foreground/5 dark:hover:bg-white/5",
+                  "transition-colors shadow-sm"
                 )}
                 aria-label="Cambiar idioma"
               >
                 <Globe size={16} />
-                <span>{currentLang.label}</span>
+                <span className="tracking-[0.12em] uppercase">
+                  {currentLang.label}
+                </span>
                 <ChevronDown
                   size={14}
                   className={cn(
@@ -267,38 +285,30 @@ export function Header({
               {isLangOpen && (
                 <div
                   className={cn(
-                    "absolute right-0 mt-2 w-48 rounded-2xl overflow-hidden z-50 shadow-xl border",
-                    "bg-zinc-100/95 text-zinc-900 border-zinc-300",
-                    "dark:bg-background/95 dark:text-foreground dark:border-white/10",
-                    "backdrop-blur-xl"
+                   "absolute right-0 mt-2 w-32 rounded-xl overflow-hidden z-50 shadow-xl border",
+    "bg-zinc-100/95 text-zinc-900 border-zinc-300",
+    "dark:bg-background/95 dark:text-foreground dark:border-white/10",
+    "backdrop-blur-xl"
                   )}
                 >
                   {languages.map((l) => {
                     const active = l.code === lang;
 
                     return (
-                      <button
-                        key={l.code}
-                        onClick={() => handleChangeLang(l.code)}
-                        className={cn(
-                          "w-full flex items-center justify-between px-3 py-2 text-sm text-left transition-colors",
-                          active
-                            ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white"
-                            : "text-zinc-800 dark:text-muted-foreground hover:bg-zinc-200/90 dark:hover:bg-white/10"
-                        )}
-                      >
-                        <span>{l.name}</span>
-                        <span
-                          className={cn(
-                            "text-xs font-semibold",
-                            active
-                              ? "text-white"
-                              : "text-zinc-700 dark:text-muted-foreground"
-                          )}
-                        >
-                          {l.label}
-                        </span>
-                      </button>
+                  <button
+                      key={l.code}
+                      onClick={() => handleChangeLang(l.code)}
+                      className={cn(
+                        "w-full flex items-center justify-center py-1.5 text-sm",
+                        "transition-colors rounded-md",
+                        active
+                          ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white"
+                          : "text-zinc-300 hover:bg-white/5"
+                      )}
+                    >
+                      <span className="truncate tracking-wide">{l.name}</span>
+                    </button>
+
                     );
                   })}
                 </div>
@@ -306,7 +316,7 @@ export function Header({
             </div>
 
             {/* Botón de tema con el mismo estilo pill */}
-            <div className="h-9 w-9 rounded-full border border-border/60 bg-background/90 backdrop-blur-md flex items-center justify-center">
+            <div className="h-9 w-9 rounded-full border border-border/60 bg-background/80 backdrop-blur-md flex items-center justify-center shadow-sm">
               <ModeToggle />
             </div>
           </div>

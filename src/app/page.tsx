@@ -180,7 +180,14 @@ export default function Home() {
           {/* Subtítulo con typing */}
           <motion.div
             variants={heroItem}
-            className="mt-3 text-lg sm:text-xl md:text-2xl text-foreground"
+            className="
+              mt-3
+              text-lg sm:text-xl md:text-2xl
+              text-foreground
+              px-6 sm:px-10 lg:px-0
+              tracking-wide
+              overflow-hidden
+            "
           >
             <TypingEffect
               text={t("hero.title")}

@@ -48,7 +48,7 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
       </SectionTitle>
 
       {/* grid centrada y con ancho máximo */}
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto justify-items-center">
+      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto justify-center">
         {projectsData.map((project, index) => {
           const isExpanded = expandedIndex === index;
 
