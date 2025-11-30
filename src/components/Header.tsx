@@ -214,10 +214,10 @@ export function Header({
             {showName && (
               <Link href="/" className="text-lg font-normal tracking-tight">
                 <span  className={cn(
-                      "font-science-gothic whitespace-nowrap font-bold",
+                      "font-science-gothic whitespace-nowrap font-light",
                       "text-transparent bg-clip-text",
                       "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500",
-                      "tracking-[0.12em] text-lg sm:text-m"
+                      "tracking-[0.12em] text-base sm:text-lg"
                     )}>
                   {t("common.fullName")}
                 </span>
