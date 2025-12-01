@@ -192,7 +192,7 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
       </div>
 
       {/* Cuadrícula de iconos */}
-      <div className="max-w-2xl mx-auto grid grid-cols-5 sm:grid-cols-5 md:grid-cols-7 gap-2 sm:gap-3 md:gap-4">
+      <div className="max-w-2xl mx-auto grid grid-cols-5 sm:grid-cols-4 md:grid-cols-7 gap-2 sm:gap-3 md:gap-4">
         {currentStack.map(({ icon: Icon, hoverColor, name }, i) => {
           const isHovered = hovered === i;
 
