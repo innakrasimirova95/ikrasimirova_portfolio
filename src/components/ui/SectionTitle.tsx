@@ -44,7 +44,7 @@ export const SectionTitle = ({
       </h2>
 
       {/* Línea animada */}
-      <div className="relative mt-1 h-[1.5px] w-60 overflow-hidden rounded-full">
+      <div className="relative mt-0 h-[1.5px] w-24 md:w-32 lg:w-40 overflow-hidden rounded-full">
         <div
           className="
             h-full w-full
