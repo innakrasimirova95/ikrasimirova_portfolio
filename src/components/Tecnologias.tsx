@@ -51,10 +51,6 @@ const skillsStack = [
   { name: "SQLAlchemy", icon: SiSqlalchemy, hoverColor: "#00758F" },
   { name: "MySQL", icon: SiMysql, hoverColor: "#4479A1" },
   { name: "SQLite", icon: SiSqlite, hoverColor: "#003B57" },
-  { name: "Keycloak", icon: SiKeycloak, hoverColor: "#3C4E8C" },
-  { name: "Docker", icon: FaDocker, hoverColor: "#2496ED" },
-  { name: "Azure", icon: VscAzure, hoverColor: "#0078D4" },
-  { name: "Git", icon: SiGit, hoverColor: "#F05032" },
 ];
 
 const toolsStack = [
