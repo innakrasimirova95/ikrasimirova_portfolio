@@ -93,7 +93,7 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
             >
               {/* Cabecera pequeña dentro de la tarjeta */}
               <div className="space-y-2">
-                <p className="text-xs font-semibold tracking-[0.2em] uppercase text-foreground/70">
+                <p className="text-xs pb-4 font-semibold tracking-[0.2em] uppercase text-foreground/70">
                   {t("contact.form.sectionHint")}
                 </p>
               </div>
