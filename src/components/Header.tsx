@@ -54,9 +54,7 @@ function IconNav({
     const initialIndex = navItems.findIndex(
       (item) => item.href.substring(1) === activeSection
     );
-    if (initialIndex !== -1) {
-      setDraggedIndex(initialIndex);
-    }
+    if (initialIndex !== -1) setDraggedIndex(initialIndex);
   };
 
   const handlePointerUp = () => {
@@ -228,7 +226,15 @@ export function Header({
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full backdrop-blur-sm bg-background/40">
+      <header
+        className={cn(
+          "sticky top-0 z-50 w-full",
+          "backdrop-blur-xl",
+          "bg-gradient-to-b from-background/80 via-background/40 to-background/0",
+          "dark:from-background/90 dark:via-background/70 dark:to-background/0",
+          "border-b border-border/30"
+        )}
+      >
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative">
           <div className="w-40">
             {showName && (
@@ -247,21 +253,8 @@ export function Header({
             )}
           </div>
 
-          {/* NAV DESKTOP */}
-          <nav className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <IconNav
-              navItems={navItems}
-              activeSection={activeSection}
-              handleNavClick={handleNavClick}
-              isDragging={isDragging}
-              setIsDragging={setIsDragging}
-              t={t}
-            />
-          </nav>
-
           {/* IDIOMA + TEMA */}
           <div className="flex items-center gap-2" ref={langMenuRef}>
-            {/* Selector de idioma (pill) */}
             <div className="relative">
               <button
                 onClick={() => setIsLangOpen((open) => !open)}
@@ -289,38 +282,36 @@ export function Header({
               </button>
 
               {isLangOpen && (
-              <div
-                className={cn(
-                  "absolute right-0 mt-2 w-32 rounded-xl overflow-hidden z-50 shadow-lg border",
-                  "bg-white/95 text-black-900 border-zinc-200",
-                  "dark:bg-background/95 dark:text-foreground dark:border-white/10",
-                  "backdrop-blur-xl"
-                )}
-              >
-                {languages.map((l) => {
-                  const active = l.code === lang;
-
-                  return (
-               <button
-                  key={l.code}
-                  onClick={() => handleChangeLang(l.code)}
+                <div
                   className={cn(
-                    "w-full flex items-center justify-center py-1.5 text-sm transition-colors",
-                    active
-                      ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white"
-                      : "text-black hover:bg-zinc-100/80 dark:text-zinc-200 dark:hover:bg-white/5"
+                    "absolute right-0 mt-2 w-32 rounded-xl overflow-hidden z-50 shadow-lg border",
+                    "bg-white/95 text-black border-zinc-200",
+                    "dark:bg-background/95 dark:text-foreground dark:border-white/10",
+                    "backdrop-blur-xl"
                   )}
                 >
-                  <span className="truncate">{l.name}</span>
-                </button>
-                  );
-                })}
-              </div>
-            )}
-
+                  {languages.map((l) => {
+                    const active = l.code === lang;
+                    return (
+                      <button
+                        key={l.code}
+                        onClick={() => handleChangeLang(l.code)}
+                        className={cn(
+                          "w-full flex items-center justify-center py-1.5 text-sm transition-colors",
+                          active
+                            ? "bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white"
+                            : "text-black hover:bg-zinc-100/80 dark:text-zinc-200 dark:hover:bg-white/5"
+                        )}
+                      >
+                        <span className="truncate">{l.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
-            {/* Botón de tema con el mismo estilo pill */}
+            {/* Botón de tema */}
             <div className="h-9 w-9 rounded-full border border-border/60 bg-background/80 backdrop-blur-md flex items-center justify-center shadow-sm">
               <ModeToggle />
             </div>
@@ -328,8 +319,8 @@ export function Header({
         </div>
       </header>
 
-      {/* NAV MOBILE */}
-      <nav className="lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50">
+      {/* NAV */}
+      <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50">
         <IconNav
           navItems={navItems}
           activeSection={activeSection}
