@@ -155,7 +155,7 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
 
   return (
     <section id="technologies" ref={ref} className="scroll-mt-24">
-      <SectionTitle className="mb-4">{t("technologies.title")}</SectionTitle>
+      <SectionTitle>{t("technologies.title")}</SectionTitle>
 
       {/* Toggle menú */}
       <div className="flex justify-center mb-8">
