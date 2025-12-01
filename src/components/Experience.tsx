@@ -14,7 +14,8 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
 
   const experienceData = dictionary.experience.roles;
 
-  const [activeIndex, setActiveIndex] = useState<number | null>(null); // All items collapsed by default
+  // Todo plegado por defecto
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const handleToggle = (index: number) => {
     setActiveIndex((prev) => (prev === index ? null : index));
@@ -29,7 +30,7 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
     >
       <SectionTitle id="experience-title">{t("experience.title")}</SectionTitle>
 
-      <div className="relative max-w-6xl mx-auto mt-10 pb-4 px-2 sm:px-0">
+      <div className="relative max-w-6xl mx-auto mt-10 pb-4 px-4 sm:px-0">
         {/* Línea vertical del timeline (solo desktop) */}
         <div
           className="
@@ -45,11 +46,17 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
           {experienceData.map((job, i) => {
             const isActive = activeIndex === i;
 
+            // Separamos la descripción en párrafos (doble salto de línea)
+            const paragraphs = String(job.description)
+              .split(/\n\s*\n/) // soporta \n\n con espacios
+              .map((p: string) => p.trim())
+              .filter(Boolean);
+
             return (
               <article
                 key={i}
                 aria-labelledby={`job-${i}-role`}
-                className="relative pl-10 pr-4 sm:pl-16 sm:pr-0"
+                className="relative pl-8 pr-1 sm:pl-16 sm:pr-0"
               >
                 {/* Nodo del timeline */}
                 <span
@@ -145,13 +152,29 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                     </div>
                   </header>
 
-                  {/* Contenido / chips */}
+                  {/* Contenido / chips o descripción */}
                   <div className="border-t border-border/80 px-4 py-3 sm:px-7 sm:py-5">
                     {isActive ? (
-                      <p className="text-sm text-foreground/80 leading-relaxed whitespace-pre-wrap text-left">
-                        {job.description}
-                      </p>
+                      // 🌈 Versión con bullets elegantes
+                      <div className="rounded-xl bg-muted/40 dark:bg-slate-950/30 border border-border/60 px-4 py-4 sm:px-5 sm:py-5">
+                        <div className="space-y-4 text-sm leading-relaxed text-foreground/80">
+                          {paragraphs.map((para, idx) => (
+                            <div key={idx} className="flex gap-3">
+                              <span
+                                className="
+                                  mt-2 inline-flex h-1.5 w-1.5 rounded-full
+                                  bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500
+                                  shadow-[0_0_8px_rgba(168,85,247,0.6)]
+                                  flex-shrink-0
+                                "
+                              />
+                              <p className="text-left">{para}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     ) : (
+                      // Chips de tecnologías cuando está plegado
                       <div className="flex flex-wrap gap-2">
                         {(job.technologies ?? []).map(
                           (tech: string, j: number) => (
@@ -159,9 +182,10 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                               key={j}
                               className="
                                 text-[11px] font-medium px-3 py-1 rounded-full
-                                bg-gradient-to-r from-blue-500/15 via-purple-500/20 to-pink-500/15
-                                text-primary dark:text-white
+                                bg-gradient-to-r from-[#4C82F7]/35 via-[#B44CFF]/35 to-[#FF4CC1]/35
+                                text-white
                                 border border-white/10
+                                shadow-[0_0_6px_rgba(180,76,255,0.20)]
                               "
                             >
                               {tech}
