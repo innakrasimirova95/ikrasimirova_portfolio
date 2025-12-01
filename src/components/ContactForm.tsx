@@ -96,9 +96,6 @@ export const ContactForm = React.forwardRef<HTMLElement, ContactFormProps>(
                 <p className="text-xs font-semibold tracking-[0.2em] uppercase text-foreground/70">
                   {t("contact.form.sectionHint")}
                 </p>
-                <p className="text-sm text-muted-foreground max-w-lg">
-                  {t("contact.form.sectionDescription")}
-                </p>
               </div>
 
               {/* Nombre + Email */}

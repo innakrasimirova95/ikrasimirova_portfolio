@@ -35,18 +35,31 @@ import { VscAzure } from "react-icons/vsc";
 import { SectionTitle } from "./ui/SectionTitle";
 import { useLanguage } from "@/context/LanguageContext";
 import { motion, useMotionValue, animate } from "framer-motion";
+import { useTheme } from "next-themes";
 
 const skillsStack = [
   { name: "Python", icon: FaPython, hoverColor: "#3776AB" },
   { name: "JavaScript", icon: FaJs, hoverColor: "#F7DF1E" },
   { name: "TypeScript", icon: SiTypescript, hoverColor: "#3178C6" },
   { name: "React", icon: FaReact, hoverColor: "#61DAFB" },
-  { name: "Next.js", icon: SiNextdotjs, hoverColor: "#ffffff" },
-  { name: "shadcn/ui", icon: SiShadcnui, hoverColor: "#ffffff" },
+  {
+    name: "Next.js",
+    icon: SiNextdotjs,
+    hoverColor: { light: "#000000", dark: "#ffffff" },
+  },
+  {
+    name: "shadcn/ui",
+    icon: SiShadcnui,
+    hoverColor: { light: "#000000", dark: "#ffffff" },
+  },
   { name: "TailwindCSS", icon: SiTailwindcss, hoverColor: "#06B6D4" },
   { name: "CSS Modules", icon: FaCss3Alt, hoverColor: "#264de4" },
   { name: "HTML", icon: FaHtml5, hoverColor: "#E34F26" },
-  { name: "Django", icon: SiDjango, hoverColor: "#092E20" },
+  {
+    name: "Django",
+    icon: SiDjango,
+    hoverColor: { light: "#092E20", dark: "#ffffff" },
+  },
   { name: "FastAPI", icon: SiFastapi, hoverColor: "#009688" },
   { name: "SQLAlchemy", icon: SiSqlalchemy, hoverColor: "#00758F" },
   { name: "MySQL", icon: SiMysql, hoverColor: "#4479A1" },
@@ -54,12 +67,24 @@ const skillsStack = [
 ];
 
 const toolsStack = [
-  { name: "Linux", icon: FaLinux, hoverColor: "#ffffff" },
+  {
+    name: "Linux",
+    icon: FaLinux,
+    hoverColor: { light: "#000000", dark: "#ffffff" },
+  },
   { name: "VS Code", icon: DiVisualstudio, hoverColor: "#007ACC" },
   { name: "Node.js", icon: SiNodedotjs, hoverColor: "#339933" },
   { name: "Vite", icon: SiVite, hoverColor: "#646CFF" },
-  { name: "Vercel", icon: SiVercel, hoverColor: "#ffffff" },
-  { name: "GitHub", icon: FaGithub, hoverColor: "#ffffff" },
+  {
+    name: "Vercel",
+    icon: SiVercel,
+    hoverColor: { light: "#000000", dark: "#ffffff" },
+  },
+  {
+    name: "GitHub",
+    icon: FaGithub,
+    hoverColor: { light: "#000000", dark: "#ffffff" },
+  },
   { name: "npm", icon: SiNpm, hoverColor: "#CB3837" },
   { name: "Jupyter", icon: SiJupyter, hoverColor: "#F37626" },
   { name: "Kaggle", icon: SiKaggle, hoverColor: "#20BEFF" },
@@ -73,6 +98,7 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
   const [hovered, setHovered] = useState<number | null>(null);
   const [activeTab, setActiveTab] = useState<"skills" | "tools">("skills");
   const { t, lang } = useLanguage();
+  const { theme } = useTheme();
 
   const tabContainerRef = useRef<HTMLDivElement>(null);
   const skillsButtonRef = useRef<HTMLButtonElement>(null);
@@ -196,6 +222,13 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
         {currentStack.map(({ icon: Icon, hoverColor, name }, i) => {
           const isHovered = hovered === i;
 
+          const resolvedColor =
+            typeof hoverColor === "string"
+              ? hoverColor
+              : theme === "dark"
+              ? hoverColor.dark
+              : hoverColor.light;
+
           return (
             <button
               key={name}
@@ -212,14 +245,14 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
               title={name}
               style={{
                 boxShadow: isHovered
-                  ? `inset 0 0 22px ${hoverColor}55`
+                  ? `inset 0 0 22px ${resolvedColor}55`
                   : "inset 0 0 0 transparent",
               }}
             >
               <Icon
                 className="text-2xl sm:text-3xl md:text-5xl"
                 style={{
-                  color: isHovered ? hoverColor : "#6b7280",
+                  color: isHovered ? resolvedColor : "#6b7280",
                   transform: isHovered ? "scale(1.14)" : "scale(1)",
                   transition: "transform 0.08s ease-out, color 0.08s ease-out",
                 }}
