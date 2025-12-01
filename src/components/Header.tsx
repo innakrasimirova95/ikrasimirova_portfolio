@@ -157,9 +157,11 @@ function IconNav({
 export function Header({
   showName,
   activeSection,
+  isAtTop,
 }: {
   showName: boolean;
   activeSection: string;
+  isAtTop: boolean;
 }) {
   const [isDragging, setIsDragging] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
@@ -228,11 +230,12 @@ export function Header({
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 w-full",
-          "backdrop-blur-xl",
-          "bg-gradient-to-b from-background/80 via-background/40 to-background/0",
-          "dark:from-background/90 dark:via-background/70 dark:to-background/0",
-          "border-b border-border/30"
+          "sticky top-0 z-50 w-full transition-all duration-300",
+          {
+            "backdrop-blur-xl bg-gradient-to-b from-background/80 via-background/40 to-background/0 dark:from-background/90 dark:via-background/70 dark:to-background/0 border-b border-border/30":
+              !isAtTop,
+            "bg-transparent border-b border-transparent": isAtTop,
+          }
         )}
       >
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between relative">

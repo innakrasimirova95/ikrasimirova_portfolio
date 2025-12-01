@@ -19,6 +19,7 @@ import LiquidEther from "@/components/ui/LiquidEther";
 export default function Home() {
   const [showNameInHeader, setShowNameInHeader] = useState(false);
   const nameRef = useRef<HTMLHeadingElement>(null);
+  const [isAtTop, setIsAtTop] = useState(true);
 
   const [activeSection, setActiveSection] = useState("home");
   const activeSectionRef = useRef(activeSection);
@@ -64,14 +65,16 @@ export default function Home() {
     };
   }, []);
 
-  // Scroll listener para el botón Home
+  // Scroll listener para transparencia del header y botón Home
   useEffect(() => {
     const handleScroll = () => {
+      setIsAtTop(window.scrollY < 50);
       if (window.scrollY === 0) {
         setActiveSection("home");
       }
     };
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -132,13 +135,24 @@ export default function Home() {
 
   return (
     <>
-      <Header showName={showNameInHeader} activeSection={activeSection} />
+      <Header
+        showName={showNameInHeader}
+        activeSection={activeSection}
+        isAtTop={isAtTop}
+      />
 
       {/* Hero Section con LiquidEther de fondo */}
       <motion.section
         id="home"
         ref={heroRef}
-        className="relative min-h-screen flex flex-col justify-center items-center px-4 text-center overflow-hidden bg-background"
+        className="
+          relative
+          -mt-16 pt-16 md:-mt-20 md:pt-20
+          min-h-screen
+          flex flex-col justify-center items-center
+          px-4 text-center
+          overflow-hidden bg-background
+        "
         initial="hidden"
         animate="visible"
         transition={{ staggerChildren: 0.15 }}
@@ -161,7 +175,7 @@ export default function Home() {
               autoIntensity={2.2}
               takeoverDuration={0.25}
               autoResumeDelay={3000}
-      autoRampDuration={0.6}
+              autoRampDuration={0.6}
             />
           </div>
         </div>
