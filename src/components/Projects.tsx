@@ -21,7 +21,7 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
       title: dictionary.projects.personalPortfolio.title,
       year: dictionary.projects.personalPortfolio.year,
       description: dictionary.projects.personalPortfolio.description,
-      technologies: ["React", "TypeScript", "Tailwind CSS"],
+      technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Three.js", "i18n"],
       image: "/images/portfolio-preview.png",
       link: "https://github.com/innakrasimirova95/ikrasimirova_portfolio",
     },
