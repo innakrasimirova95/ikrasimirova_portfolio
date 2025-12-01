@@ -11,7 +11,7 @@ export const SectionTitle = ({
   ...props
 }: SectionTitleProps) => {
   return (
-    <div className="w-full mb-14 flex flex-col items-center">
+    <div className="w-full mb-10 flex flex-col items-center">
       {/* Estilos y animaciones inline */}
       <style>
         {`
@@ -43,8 +43,8 @@ export const SectionTitle = ({
         {children}
       </h2>
 
-      {/* Línea animada*/}
-      <div className="relative mt-4 h-[1.5px] w-32 overflow-hidden rounded-full">
+      {/* Línea animada */}
+      <div className="relative mt-1 h-[1.5px] w-60 overflow-hidden rounded-full">
         <div
           className="
             h-full w-full

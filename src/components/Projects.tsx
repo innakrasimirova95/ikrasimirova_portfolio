@@ -43,7 +43,7 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
       className="scroll-mt-24 py-16"
       aria-labelledby="projects-title"
     >
-      <SectionTitle id="projects-title" className="mb-8">
+      <SectionTitle id="projects-title">
         {t("projects.title")}
       </SectionTitle>
 
