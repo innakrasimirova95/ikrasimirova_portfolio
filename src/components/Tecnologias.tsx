@@ -78,21 +78,18 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
   const skillsButtonRef = useRef<HTMLButtonElement>(null);
   const toolsButtonRef = useRef<HTMLButtonElement>(null);
 
-  // motion values del pill
   const x = useMotionValue(0);
   const width = useMotionValue(0);
 
   const [skillsWidth, setSkillsWidth] = useState(0);
   const [toolsWidth, setToolsWidth] = useState(0);
 
-  // para swipe
   const dragStartX = useRef<number | null>(null);
 
   useEffect(() => {
     setHovered(null);
   }, [activeTab]);
 
-  // Medir botones (inicio, cambio idioma, resize)
   useEffect(() => {
     const updateDimensions = () => {
       if (!skillsButtonRef.current || !toolsButtonRef.current) return;
@@ -117,7 +114,6 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
     return () => window.removeEventListener("resize", updateDimensions);
   }, [lang, activeTab, x, width]);
 
-  // Animar pill cuando cambia la pestaña
   useEffect(() => {
     if (!skillsWidth || !toolsWidth) return;
 
@@ -136,16 +132,11 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
     if (dragStartX.current === null) return;
 
     const diff = clientX - dragStartX.current;
-    const threshold = 25; // píxeles mínimos para considerar swipe
+    const threshold = 25;
 
     if (Math.abs(diff) > threshold) {
-      if (diff > 0) {
-        // desliza hacia la derecha → tools
-        setActiveTab("tools");
-      } else {
-        // desliza hacia la izquierda → skills
-        setActiveTab("skills");
-      }
+      if (diff > 0) setActiveTab("tools");
+      else setActiveTab("skills");
     }
 
     dragStartX.current = null;
@@ -162,14 +153,11 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
         <div
           ref={tabContainerRef}
           className="relative inline-flex items-center rounded-full border border-border/70 bg-background/80 backdrop-blur p-1 shadow-lg select-none"
-          // swipe con ratón
           onMouseDown={(e) => handleSwipeStart(e.clientX)}
           onMouseUp={(e) => handleSwipeEnd(e.clientX)}
-          // swipe con touch
           onTouchStart={(e) => handleSwipeStart(e.touches[0].clientX)}
           onTouchEnd={(e) => handleSwipeEnd(e.changedTouches[0].clientX)}
         >
-          {/* Pill animado */}
           {skillsWidth > 0 && toolsWidth > 0 && (
             <motion.div
               className="absolute top-1 left-1 h-[calc(100%-0.5rem)] rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
@@ -177,7 +165,6 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
             />
           )}
 
-          {/* Botón Skills */}
           <button
             ref={skillsButtonRef}
             onClick={() => setActiveTab("skills")}
@@ -190,7 +177,6 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
             {t("technologies.skills")}
           </button>
 
-          {/* Botón Tools */}
           <button
             ref={toolsButtonRef}
             onClick={() => setActiveTab("tools")}
@@ -206,7 +192,7 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
       </div>
 
       {/* Cuadrícula de iconos */}
-      <div className="max-w-5xl mx-auto grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-3 sm:gap-4 md:gap-5">
+      <div className="max-w-2xl mx-auto grid grid-cols-5 sm:grid-cols-5 md:grid-cols-7 gap-2 sm:gap-3 md:gap-4">
         {currentStack.map(({ icon: Icon, hoverColor, name }, i) => {
           const isHovered = hovered === i;
 
@@ -219,8 +205,7 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
                 rounded-xl border border-border/40 bg-background/30
                 transition-all duration-75 transform hover:scale-105
                 aspect-square
-                p-5
-                min-w-[90px] min-h-[90px]
+                p-2.5 sm:p-3 md:p-4
               "
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
@@ -232,7 +217,7 @@ export const TechIcons = React.forwardRef<HTMLElement>((props, ref) => {
               }}
             >
               <Icon
-                className="text-3xl sm:text-3xl md:text-5xl"
+                className="text-2xl sm:text-3xl md:text-5xl"
                 style={{
                   color: isHovered ? hoverColor : "#6b7280",
                   transform: isHovered ? "scale(1.14)" : "scale(1)",
