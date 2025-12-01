@@ -29,6 +29,7 @@ Como escaparate de mis habilidades, este proyecto incorpora un stack de tecnolog
 - **next-themes**: Gestión de temas (claro/oscuro) de forma eficiente.
 - **Lucide React & React Icons**: Amplia colección de iconos.
 - **Geist Fonts**: Tipografía moderna y limpia para una legibilidad óptima.
+- **Three.js**: Biblioteca de JavaScript para renderizado 3D, utilizada para el efecto visual de LiquidEther.
 
 ### Backend y Servicios
 - **API Routes de Next.js**: Para la lógica de backend, como el envío de formularios.
