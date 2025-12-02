@@ -32,7 +32,7 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable} ${spaceGrotesk.variable}`}
     >
       <body className="min-h-screen antialiased">
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="dark">
           <LanguageProvider>{children}</LanguageProvider>
         </ThemeProvider>
       </body>
