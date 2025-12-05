@@ -27,7 +27,6 @@ import {
   SiVite,
   SiVercel,
   SiJupyter,
-  SiKaggle,
   SiNpm,
 } from "react-icons/si";
 import { DiVisualstudio } from "react-icons/di";
@@ -87,7 +86,6 @@ const toolsStack = [
   },
   { name: "npm", icon: SiNpm, hoverColor: "#CB3837" },
   { name: "Jupyter", icon: SiJupyter, hoverColor: "#F37626" },
-  { name: "Kaggle", icon: SiKaggle, hoverColor: "#20BEFF" },
   { name: "Keycloak", icon: SiKeycloak, hoverColor: "#3C4E8C" },
   { name: "Docker", icon: FaDocker, hoverColor: "#2496ED" },
   { name: "Azure", icon: VscAzure, hoverColor: "#0078D4" },
