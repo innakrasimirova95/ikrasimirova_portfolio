@@ -31,11 +31,6 @@ Como escaparate de mis habilidades, este proyecto incorpora un stack de tecnolog
 - **Geist Fonts**: Tipografía moderna y limpia para una legibilidad óptima.
 - **Three.js**: Biblioteca de JavaScript para renderizado 3D, utilizada para el efecto visual de LiquidEther.
 
-### Backend y Servicios
-- **API Routes de Next.js**: Para la lógica de backend, como el envío de formularios.
-- **Resend**: Servicio utilizado para el envío de correos electrónicos desde el formulario de contacto.
-- **React Context**: Utilizado para gestionar el estado global del idioma en toda la aplicación.
-
 ## Funcionalidad de Contacto
 
 El formulario de contacto está implementado utilizando una **API Route de Next.js**. Cuando un usuario envía un mensaje:
