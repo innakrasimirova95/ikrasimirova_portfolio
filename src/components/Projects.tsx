@@ -141,7 +141,7 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
                   </div>
 
                   {/* Tecnologías */}
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mt-4">
                     {project.technologies.map((tech, i) => (
                       <span
                         key={i}
