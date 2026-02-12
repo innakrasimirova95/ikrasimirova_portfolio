@@ -147,10 +147,9 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
                         key={i}
                         className="
                           text-[11px] font-medium px-3 py-1 rounded-full
-                          bg-gradient-to-r from-blue-500/15 via-purple-500/20 to-pink-500/15
-                          text-primary dark:text-white
-                          border border-white/10
-                        "
+                          text-white
+                          border border-white/20
+                          shadow-[0_0_6px_rgba(180,76,255,0.20)]"
                       >
                         {tech}
                       </span>

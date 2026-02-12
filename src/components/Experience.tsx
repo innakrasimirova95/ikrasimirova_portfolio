@@ -182,9 +182,8 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                               key={j}
                               className="
                                 text-[11px] font-medium px-3 py-1 rounded-full
-                                bg-gradient-to-r from-[#4C82F7]/35 via-[#B44CFF]/35 to-[#FF4CC1]/35
                                 text-white
-                                border border-white/10
+                                border border-white/20
                                 shadow-[0_0_6px_rgba(180,76,255,0.20)]
                               "
                             >
