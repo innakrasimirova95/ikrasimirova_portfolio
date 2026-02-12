@@ -5,11 +5,11 @@ export const en = {
     viewDetails: "View details",
   },
   nav: {
-    projects: "<Projects/>",
-    experience: "<Experience/>",
-    education: "<Education/>",
-    technologies: "<Technologies/>",
-    contact: "<Contact/>",
+    projects: "Projects",
+    experience: "Experience",
+    education: "Education",
+    technologies: "Technologies",
+    contact: "Contact",
     toggleTheme: "Toggle theme",
   },
   hero: {
@@ -21,7 +21,7 @@ export const en = {
     ariaCV: "Download CV",
   },
   projects: {
-    title: "<Projects/>",
+    title: "Projects",
     personalPortfolio: {
       title: "Personal Portfolio",
       year: "2025",
@@ -33,7 +33,7 @@ export const en = {
     seeLess: "See less",
   },
   experience: {
-    title: "<Experience/>",
+    title: "Experience",
     roles: [
       {
         company: "AECOM",
@@ -92,7 +92,7 @@ One of my most advanced developments was a module to import, visualize and edit 
     ],
   },
   education: {
-    title: "<Education/>",
+    title: "Education",
     degrees: [
       {
         title: "Master's in Software Project Management and Direction",
@@ -119,12 +119,12 @@ One of my most advanced developments was a module to import, visualize and edit 
     ],
   },
   technologies: {
-    title: "<Technologies/>",
+    title: "Technologies",
     skills: "Skills",
     tools: "Tools",
   },
   contact: {
-    title: "<Contact/>",
+    title: "Contact",
     form: {
       name: "Name",
       namePlaceholder: "Your name",

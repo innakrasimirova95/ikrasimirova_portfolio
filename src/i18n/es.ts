@@ -5,11 +5,11 @@ export const es = {
     viewDetails: "Ver detalles",
   },
   nav: {
-    projects: "<Proyectos/>",
-    experience: "<Experiencia/>",
-    education: "<Educación/>",
-    technologies: "<Tecnologías/>",
-    contact: "<Contacto/>",
+    projects: "Proyectos",
+    experience: "Experiencia",
+    education: "Educación",
+    technologies: "Tecnologías",
+    contact: "Contacto",
     toggleTheme: "Cambiar tema",
   },
   hero: {
@@ -21,7 +21,7 @@ export const es = {
     ariaCV: "Descargar CV",
   },
   projects: {
-    title: "<Proyectos/>",
+    title: "Proyectos",
     personalPortfolio: {
       title: "Portfolio Personal",
       year: "2025",
@@ -33,7 +33,7 @@ export const es = {
     seeLess: "Ver menos",
   },
   experience: {
-    title: "<Experiencia/>",
+    title: "Experiencia",
     roles: [
       {
         company: "AECOM",
@@ -92,7 +92,7 @@ Uno de mis desarrollos más avanzados fue un módulo para importar, visualizar y
     ],
   },
   education: {
-    title: "<Educación/>",
+    title: "Educación",
     degrees: [
       {
         title: "Máster en dirección y gestión de proyectos software",
@@ -119,12 +119,12 @@ Uno de mis desarrollos más avanzados fue un módulo para importar, visualizar y
     ],
   },
   technologies: {
-    title: "<Tecnologías/>",
+    title: "Tecnologías",
     skills: "Habilidades",
     tools: "Herramientas",
   },
   contact: {
-    title: "<Contacto/>",
+    title: "Contacto",
     form: {
       name: "Nombre",
       namePlaceholder: "Tu nombre",

@@ -5,11 +5,11 @@ export const bg = {
     viewDetails: "Виж детайли",
   },
   nav: {
-    projects: "<Проекти/>",
-    experience: "<Опит/>",
-    education: "<Образование/>",
-    technologies: "<Технологии/>",
-    contact: "<Контакт/>",
+    projects: "Проекти",
+    experience: "Опит",
+    education: "Образование",
+    technologies: "Технологии",
+    contact: "Контакт",
     toggleTheme: "Превключване на тема",
   },
   hero: {
@@ -21,7 +21,7 @@ export const bg = {
     ariaCV: "Изтегляне на CV",
   },
   projects: {
-    title: "<Проекти/>",
+    title: "Проекти",
     personalPortfolio: {
       title: "Лично портфолио",
       year: "2025",
@@ -33,7 +33,7 @@ export const bg = {
     seeLess: "Виж по-малко",
   },
   experience: {
-    title: "<Опит/>",
+    title: "Опит",
     roles: [
       {
         company: "AECOM",
@@ -55,7 +55,7 @@ export const bg = {
 
 Освен това разработих и интегрирах цялостен проект за управление на BIM модели, чийто фронтенд е направен с React, а бекендът с Django, където внедрих удостоверяване с Entra ID, връзка с API на Autodesk ACC за импортиране на BIM модели и зареждане на модели от локално. Също така, вграждане на BIM визуализатора в тази система, което ви позволява да преглеждате моделите директно в платформата.
 
-Впоследствие си сътрудничих както по фронтенда, така и по бекенда по проект, ориентиран към IoT сензори, интегрирайки визуализатора и поддържащи табла за управление с Recharts, навигация с React Router и визуализация на данни в реално време. Сътрудничих и на бекенда с Node.js, PostgreSQL, WebSockets. Услугите на Azure, с които съм работил, са Blob Storage, Web App, Static Web App, Azure Database for PostgreSQL и Enta ID.
+Впоследствие си сътрудничих както по фронтенда, така и по бекенда по проект, ориентиран към IoT сензори, интегрирайки визуализатора и поддържащи табла за управление с Recharts, навигация с React Router и визуализация на данни в реално време. Сътрудничих и на бекенда с Node.js, PostgreSQL, WebSockets. Услугите на Azure, с които съм работил, са Blob Storage, Web App, Static Web App, Azure Database за PostgreSQL и Enta ID.
 
 Този опит ми позволи да пренеса моя собствен BIM визуализатор от неговата концепция до интегрирането му в реални платформи: корпоративен мениджър на BIM проекти и облачно IoT решение за данни.`
       },
@@ -92,7 +92,7 @@ export const bg = {
     ],
   },
   education: {
-    title: "<Образование/>",
+    title: "Образование",
     degrees: [
       {
         title: "Магистър по управление и ръководство на софтуерни проекти",
@@ -117,12 +117,12 @@ export const bg = {
     ],
   },
   technologies: {
-    title: "<Технологии/>",
+    title: "Технологии",
     skills: "Умения",
     tools: "Инструменти",
   },
   contact: {
-    title: "<Контакт/>",
+    title: "Контакт",
     form: {
       name: "Име",
       namePlaceholder: "Вашето име",

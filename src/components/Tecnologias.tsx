@@ -28,6 +28,8 @@ import {
   SiVercel,
   SiJupyter,
   SiNpm,
+  SiPostgresql,
+  SiThreedotjs,
 } from "react-icons/si";
 import { DiVisualstudio } from "react-icons/di";
 import { VscAzure } from "react-icons/vsc";
@@ -38,7 +40,6 @@ import { useTheme } from "next-themes";
 
 const skillsStack = [
   { name: "Python", icon: FaPython, hoverColor: "#3776AB" },
-  { name: "JavaScript", icon: FaJs, hoverColor: "#F7DF1E" },
   { name: "TypeScript", icon: SiTypescript, hoverColor: "#3178C6" },
   { name: "React", icon: FaReact, hoverColor: "#61DAFB" },
   {
@@ -63,6 +64,7 @@ const skillsStack = [
   { name: "SQLAlchemy", icon: SiSqlalchemy, hoverColor: "#00758F" },
   { name: "MySQL", icon: SiMysql, hoverColor: "#4479A1" },
   { name: "SQLite", icon: SiSqlite, hoverColor: "#003B57" },
+  { name: "PostgreSQL", icon: SiPostgresql, hoverColor: "#336791" },
 ];
 
 const toolsStack = [

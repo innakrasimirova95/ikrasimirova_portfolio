@@ -30,7 +30,7 @@ export const SectionTitle = ({
       <h2
         className={cn(
           "text-center text-[1.6rem] sm:text-[2.3rem]",
-          "font-extralight tracking-[0.22em]",
+          "font-extralight tracking-[0.45em]",
           "uppercase",
           "bg-gradient-to-r from-blue-300 via-purple-400 to-pink-400",
           "bg-clip-text text-transparent",
