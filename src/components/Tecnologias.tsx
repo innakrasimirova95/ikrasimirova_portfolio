@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
   FaPython,
-  FaJs,
   FaReact,
   FaHtml5,
   FaCss3Alt,
@@ -29,7 +28,6 @@ import {
   SiJupyter,
   SiNpm,
   SiPostgresql,
-  SiThreedotjs,
 } from "react-icons/si";
 import { DiVisualstudio } from "react-icons/di";
 import { VscAzure } from "react-icons/vsc";
