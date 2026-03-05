@@ -7,6 +7,7 @@ import {
 import { SectionTitle } from "./ui/SectionTitle";
 import { useLanguage, useDictionary } from "@/context/LanguageContext";
 import { cn } from "@/lib/utils";
+import { TechnologyTag } from "./ui/TechnologyTag";
 
 export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
   const { t } = useLanguage();
@@ -178,17 +179,7 @@ export const Experience = React.forwardRef<HTMLElement>((props, ref) => {
                       <div className="flex flex-wrap gap-2">
                         {(job.technologies ?? []).map(
                           (tech: string, j: number) => (
-                            <span
-                              key={j}
-                              className="
-                                text-[11px] font-medium px-3 py-1 rounded-full
-                                text-white
-                                border border-white/20
-                                shadow-[0_0_6px_rgba(180,76,255,0.20)]
-                              "
-                            >
-                              {tech}
-                            </span>
+                            <TechnologyTag key={j} name={tech} />
                           )
                         )}
                       </div>

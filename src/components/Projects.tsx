@@ -9,6 +9,7 @@ import {
 } from "react-icons/hi";
 import { SectionTitle } from "./ui/SectionTitle";
 import { cn } from "@/lib/utils";
+import { TechnologyTag } from "./ui/TechnologyTag";
 import { useLanguage, useDictionary } from "@/context/LanguageContext";
 
 export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
@@ -143,16 +144,7 @@ export const Projects = React.forwardRef<HTMLElement>((props, ref) => {
                   {/* Tecnologías */}
                   <div className="flex flex-wrap gap-2 mt-4">
                     {project.technologies.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="
-                          text-[11px] font-medium px-3 py-1 rounded-full
-                          text-white
-                          border border-white/20
-                          shadow-[0_0_6px_rgba(180,76,255,0.20)]"
-                      >
-                        {tech}
-                      </span>
+                      <TechnologyTag key={i} name={tech} />
                     ))}
                   </div>
 
