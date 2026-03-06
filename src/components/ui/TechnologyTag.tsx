@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
 
 type TechnologyTagProps = {
   name: string;
@@ -9,15 +8,16 @@ type TechnologyTagProps = {
 };
 
 export const TechnologyTag = ({ name, className }: TechnologyTagProps) => {
-  const { theme } = useTheme();
-
   return (
     <span
       className={cn(
-        "font-medium px-3 py-1 rounded-full text-[11px]",
-        theme === "dark"
-          ? "text-white border border-white/20 shadow-[0_0_6px_rgba(180,76,255,0.20)]"
-          : "text-black border border-gray-300 shadow-[0_0_6px_rgba(0,0,0,0.1)]",
+        "font-medium px-3 py-1 rounded-full text-[11px] transition-colors duration-300",
+        // Texto: Negro en claro, Blanco en oscuro
+        "text-black dark:text-white",
+        // Borde: Gris en claro, Transparente/Blanco en oscuro
+        "border border-gray-300 dark:border-white/20",
+        // Sombra suave adaptativa
+        "shadow-[0_0_6px_rgba(0,0,0,0.05)] dark:shadow-[0_0_8px_rgba(168,85,247,0.15)]",
         className
       )}
     >
