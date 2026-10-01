@@ -38,7 +38,7 @@ export const en = {
       {
         company: "AECOM",
         role: "Digital Solution Developer",
-        period: "May 2025 - October 2025",
+        period: "2025",
         technologies: [
           "React",
           "TypeScript",
@@ -62,7 +62,7 @@ This experience allowed me to take my own BIM viewer from its conception to its 
       {
         company: "IGNIS",
         role: "Full Stack Developer & Researcher",
-        period: "July 2023 - April 2025",
+        period: "2023 - 2025",
         technologies: [
           "Python",
           "Pandas",
@@ -85,7 +85,7 @@ One of my most advanced developments was a module to import, visualize and edit 
       {
         company: "Deloitte",
         role: "Risk Advisory Cyber - Infrastructure Protection",
-        period: "November 2022 - January 2023",
+        period: "2022 - 2023",
         technologies: ["Microsoft 365", "Teams", "OneDrive", "Security"],
         description: `I was responsible for reviewing and validating the correct configuration of corporate tools such as Teams, OneDrive, and other Microsoft 365 services, ensuring that permissions, access, and policies were well-defined. My objective was to prevent information leaks and ensure that only authorized personnel could access resources, contributing to strengthening clients' internal security.`,
       },
@@ -97,24 +97,24 @@ One of my most advanced developments was a module to import, visualize and edit 
       {
         title: "Master's in Software Project Management and Direction",
         institution: "Polytechnic University of Madrid - ETSII",
-        date: "October 2022 - July 2024",
+        date: "2022 - 2024",
       },
       {
         title: "Erasmus +",
         institution: "Tallinn University of Technology (TalTech) - Tallinn/Estonia",
-        date: "January 2022 - June 2022",
+        date: "2022",
       },
       {
         title:
           "Double Degree in Software Engineering and Information Society Technology",
         institution: "Polytechnic University of Madrid - ETSISI",
-        date: "September 2017 - June 2023",
+        date: "2017 - 2023",
       },
       {
         title:
           "Higher Degree in Administration of Computer Systems and Networks",
         institution: "IES Europa, Rivas – Vaciamadrid",
-        date: "September 2014 - June 2016",
+        date: "2014 - 2016",
       },
     ],
   },

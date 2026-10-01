@@ -38,7 +38,7 @@ export const es = {
       {
         company: "AECOM",
         role: "Digital Solution Developer",
-        period: "Mayo 2025 - Octubre 2025",
+        period: "2025",
         technologies: [
           "React",
           "TypeScript",
@@ -62,7 +62,7 @@ Esta experiencia me permitió llevar un visor BIM propio desde su concepción ha
       {
         company: "IGNIS",
         role: "Investigadora Desarrolladora Full Stack",
-        period: "Julio 2023 - Abril 2025",
+        period: "2023 - 2025",
         technologies: [
           "Python",
           "Pandas",
@@ -85,7 +85,7 @@ Uno de mis desarrollos más avanzados fue un módulo para importar, visualizar y
       {
         company: "Deloitte",
         role: "Risk Advisory Cyber - Infrastructure Protection",
-        period: "Noviembre 2022 - Enero 2023",
+        period: "2022 - 2023",
         technologies: ["Microsoft 365", "Teams", "OneDrive", "Seguridad"],
         description: `Me encargaba de revisar y validar la correcta configuración de herramientas corporativas como Teams, OneDrive y otros servicios de Microsoft 365, asegurando que los permisos, accesos y políticas estuvieran bien definidos. Mi objetivo era evitar fugas de información y garantizar que solo las personas autorizadas pudieran acceder a los recursos, contribuyendo a fortalecer la seguridad interna de los clientes.`,
       },
@@ -97,24 +97,24 @@ Uno de mis desarrollos más avanzados fue un módulo para importar, visualizar y
       {
         title: "Máster en dirección y gestión de proyectos software",
         institution: "Universidad Politécnica de Madrid - ETSII",
-        date: "Octubre 2022 - Julio 2024",
+        date: "2022 - 2024",
       },
       {
         title: "Erasmus +",
         institution: "Tallina Tehnikaülikool (TalTech) - Tallin/Estonia",
-        date: "Enero 2022 - Junio 2022",
+        date: "2022",
       },
       {
         title:
           "Doble grado en ingeniería de software y tecnología para la sociedad de la información",
         institution: "Universidad Politécnica de Madrid - ETSISI",
-        date: "Septiembre 2017 - Junio 2023",
+        date: "2017 - 2023",
       },
       {
         title:
           "Grado superior de administración de sistemas informáticos y redes",
         institution: "IES Europa, Rivas – Vaciamadrid",
-        date: "Septiembre 2014 - Junio 2016",
+        date: "2014 - 2016",
       },
     ],
   },
